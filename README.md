@@ -1,4 +1,4 @@
-# GameBaseGroup2 - ASU SER 594
+# GameBaseGroup2 - ASU SER 594 Game Based Learning
 
 Group Members : 
 1) Digant Jagtap
