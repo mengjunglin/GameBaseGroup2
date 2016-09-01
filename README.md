@@ -1,10 +1,8 @@
-# GameBaseGroup2 - ASU SER 594 Game Based Learning
+# SER594 Game Based Learning - Group 2
 
-Group Members : 
-1) Digant Jagtap
-2) Meng-Jung Lin
-3) Deepika Krishna Kumar
-4) Alankrit Shah
-5) Hussain Shauzab Abis
-
-
+Group Members:<br>
+1) Digant Jagtap<br>
+2) Meng-Jung Lin<br>
+3) Deepika Krishna Kumar<br>
+4) Alankrit Shah<br>
+5) Hussain Shauzab Abis<br>
