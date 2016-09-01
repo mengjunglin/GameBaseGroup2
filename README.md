@@ -1,5 +1,4 @@
 # GameBaseGroup2
-GameBaseGroup2
 
 Group Members : 
 1) Digant Jagtap
