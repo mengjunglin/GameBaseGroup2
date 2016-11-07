@@ -1135,6 +1135,7 @@ MonoBehaviour:
   isOptionB: {fileID: 466699150}
   isOptionC: {fileID: 1534946122}
   isOptionD: {fileID: 1822305278}
+  questionText: {fileID: 412543060}
 --- !u!1 &1520980041
 GameObject:
   m_ObjectHideFlags: 0
