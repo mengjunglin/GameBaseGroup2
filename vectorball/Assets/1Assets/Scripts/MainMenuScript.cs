@@ -17,4 +17,9 @@ public class MainMenuScript : MonoBehaviour {
 	{
 		Application.Quit ();
 	}
+
+	public void OpenScene()
+	{
+		Application.LoadLevel (1);
+	}
 }
