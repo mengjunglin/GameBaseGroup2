@@ -217,18 +217,6 @@ Prefab:
       propertyPath: m_Name
       value: Stadium Elements
       objectReference: {fileID: 0}
-    - target: {fileID: 4000013495535820, guid: 4698d68664073784fab260b2ad088632, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013495535820, guid: 4698d68664073784fab260b2ad088632, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000013495535820, guid: 4698d68664073784fab260b2ad088632, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.175
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4698d68664073784fab260b2ad088632, type: 2}
   m_IsPrefabParent: 0

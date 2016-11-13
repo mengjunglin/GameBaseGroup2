@@ -8,7 +8,8 @@ function Start () {
 	animator=GetComponent (Animator);
 }
 
-function Update () {
+//Update function changed to BlockedUpdate
+function BlockedUpdate () {
 	v=Input.GetAxis("Vertical");
 	h=Input.GetAxis("Horizontal");
 	if (animator.GetFloat("Run")==0.2){
