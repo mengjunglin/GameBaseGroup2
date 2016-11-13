@@ -8,7 +8,7 @@ public class FieldController : MonoBehaviour {
     [SerializeField]
     private PlayerScript[] playerScripts;
     [SerializeField]
-    private GameObject denseGridHolderL, denseGridHolderR;
+    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab;
 
     public bool isDense { private set; get; }
 
@@ -21,7 +21,6 @@ public class FieldController : MonoBehaviour {
 
     void Start () {
         UpdatePlayerGrid(true);
-        playerScripts = GetComponentsInChildren<PlayerScript>();
 	}
 
     public void UpdatePlayerGrid(bool isDense)
@@ -30,6 +29,13 @@ public class FieldController : MonoBehaviour {
 
         denseGridHolderL.SetActive(isDense);
         denseGridHolderR.SetActive(isDense);
+
+        playerScripts = GetComponentsInChildren<PlayerScript>();
+
+        foreach(PlayerScript ps in playerScripts)
+        {
+            ps.ball = ballPrefab.transform;
+        }
     }
 	
 	public Vector3 GetAbsolutePosition(int x, int y)
