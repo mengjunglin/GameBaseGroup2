@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 public class FieldController : MonoBehaviour {
 
@@ -22,11 +23,6 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-		int count = 0;
-		foreach (PlayerScript player in playerScripts) {
-			if (true == player.isOpponent)
-				opponentPlayerScripts [count++] = player;
-		}
         UpdatePlayerGrid(true);
 	}
 
@@ -39,6 +35,15 @@ public class FieldController : MonoBehaviour {
 
         playerScripts = GetComponentsInChildren<PlayerScript>();
 
+		int count = 0;
+		ArrayList players = new ArrayList ();
+		foreach (PlayerScript player in playerScripts) {
+			if (true == player.isOpponent)
+				players.Add(player);
+		}
+		opponentPlayerScripts = new PlayerScript[players.Count];
+		foreach (PlayerScript ps in players)
+			opponentPlayerScripts [count++] = ps;
         foreach(PlayerScript ps in playerScripts)
         {
             ps.ball = ballPrefab.transform;

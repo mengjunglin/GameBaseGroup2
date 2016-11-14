@@ -87,7 +87,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//Laod the options for the question
 		string[] options = new string[4];
 		int correctIndex = Random.Range (0, 3);
-		for(int i=0;i<3;++i)
+		for(int i=0;i<4;++i)
 		{
 			if (correctIndex == i) {
 				options [i] = SampleQuestionAnswerScript.GetAnswer (level);
