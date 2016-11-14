@@ -10,7 +10,7 @@ public class FieldController : MonoBehaviour {
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR, ballPrefab;
 
-    public static bool isDense { private set; get; }
+    public bool isDense { private set; get; }
 
     public static FieldController instance;
 
@@ -25,7 +25,7 @@ public class FieldController : MonoBehaviour {
 
     public void UpdatePlayerGrid(bool isDense)
     {
-		FieldController.isDense = isDense;
+		this.isDense = isDense;
 
         denseGridHolderL.SetActive(isDense);
         denseGridHolderR.SetActive(isDense);
@@ -38,9 +38,9 @@ public class FieldController : MonoBehaviour {
         }
     }
 	
-	public static Vector3 GetAbsolutePosition(int x, int y)
+	public Vector3 GetAbsolutePosition(int x, int y)
     {
-		PlayerScript selectedPlayer = FieldController.instance.GetPlayerAt(x, y);
+		PlayerScript selectedPlayer = GetPlayerAt(x, y);
 
         if (selectedPlayer)
             return selectedPlayer.transform.position;

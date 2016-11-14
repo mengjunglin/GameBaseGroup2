@@ -72,7 +72,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void MoveBall(int x, int y){
-		ball.transform.position = FieldController.GetAbsolutePosition(x,y);
+		ball.transform.position = FieldController.instance.GetAbsolutePosition(x,y);
 	}
 
 	public void LoadNextQuestion(){
