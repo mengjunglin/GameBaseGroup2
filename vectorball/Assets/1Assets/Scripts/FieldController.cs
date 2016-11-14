@@ -23,10 +23,10 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-        UpdatePlayerGrid(true);
+        UpdatePlayerGrid(true,0);
 	}
 
-    public void UpdatePlayerGrid(bool isDense)
+	public void UpdatePlayerGrid(bool isDense, int level)
     {
 		this.isDense = isDense;
 
@@ -34,6 +34,22 @@ public class FieldController : MonoBehaviour {
         denseGridHolderR.SetActive(isDense);
 
         playerScripts = GetComponentsInChildren<PlayerScript>();
+
+		foreach(PlayerScript ps in playerScripts)
+		{
+			ps.ball = ballPrefab.transform;
+			if (level == 1) {
+				// Set new positions for level 2 
+
+				//Find orignal positions.
+				Match positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])");
+				string[] xy = positionIndices.Value.Split (',');
+				ps.setMultiplier (Random.Range (1, 4));
+				int[] positions = { ps.getMultiplier () * int.Parse (xy [0]), ps.getMultiplier () * int.Parse (xy [1]) };
+				string newPositions = positions [0].ToString () + "," + positions [1].ToString ();
+				ps.name = "PositionA [" + newPositions + "]";
+			}
+		}
 
 		int count = 0;
 		ArrayList players = new ArrayList ();
@@ -44,10 +60,7 @@ public class FieldController : MonoBehaviour {
 		opponentPlayerScripts = new PlayerScript[players.Count];
 		foreach (PlayerScript ps in players)
 			opponentPlayerScripts [count++] = ps;
-        foreach(PlayerScript ps in playerScripts)
-        {
-            ps.ball = ballPrefab.transform;
-        }
+	
     }
 	
 	public Vector3 GetAbsolutePosition(int x, int y)

@@ -3,13 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class SampleQuestionAnswerScript : MonoBehaviour {
-	public static string CorrectOptionForQuestion(int level){
-		//return correct answer(level) from TextAsset
-		return "2,3";
-	}
+	
 	public static string GetQuestion(int level){
 		//Function will read the questions - Done by Hussain
-		return "Question 2";
+		return "Question " + level.ToString();
 	}
 	public static string[] GetOptions(int level){
 		//Return the options read from TextAsset
@@ -17,6 +14,6 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 	}
 	public static string GetAnswer(int level){
 		//Function will read the questions - Done by Hussain
-		return "1,3";
+		return "(1,3)";
 	}
 }
