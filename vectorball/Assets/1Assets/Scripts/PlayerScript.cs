@@ -3,15 +3,27 @@ using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
-	//public string type
+    public bool isOpponent;
+    public Animator anim;
+    public Transform ball;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Awake()
+    {
+        isOpponent = (name.Contains("PositionB"));
+        anim = GetComponentInChildren<Animator>();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+            PlayKickAnimation();
+
+        if(ball)
+            transform.LookAt(ball);
+    }
+
+    public void PlayKickAnimation()
+    {
+        anim.SetTrigger("Kick");
+    }
 }

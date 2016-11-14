@@ -83731,6 +83731,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010171388942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83756,6 +83759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010281182518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83810,6 +83816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010319031694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83821,6 +83830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010320458302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83860,6 +83872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010443736822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83929,6 +83944,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000010543892190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84025,6 +84043,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000011125617424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84079,6 +84100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000011224398020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84133,6 +84157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000011337205682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84215,6 +84242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000011630395846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84226,6 +84256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000011651993714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84437,6 +84470,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012050822100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84448,6 +84484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012077127796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84501,6 +84540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012299471728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84512,6 +84554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012310398434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84595,6 +84640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012464515754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84664,6 +84712,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012531236468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84675,10 +84726,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd1f2ab20576b14c82dec45386d5ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransforms: []
+  playerScripts: []
   denseGridHolderL: {fileID: 1000013102707528}
   denseGridHolderR: {fileID: 1000010272408714}
-  isDense: 0
+  ballPrefab: {fileID: 0}
 --- !u!114 &114000012554824458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84690,6 +84741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012584879034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84701,6 +84755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000012592434816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85153,6 +85210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000014038942484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85164,6 +85224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000014089843930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85204,6 +85267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000014135328000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85243,6 +85309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOpponent: 0
+  anim: {fileID: 0}
+  ball: {fileID: 0}
 --- !u!114 &114000014206685254
 MonoBehaviour:
   m_ObjectHideFlags: 1
