@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 public class ChooseOptionsManagerScript : MonoBehaviour {
 
@@ -83,7 +85,24 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		questionText.text = question;
 
 		//Laod the options for the question
-		string[] options = SampleQuestionAnswerScript.GetOptions (level);
+		string[] options = new string[4];
+		int correctIndex = Random.Range (0, 3);
+		for(int i=0;i<3;++i)
+		{
+			if (correctIndex == i) {
+				options [i] = SampleQuestionAnswerScript.GetAnswer (level);
+			}
+			else {
+				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
+				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
+				while(options.Contains(positionIndices)){
+					ps = FieldController.instance.GetRandomOpponent ();
+					positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
+				}
+				options [i] = positionIndices;
+			}
+		}
+		//string[] options = SampleQuestionAnswerScript.GetOptions (level);
 
 		//Set the options in the toggles
 		isOptionA.GetComponentInChildren<Text>().text = options[0];

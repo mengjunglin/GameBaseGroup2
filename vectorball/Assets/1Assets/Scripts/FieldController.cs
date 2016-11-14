@@ -7,6 +7,8 @@ public class FieldController : MonoBehaviour {
 
     [SerializeField]
     private static PlayerScript[] playerScripts;
+	[SerializeField]
+	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR, ballPrefab;
 
@@ -20,6 +22,11 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
+		int count = 0;
+		foreach (PlayerScript player in playerScripts) {
+			if (true == player.isOpponent)
+				opponentPlayerScripts [count++] = player;
+		}
         UpdatePlayerGrid(true);
 	}
 
@@ -81,4 +88,8 @@ public class FieldController : MonoBehaviour {
         //Debug.LogError("X,Y not foundin player Grid.");
         return null;
     }
+	public PlayerScript GetRandomOpponent(){
+		return opponentPlayerScripts[Random.Range(0,opponentPlayerScripts.Length)];
+	}
+
 }
