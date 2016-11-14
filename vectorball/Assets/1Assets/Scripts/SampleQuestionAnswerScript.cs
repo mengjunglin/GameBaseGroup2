@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class SampleQuestionAnswerScript : MonoBehaviour {
 	public static string CorrectOptionForQuestion(int level){
 		//return correct answer(level) from TextAsset
-		return "A";
+		return "2,3";
 	}
 	public static string GetQuestion(int level){
 		//Function will read the questions - Done by Hussain
@@ -13,6 +13,6 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 	}
 	public static string[] GetOptions(int level){
 		//Return the options read from TextAsset
-		return new string[]{"Option2A","Option2B","Option2C","Option2D"};
+		return new string[]{"1,2","4,2","3,3","2,1"};
 	}
 }

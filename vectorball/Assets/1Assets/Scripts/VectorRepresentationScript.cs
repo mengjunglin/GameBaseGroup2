@@ -12,7 +12,7 @@ public class VectorRepresentationScript : MonoBehaviour {
 
 		GameObject dialogueCanvasObj = GameObject.FindGameObjectWithTag ("DialogueCanvas");
 		//dialogueCanvasObj.SetActive(false);
-		convertResultToVector (true,0,"2,3");
+		//convertResultToVector (true,0,"2,3");
 
 	}
 	

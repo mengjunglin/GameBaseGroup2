@@ -11,58 +11,73 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle isOptionC;
 	public Toggle isOptionD;
 
+	public GameObject ball;
+
 	//Question textbox
 	public Text questionText;
 
-	private static int level = 1;
+	private static int level = 0;
+
+
+	// num 
 
 	//Check which option is active
 	public string ActiveOption(){
 		//Set the chosen option as A or B or C or D below
 		string option = " ";
 		if (isOptionA.isOn)
-			option = "A";
+			option = isOptionA.GetComponentInChildren<Text>().text;
 		else if (isOptionB.isOn)
-			option = "B";
+			option = isOptionB.GetComponentInChildren<Text>().text;
 		else if (isOptionC.isOn)
-			option = "C";
+			option = isOptionC.GetComponentInChildren<Text>().text;
 		else if (isOptionD.isOn)
-			option = "D";
+			option = isOptionD.GetComponentInChildren<Text>().text;
 		return option;
 	}
 
 	public void OnSubmit(){
 		//Check the selected option with correct option
-		Debug.Log("User chose "+ ActiveOption());
+		string option = ActiveOption ();
+		Debug.Log("User chose "+ option);
+		//TODO - Move ball
+		string[] coordinates = option.Split(',');
+		int x = int.Parse(coordinates[0]);
+		int y = int.Parse(coordinates[1]);
+		MoveBall (x,y);
 		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
-		if (ActiveOption ().Equals(SampleQuestionAnswerScript.CorrectOptionForQuestion (level)))
-			IfCorrectOption ();
+		if (option.Equals(SampleQuestionAnswerScript.CorrectOptionForQuestion (level)))
+			IfCorrectOption (option);
 		else
-			IfIncorrectOption ();
+			IfIncorrectOption (option);
 		//Maintain TextAsset with q and a. 
 		//Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
 		//Can use same for generating question and display on canvas
 	}
 
-	public void IfCorrectOption(){
+	public void IfCorrectOption(string option){
+		//function to display vector notation
+		Debug.Log(option);
+		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		script.convertResultToVector(true,level,option);
 		//Increase level
 		++level;
-
-		//TODO - Move ball
-	
 		LoadNextQuestion ();
-
-
-
 	}
 
-	public void IfIncorrectOption(){
+	public void IfIncorrectOption(string option){
 		//Hint Popup. Maintain hint also in TextAsset
+		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		script.convertResultToVector(false,level,option);
+	}
+
+	public void MoveBall(int x, int y){
+		ball.transform.position = PlayerGridScript.GetAbsolutePosition(x,y);
 	}
 
 	public void LoadNextQuestion(){
 		//Load next question
-		string question = SampleQuestionAnswerScript.GetQuestion (level);
+		string question = SampleQuestionAnswerScript.GetQuestion(level);
 
 		//Set the question in the text box
 		questionText.text = question;

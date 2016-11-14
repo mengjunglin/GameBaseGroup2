@@ -8,11 +8,11 @@ public enum Team { Home, Opponent}
 public class PlayerGridScript : MonoBehaviour {
 
     [SerializeField]
-    private PlayerScript[] playerScripts;
+    private static PlayerScript[] playerScripts;
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR;
 
-    public bool isDense { private set; get; }
+    public static bool isDense { private set; get; }
 
 	// Use this for initialization
 	void Start () {
@@ -22,13 +22,14 @@ public class PlayerGridScript : MonoBehaviour {
 
     public void UpdatePlayerGrid(bool isDense)
     {
-        this.isDense = isDense;
+		PlayerGridScript
+			.isDense = isDense;
 
         denseGridHolderL.SetActive(isDense);
         denseGridHolderR.SetActive(isDense);
     }
 	
-	public Vector3 GetAbsolutePosition(int x, int y)
+	public static Vector3 GetAbsolutePosition(int x, int y)
     {
         print("Input x: " + x + " y:" + y);
         if (!isDense)
