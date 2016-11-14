@@ -51,6 +51,7 @@
      <Compile Include="Assets\1Assets\Models\Players\Source\Scripts\FaceAnimations.js" />
      <Compile Include="Assets\1Assets\Models\Players\Source\Scripts\GUIInstructions.js" />
      <Compile Include="Assets\1Assets\Models\Players\Source\Scripts\PlayFaceAnimations.js" />
+     <None Include="Assets\1Assets\Questions\Questions.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
