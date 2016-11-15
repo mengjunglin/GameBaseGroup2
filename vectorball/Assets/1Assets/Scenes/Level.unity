@@ -447,6 +447,7 @@ GameObject:
   - 224: {fileID: 198772285}
   - 114: {fileID: 198772287}
   - 114: {fileID: 198772286}
+  - 114: {fileID: 198772288}
   m_Layer: 5
   m_Name: ChooseOptionsManager
   m_TagString: OptionsManager
@@ -504,6 +505,18 @@ MonoBehaviour:
   isOptionD: {fileID: 1847432282}
   ball: {fileID: 375354010}
   questionText: {fileID: 754510309}
+--- !u!114 &198772288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 198772284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07f79175bd080b439102bb16ecda9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionsFile: {fileID: 4900000, guid: bd397bd2b1f67044ca7af0e774173cfd, type: 3}
 --- !u!1 &211043170 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000012499949674, guid: 3ee93e547898b4b26a66474eed37fc0a,
@@ -600,27 +613,27 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -144.7
+      value: -144.69998
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 26.3
+      value: 11.225634
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -0.6
+      value: -0.60000026
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.0000019670586
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 4.9112714e-11
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.0000034463128
       objectReference: {fileID: 0}
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_LocalRotation.w
