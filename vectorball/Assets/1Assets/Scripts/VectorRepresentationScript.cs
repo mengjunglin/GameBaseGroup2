@@ -40,7 +40,7 @@ public class VectorRepresentationScript : MonoBehaviour {
 			dialogueMessage = "Hurray! That was an awesome pass. In vector world it means";
 		}
 		dialogueObj.GetComponent<Text> ().text = dialogueMessage;
-		if (level == 0) {
+		//if (level == 0) {
 			// addleftBrk(highScoreText,result);
 			string[] coordinates = result.Split (',');
 				
@@ -48,6 +48,6 @@ public class VectorRepresentationScript : MonoBehaviour {
 			// Text rightBrk = highScoreText.gameObject.transform.parent.gameObject.AddComponent<Text> ();
 			// rightBrk.text = "]";
 			//Debug.Log (string.Format("[{0} \n {1}] = {2}", a, b, c));
-		}
+		//}
 	}
 }

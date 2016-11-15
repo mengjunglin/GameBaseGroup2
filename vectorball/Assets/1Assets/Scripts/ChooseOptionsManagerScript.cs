@@ -106,12 +106,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//Laod the options for the question
 		string[] options = new string[4];
 		int correctIndex = Random.Range (0, 3);
+		options [correctIndex] = currentQuestion.answer;
 		for(int i=0;i<4;++i)
 		{
-			if (correctIndex == i) {
-				options [i] = currentQuestion.answer;
-			}
-			else {
+			if (correctIndex != i) {
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
 				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
 				while(options.Contains(positionIndices)){
@@ -128,7 +126,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 				}
 			}
 		}
-		//string[] options = SampleQuestionAnswerScript.GetOptions (level);
 
 		//Set the options in the toggles
 		isOptionA.GetComponentInChildren<Text>().text = options[0];
