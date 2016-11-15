@@ -22,7 +22,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	private static int level = 1;
 
 	public void Start(){
-		LoadNextQuestion ();
+		//LoadNextQuestion ();
 	}
 
 	//Check which option is active
