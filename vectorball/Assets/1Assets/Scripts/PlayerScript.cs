@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour {
     public Animator anim;
     public Transform ball;
 	private int multiplier=0;
+    public TextMesh label;
 
     [SerializeField]
     PlayFaceAnimations faceAnimController;
@@ -23,7 +24,7 @@ public class PlayerScript : MonoBehaviour {
         if (ball)
         {
             Vector3 target = new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z);
-            transform.LookAt(target);
+            anim.transform.LookAt(target);
         }
     }
 
@@ -49,11 +50,19 @@ public class PlayerScript : MonoBehaviour {
     public void PlayExpression(bool happy)
     {
         faceAnimController.Eye = happy ? Eyes_Expressions.Closed_smile : Eyes_Expressions.Sad;
-        Invoke("ResetExpression", 2f);
+        Invoke("ResetPlayer", 2f);
     }
 
-    public void ResetExpression()
+    public void ResetPlayer()
     {
         faceAnimController.Eye = Eyes_Expressions.Happy;
+        label.color = Color.black;
+    }
+
+    public void HighlightPlayer()
+    {
+        label.color = Color.green;
+        faceAnimController.Eye = Eyes_Expressions.Closed_happy;
+        Invoke("ResetPlayer", 2f);
     }
 }

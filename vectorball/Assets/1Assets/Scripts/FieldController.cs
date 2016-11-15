@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Collections;
 
 public class FieldController : MonoBehaviour {
 
@@ -11,7 +10,7 @@ public class FieldController : MonoBehaviour {
 	[SerializeField]
 	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
-    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab;
+    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab, positionLabel;
 
     public bool isDense { private set; get; }
 
@@ -46,7 +45,18 @@ public class FieldController : MonoBehaviour {
 		foreach(PlayerScript ps in playerScripts)
 		{
 			ps.ball = ballPrefab.transform;
-			if (level == 1) {
+            Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
+            label.localPosition = new Vector2(0, 30);
+            label.rotation = Quaternion.Euler(0,90,0);
+            ps.label = label.GetComponent<TextMesh>();
+
+            if(level == 0)
+            {
+                Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
+                string[] xy = positionIndices.Value.Split(',');
+                ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
+            }
+			else if (level == 1) {
 				// Set new positions for level 2 
 
 				//Find orignal positions.
@@ -56,7 +66,9 @@ public class FieldController : MonoBehaviour {
 				int[] positions = { ps.getMultiplier () * int.Parse (xy [0]), ps.getMultiplier () * int.Parse (xy [1]) };
 				string newPositions = positions [0].ToString () + "," + positions [1].ToString ();
 				ps.name = "PositionA [" + newPositions + "]";
-			}
+
+                ps.label.text = "(" + positions[0] + "," + positions[1] + ")";
+            }
 		}
 
 		int count = 0;
