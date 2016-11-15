@@ -591,21 +591,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293,
     type: 2}
   m_PrefabInternal: {fileID: 425480178}
---- !u!54 &375354017
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 375354010}
-  serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &425480178
 Prefab:
   m_ObjectHideFlags: 0
@@ -644,16 +629,6 @@ Prefab:
     - target: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012037108836, guid: cddd395770a2bbd4abc2bebb904be293,
-        type: 2}
-      propertyPath: speed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012037108836, guid: cddd395770a2bbd4abc2bebb904be293,
-        type: 2}
-      propertyPath: _angle
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
