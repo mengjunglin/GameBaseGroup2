@@ -26,6 +26,14 @@ public class FieldController : MonoBehaviour {
         UpdatePlayerGrid(true,0);
 	}
 
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.H))
+    //        AnimatePlayerMood(true);
+    //    if (Input.GetKeyDown(KeyCode.U))
+    //        AnimatePlayerMood(false);
+    //}
+
 	public void UpdatePlayerGrid(bool isDense, int level)
     {
 		this.isDense = isDense;
@@ -106,8 +114,16 @@ public class FieldController : MonoBehaviour {
         //Debug.LogError("X,Y not foundin player Grid.");
         return null;
     }
+
 	public PlayerScript GetRandomOpponent(){
 		return opponentPlayerScripts[Random.Range(0,opponentPlayerScripts.Length)];
 	}
 
+    public void AnimatePlayerMood(bool homeTeamWon)
+    {
+        foreach(PlayerScript ps in playerScripts)
+        {
+            ps.PlayExpression((ps.isOpponent ^ homeTeamWon)); 
+        }
+    }
 }

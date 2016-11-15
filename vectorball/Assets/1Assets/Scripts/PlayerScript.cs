@@ -8,19 +8,29 @@ public class PlayerScript : MonoBehaviour {
     public Transform ball;
 	private int multiplier=0;
 
+    [SerializeField]
+    PlayFaceAnimations faceAnimController;
+
     void Awake()
     {
         isOpponent = (name.Contains("PositionB"));
         anim = GetComponentInChildren<Animator>();
+        faceAnimController = GetComponentInChildren<PlayFaceAnimations>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-            PlayKickAnimation();
+        if (ball)
+        {
+            Vector3 target = new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z);
+            transform.LookAt(target);
+        }
+    }
 
-        if(ball)
-            transform.LookAt(ball);
+    public void KickBallTowards(int x, int y)
+    {
+        PlayerScript target = FieldController.instance.GetPlayerAt(x, y);
+        ball.GetComponent<BallMoveBehavior>().setTarget(target.transform);
     }
 
     public void PlayKickAnimation()
@@ -35,4 +45,15 @@ public class PlayerScript : MonoBehaviour {
 	public int getMultiplier(){
 		return multiplier ;
 	}
+
+    public void PlayExpression(bool happy)
+    {
+        faceAnimController.Eye = happy ? Eyes_Expressions.Closed_smile : Eyes_Expressions.Sad;
+        Invoke("ResetExpression", 2f);
+    }
+
+    public void ResetExpression()
+    {
+        faceAnimController.Eye = Eyes_Expressions.Happy;
+    }
 }

@@ -8,6 +8,9 @@ public class BallMoveBehavior : MonoBehaviour {
 	public Transform target;
 	[Range(20f, 70f)] public float _angle;      // shooting angle
 
+    [SerializeField]
+    float kickDelay;
+
 	public float speed;
 	void Update() {
 		float step = speed * Time.deltaTime;
@@ -23,9 +26,14 @@ public class BallMoveBehavior : MonoBehaviour {
 	}
 
 	public void setTarget(Transform target){
-		this.target = target;
+        Transform ballOwner = this.target;
+        this.target = target;
 		this._bullseye = target;
-		Launch();
+
+        //If u get an error here. Be sure to give a player0:0 reference to target(this script's target field) by default
+        ballOwner.GetComponent<PlayerScript>().PlayKickAnimation();
+
+		Invoke("Launch", kickDelay);
 	}
 
 	private void Launch()
