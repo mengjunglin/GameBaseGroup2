@@ -9,7 +9,7 @@ public class GameSceneScript : MonoBehaviour {
 	void Start () {
 		//these should be updated throughout the game
 		playerScore = 1;
-		opponentScore = 0;
+		opponentScore = 2;
 	}
 	
 	// Update is called once per frame
