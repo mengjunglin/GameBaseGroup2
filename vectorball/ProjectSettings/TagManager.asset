@@ -8,6 +8,8 @@ TagManager:
   - ResultBox
   - Dialogue
   - DialogueCanvas
+  - OptionsManager
+  - Ball
   layers:
   - Default
   - TransparentFX

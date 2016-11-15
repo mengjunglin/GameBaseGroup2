@@ -14,7 +14,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle isOptionD;
 
 	public GameObject ball;
-
 	//Question textbox
 	public Text questionText;
 
@@ -57,6 +56,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		}
 
 		MoveBall (x,y);
+
 		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
 		if (option.Equals(currentQuestion.answer))
 			IfCorrectOption (option);
@@ -85,8 +85,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void MoveBall(int x, int y){
-		ball.transform.position = FieldController.instance.GetAbsolutePosition(x,y);
+		//ball.transform.position = Vector3.MoveTowards(ball.transform.position, FieldController.instance.GetAbsolutePosition(x,y), step);
+		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
+		e.setTarget (FieldController.instance.GetPlayerAt(x,y).transform);
+
 	}
+
+
 
 	public void LoadNextQuestion(){
 		SampleQuestionAnswerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<SampleQuestionAnswerScript>();
