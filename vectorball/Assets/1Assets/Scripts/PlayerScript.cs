@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour {
     public bool isOpponent;
     public Animator anim;
     public Transform ball;
+	private int multiplier=0;
 
     void Awake()
     {
@@ -26,4 +27,12 @@ public class PlayerScript : MonoBehaviour {
     {
         anim.SetTrigger("Kick");
     }
+
+	public void setMultiplier(int m){
+		multiplier = m;
+	}
+
+	public int getMultiplier(){
+		return multiplier ;
+	}
 }

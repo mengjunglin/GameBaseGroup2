@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 public class ChooseOptionsManagerScript : MonoBehaviour {
 
@@ -17,8 +19,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	private static int level = 0;
 
-
-	// num 
+	public void Start(){
+		LoadNextQuestion ();
+	}
 
 	//Check which option is active
 	public string ActiveOption(){
@@ -38,15 +41,22 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public void OnSubmit(){
 		//Check the selected option with correct option
 		string option = ActiveOption ();
-		Debug.Log("User chose "+ option);
-		//TODO - Move ball
-		string[] coordinates = option.Split(',');
+		char multiplier = option.ToCharArray () [0];
+		string positionIndices = Regex.Match (option, "(?<=\\().+?(?=\\))").Value;
+		Debug.Log("User chose "+ positionIndices);
+		string[] coordinates = positionIndices.Split(',');
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
+		if ('(' != multiplier) {
+			int m = int.Parse (multiplier.ToString());
+			x = x * m;
+			y = y * m;
+		}
+
 		MoveBall (x,y);
 
 		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
-		if (option.Equals(SampleQuestionAnswerScript.CorrectOptionForQuestion (level)))
+		if (option.Equals(SampleQuestionAnswerScript.GetAnswer (level)))
 			IfCorrectOption (option);
 		else
 			IfIncorrectOption (option);
@@ -62,6 +72,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		script.convertResultToVector(true,level,option);
 		//Increase level
 		++level;
+		FieldController.instance.UpdatePlayerGrid (true, 1);
 		LoadNextQuestion ();
 	}
 
@@ -88,7 +99,31 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		questionText.text = question;
 
 		//Laod the options for the question
-		string[] options = SampleQuestionAnswerScript.GetOptions (level);
+		string[] options = new string[4];
+		int correctIndex = Random.Range (0, 3);
+		for(int i=0;i<4;++i)
+		{
+			if (correctIndex == i) {
+				options [i] = SampleQuestionAnswerScript.GetAnswer (level);
+			}
+			else {
+				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
+				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
+				while(options.Contains(positionIndices)){
+					ps = FieldController.instance.GetRandomOpponent ();
+					positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
+				}
+				if (0 != ps.getMultiplier()) {
+					string[] xy = positionIndices.Split (',');
+					int[] positions = { int.Parse (xy [0])/ps.getMultiplier (), int.Parse (xy [1])/ps.getMultiplier () };
+					string newPositions = ps.getMultiplier () + "(" + positions [0].ToString () + "," + positions [1].ToString () + ")";
+					options [i] = newPositions;
+				} else {
+					options [i] = "(" + positionIndices + ")";
+				}
+			}
+		}
+		//string[] options = SampleQuestionAnswerScript.GetOptions (level);
 
 		//Set the options in the toggles
 		isOptionA.GetComponentInChildren<Text>().text = options[0];

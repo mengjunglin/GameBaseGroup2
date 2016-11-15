@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 public class FieldController : MonoBehaviour {
 
     [SerializeField]
     private static PlayerScript[] playerScripts;
+	[SerializeField]
+	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR, ballPrefab;
 
@@ -20,10 +23,10 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-        UpdatePlayerGrid(true);
+        UpdatePlayerGrid(true,0);
 	}
 
-    public void UpdatePlayerGrid(bool isDense)
+	public void UpdatePlayerGrid(bool isDense, int level)
     {
 		this.isDense = isDense;
 
@@ -32,10 +35,32 @@ public class FieldController : MonoBehaviour {
 
         playerScripts = GetComponentsInChildren<PlayerScript>();
 
-        foreach(PlayerScript ps in playerScripts)
-        {
-            ps.ball = ballPrefab.transform;
-        }
+		foreach(PlayerScript ps in playerScripts)
+		{
+			ps.ball = ballPrefab.transform;
+			if (level == 1) {
+				// Set new positions for level 2 
+
+				//Find orignal positions.
+				Match positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])");
+				string[] xy = positionIndices.Value.Split (',');
+				ps.setMultiplier (Random.Range (1, 4));
+				int[] positions = { ps.getMultiplier () * int.Parse (xy [0]), ps.getMultiplier () * int.Parse (xy [1]) };
+				string newPositions = positions [0].ToString () + "," + positions [1].ToString ();
+				ps.name = "PositionA [" + newPositions + "]";
+			}
+		}
+
+		int count = 0;
+		ArrayList players = new ArrayList ();
+		foreach (PlayerScript player in playerScripts) {
+			if (true == player.isOpponent)
+				players.Add(player);
+		}
+		opponentPlayerScripts = new PlayerScript[players.Count];
+		foreach (PlayerScript ps in players)
+			opponentPlayerScripts [count++] = ps;
+	
     }
 	
 	public Vector3 GetAbsolutePosition(int x, int y)
@@ -81,4 +106,8 @@ public class FieldController : MonoBehaviour {
         //Debug.LogError("X,Y not foundin player Grid.");
         return null;
     }
+	public PlayerScript GetRandomOpponent(){
+		return opponentPlayerScripts[Random.Range(0,opponentPlayerScripts.Length)];
+	}
+
 }
