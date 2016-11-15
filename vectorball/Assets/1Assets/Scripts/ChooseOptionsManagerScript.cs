@@ -12,7 +12,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle isOptionD;
 
 	public GameObject ball;
-
 	//Question textbox
 	public Text questionText;
 
@@ -45,6 +44,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
 		MoveBall (x,y);
+
 		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
 		if (option.Equals(SampleQuestionAnswerScript.CorrectOptionForQuestion (level)))
 			IfCorrectOption (option);
@@ -72,8 +72,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void MoveBall(int x, int y){
-		ball.transform.position = FieldController.instance.GetAbsolutePosition(x,y);
+		//ball.transform.position = Vector3.MoveTowards(ball.transform.position, FieldController.instance.GetAbsolutePosition(x,y), step);
+		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
+		e.setTarget (FieldController.instance.GetPlayerAt(x,y).transform);
+
 	}
+
+
 
 	public void LoadNextQuestion(){
 		//Load next question
