@@ -18,7 +18,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	//Question textbox
 	public Text questionText;
 
-	private static int level = 0;
+	private Question currentQuestion;
+
+	private static int level = 1;
 
 	public void Start(){
 		LoadNextQuestion ();
@@ -56,7 +58,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		MoveBall (x,y);
 		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
-		if (option.Equals(SampleQuestionAnswerScript.GetAnswer (level)))
+		if (option.Equals(currentQuestion.answer))
 			IfCorrectOption (option);
 		else
 			IfIncorrectOption (option);
@@ -87,11 +89,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void LoadNextQuestion(){
+		SampleQuestionAnswerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<SampleQuestionAnswerScript>();
 		//Load next question
-		string question = SampleQuestionAnswerScript.GetQuestion(level);
-
+		currentQuestion = script.GetQuestion(level,1);
+		Debug.Log (currentQuestion.answer);
+		Debug.Log (currentQuestion.question);
+		Debug.Log (currentQuestion.level);
 		//Set the question in the text box
-		questionText.text = question;
+		questionText.text = currentQuestion.question;
 
 		//Laod the options for the question
 		string[] options = new string[4];
@@ -99,7 +104,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		for(int i=0;i<4;++i)
 		{
 			if (correctIndex == i) {
-				options [i] = SampleQuestionAnswerScript.GetAnswer (level);
+				options [i] = currentQuestion.answer;
 			}
 			else {
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
