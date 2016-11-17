@@ -10,7 +10,7 @@ public class FieldController : MonoBehaviour {
 	[SerializeField]
 	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
-    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab, positionLabel;
+    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab, positionLabel, arrowSprite;
 
     public bool isDense { private set; get; }
 
@@ -31,9 +31,14 @@ public class FieldController : MonoBehaviour {
     //        AnimatePlayerMood(true);
     //    if (Input.GetKeyDown(KeyCode.U))
     //        AnimatePlayerMood(false);
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //        foreach (PlayerScript ps in playerScripts)
+    //        {
+    //            ps.HighlightPlayer();
+    //        }
     //}
 
-	public void UpdatePlayerGrid(bool isDense, int level)
+    public void UpdatePlayerGrid(bool isDense, int level)
     {
 		this.isDense = isDense;
 
@@ -45,16 +50,25 @@ public class FieldController : MonoBehaviour {
 		foreach(PlayerScript ps in playerScripts)
 		{
 			ps.ball = ballPrefab.transform;
-            Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
-            label.localPosition = new Vector2(0, 30);
-            label.rotation = Quaternion.Euler(0,90,0);
-            ps.label = label.GetComponent<TextMesh>();
 
-            if(level == 0)
+            //In case we need labels in future
+            //Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
+            //label.localPosition = new Vector2(0, 30);
+            //label.rotation = Quaternion.Euler(0,90,0);
+            //ps.label = label.GetComponent<TextMesh>();
+
+            Transform positionMarker = ((GameObject)GameObject.Instantiate(arrowSprite, ps.transform)).transform;
+            positionMarker.localPosition = new Vector2(0, 35);
+            positionMarker.gameObject.SetActive(false);
+            ps.arrowMarker = positionMarker.GetComponent<SpriteRenderer>();
+            //positionMarker.rotation = Quaternion.Euler(0, -90, 0);
+
+            if (level == 0)
             {
                 Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
                 string[] xy = positionIndices.Value.Split(',');
-                ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
+                if(ps.label)
+                    ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
             }
 			else if (level == 1) {
 				// Set new positions for level 2 

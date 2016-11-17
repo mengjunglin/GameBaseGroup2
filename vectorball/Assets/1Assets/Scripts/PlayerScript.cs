@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour {
     public Transform ball;
 	private int multiplier=0;
     public TextMesh label;
+    public SpriteRenderer arrowMarker;
 
     [SerializeField]
     PlayFaceAnimations faceAnimController;
@@ -56,13 +57,17 @@ public class PlayerScript : MonoBehaviour {
     public void ResetPlayer()
     {
         faceAnimController.Eye = Eyes_Expressions.Happy;
-        label.color = Color.black;
+        if(label)
+            label.color = Color.black;
+        arrowMarker.gameObject.SetActive(false);
     }
 
     public void HighlightPlayer()
     {
-        label.color = Color.green;
+        if (label)
+            label.color = Color.green;
+        arrowMarker.gameObject.SetActive(true);
         faceAnimController.Eye = Eyes_Expressions.Closed_happy;
-        Invoke("ResetPlayer", 2f);
+        //Invoke("ResetPlayer", 2f);
     }
 }
