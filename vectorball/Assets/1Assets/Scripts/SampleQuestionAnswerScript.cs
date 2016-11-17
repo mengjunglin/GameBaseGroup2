@@ -26,7 +26,6 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 			foreach (string questionLine in questionLines) {
 				string[] questionElements = questionLine.Split ('@');
 				questions [counter] = new Question ();
-				Debug.Log ("start" + questionElements [0] + "end");
 				questions [counter].level = int.Parse(questionElements [0].Trim());
 				if (prevLevel < questions [counter].level) {
 					prevLevel = questions [counter].level;

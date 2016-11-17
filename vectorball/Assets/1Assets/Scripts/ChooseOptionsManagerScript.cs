@@ -134,5 +134,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		isOptionD.GetComponentInChildren<Text>().text = options[3];
 
 	}
+
+	// Function to get current question number for a particular level
+	public int GetCurrentQuestionNumber(){
+		if (currentQuestion != null) {
+			return currentQuestion.subLevel;
+		}
+		return -1;
+	}
 		
 }
