@@ -39,8 +39,11 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 				Debug.Log (questions [counter].question = questionElements [1]);
 				++counter;
 			}
-		}
-	}
+
+            ChooseOptionsManagerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<ChooseOptionsManagerScript>();
+            script.LoadNextQuestion();
+        }
+    }
 		
 	public Question GetQuestion(int level,int sublevel){
 		foreach (Question question in questions) {
