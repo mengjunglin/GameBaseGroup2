@@ -14,15 +14,24 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle isOptionD;
 
 	public GameObject ball;
+
 	//Question textbox
 	public Text questionText;
 
 	private Question currentQuestion;
 
-	private static int level = 1;
+	private int level = 1;
+
+	GameSceneScript scoreScript;
 
 	public void Start(){
+		scoreScript = GetComponent<GameSceneScript> ();
 		//LoadNextQuestion ();
+	}
+
+	public void Update(){
+		//Check if all questions for level complete  
+		//scoreScript.LevelComplete();
 	}
 
 	//Check which option is active
@@ -68,19 +77,29 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void IfCorrectOption(string option){
+		//increase score
+		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
+		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+
 		//function to display vector notation
 		Debug.Log(option);
-		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(true,level,option);
+
 		//Increase level
 		++level;
-		FieldController.instance.UpdatePlayerGrid (true, 1);
-		LoadNextQuestion ();
+
+		//FieldController.instance.UpdatePlayerGrid (true, 1);
+		//LoadNextQuestion ();
 	}
 
 	public void IfIncorrectOption(string option){
-		//Hint Popup. Maintain hint also in TextAsset
-		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		//increase opponent's score
+		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
+		GameSceneScript scoreScript = GetComponent<GameSceneScript>();
+		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+
+		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(false,level,option);
 	}
 
@@ -94,22 +113,26 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 	public void LoadNextQuestion(){
-		SampleQuestionAnswerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<SampleQuestionAnswerScript>();
+		SampleQuestionAnswerScript script = GetComponent<SampleQuestionAnswerScript>();
 		//Load next question
 		currentQuestion = script.GetQuestion(level,1);
 		Debug.Log (currentQuestion.answer);
 		Debug.Log (currentQuestion.question);
 		Debug.Log (currentQuestion.level);
+
 		//Set the question in the text box
 		questionText.text = currentQuestion.question;
 
-		//Laod the options for the question
+		//Laod the current answer for the question
 		string[] options = new string[4];
 		int correctIndex = Random.Range (0, 3);
 		options [correctIndex] = currentQuestion.answer;
+
+		//Load random opponents
 		for(int i=0;i<4;++i)
 		{
 			if (correctIndex != i) {
+				FieldController.instance.UpdatePlayerGrid (true,0);
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
 				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
 				while(options.Contains(positionIndices)){

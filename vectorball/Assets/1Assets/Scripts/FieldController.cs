@@ -22,7 +22,7 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-        UpdatePlayerGrid(true,0);
+		UpdatePlayerGrid(true,1);
 	}
 
     //void Update()
@@ -50,13 +50,13 @@ public class FieldController : MonoBehaviour {
             label.rotation = Quaternion.Euler(0,90,0);
             ps.label = label.GetComponent<TextMesh>();
 
-            if(level == 0)
+            if(level == 1)
             {
                 Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
                 string[] xy = positionIndices.Value.Split(',');
                 ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
             }
-			else if (level == 1) {
+			else if (level == 2) {
 				// Set new positions for level 2 
 
 				//Find orignal positions.
