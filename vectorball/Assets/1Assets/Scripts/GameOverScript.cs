@@ -5,7 +5,7 @@ public class GameOverScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -16,6 +16,12 @@ public class GameOverScript : MonoBehaviour {
 	public void GoToMainMenu()
 	{
 		Application.LoadLevel ("MainMenu");
+	}
 
+	public void BackToLevel()
+	{
+		//int level = GameSceneScript.level;
+		Debug.Log("Level="+GameSceneScript.level);
+		Application.LoadLevel ("GameScene");
 	}
 }

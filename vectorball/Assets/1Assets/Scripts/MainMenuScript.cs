@@ -21,6 +21,12 @@ public class MainMenuScript : MonoBehaviour {
 	public void OpenScene()
 	{
 		Application.LoadLevel (1);
+	}
 
+	//one method for each button, correspond to different levels
+	public void OpenLevel1()
+	{
+		GameSceneScript.level = 3;
+		Application.LoadLevel (1);
 	}
 }
