@@ -428,6 +428,7 @@ GameObject:
   - 114: {fileID: 114000011564900392}
   - 114: {fileID: 114000010237466820}
   - 114: {fileID: 114000011389560266}
+  - 114: {fileID: 114000011102694386}
   m_Layer: 5
   m_Name: ChooseOptionsManager
   m_TagString: OptionsManager
@@ -720,6 +721,19 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &114000011102694386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013673663626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acced7cd1b25246e6a17cbb150b628df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 114000013896042760}
+  opponentScoreText: {fileID: 114000012563121654}
 --- !u!114 &114000011179896462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -810,8 +824,6 @@ MonoBehaviour:
   isOptionD: {fileID: 114000013693076720}
   ball: {fileID: 0}
   questionText: {fileID: 114000011912097854}
-  scoreText: {fileID: 114000013896042760}
-  opponentScoreText: {fileID: 114000012563121654}
 --- !u!114 &114000011815742380
 MonoBehaviour:
   m_ObjectHideFlags: 1
