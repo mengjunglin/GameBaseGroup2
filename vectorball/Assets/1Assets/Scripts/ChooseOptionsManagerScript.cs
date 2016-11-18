@@ -34,8 +34,30 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//scoreScript.LevelComplete();
 	}
 
-	//Check which option is active
-	public string ActiveOption(){
+    void OnEnable()
+    {
+        TimerScript.instance.TimeoutEvent += OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent += OnTimerUpdate;
+    }
+
+    void OnDisable()
+    {
+        TimerScript.instance.TimeoutEvent -= OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent -= OnTimerUpdate;
+    }
+
+    void OnTimeOut()
+    {
+        Debug.Log("Timed out");
+    }
+
+    void OnTimerUpdate(float percent)
+    {
+        Debug.Log("Timer percent" + percent);
+    }
+
+    //Check which option is active
+    public string ActiveOption(){
 		//Set the chosen option as A or B or C or D below
 		string option = " ";
 		if (isOptionA.isOn)

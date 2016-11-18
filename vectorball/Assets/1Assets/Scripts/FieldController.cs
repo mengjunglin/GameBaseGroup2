@@ -25,18 +25,20 @@ public class FieldController : MonoBehaviour {
 		UpdatePlayerGrid(true,1);
 	}
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.H))
-    //        AnimatePlayerMood(true);
-    //    if (Input.GetKeyDown(KeyCode.U))
-    //        AnimatePlayerMood(false);
-    //    if (Input.GetKeyDown(KeyCode.P))
-    //        foreach (PlayerScript ps in playerScripts)
-    //        {
-    //            ps.HighlightPlayer();
-    //        }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+            AnimatePlayerMood(true);
+        if (Input.GetKeyDown(KeyCode.U))
+            AnimatePlayerMood(false);
+        if (Input.GetKeyDown(KeyCode.P))
+            foreach (PlayerScript ps in playerScripts)
+            {
+                ps.HighlightPlayer();
+            }
+        if (Input.GetKeyDown(KeyCode.T))
+            TimerScript.instance.StartTimer(4, 90);
+    }
 
     public void UpdatePlayerGrid(bool isDense, int level)
     {
@@ -62,7 +64,6 @@ public class FieldController : MonoBehaviour {
             positionMarker.localPosition = new Vector2(0, 35);
             positionMarker.gameObject.SetActive(false);
             ps.arrowMarker = positionMarker.GetComponent<SpriteRenderer>();
-            //positionMarker.rotation = Quaternion.Euler(0, -90, 0);
 			if(level == 1)
             {
                 Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
