@@ -24,14 +24,21 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	GameSceneScript scoreScript;
 
+	public int MaxQuestionsInLevel = 3;
+
+	private int levelCounter = 1;
+
 	public void Start(){
 		scoreScript = GetComponent<GameSceneScript> ();
 		//LoadNextQuestion ();
 	}
 
 	public void Update(){
-		//Check if all questions for level complete  
-		//scoreScript.LevelComplete();
+		//Check if all questions for level complete 
+		if (levelCounter == MaxQuestionsInLevel) {
+			levelCounter = 1;
+			scoreScript.LevelComplete ();
+		}
 	}
 
     void OnEnable()
@@ -73,6 +80,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void OnSubmit(){
 
+		++levelCounter;
 		// remove highlight
 
 		//Check the selected option with correct option
