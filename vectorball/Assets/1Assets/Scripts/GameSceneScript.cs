@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GameSceneScript : MonoBehaviour {
+
 	private int playerScore;
 	private int opponentScore;
 
@@ -16,6 +17,7 @@ public class GameSceneScript : MonoBehaviour {
 		//these should be updated throughout the game
 		playerScore = 0;
 		opponentScore = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -45,9 +47,10 @@ public class GameSceneScript : MonoBehaviour {
 		//if player score>opponentand , update grid => next level
 		if (playerScore > opponentScore) {
 			//direct to next level
-			//Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
 			FieldController.instance.UpdatePlayerGrid (true, 1);
 			GetComponent<ChooseOptionsManagerScript>().LoadNextQuestion ();
+			//level++; //advance to next level - commeneted next line as we are using same scene for level 2 as well
+			//Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
 		} else {
 			Application.LoadLevel ("GameOverScene");
 		}

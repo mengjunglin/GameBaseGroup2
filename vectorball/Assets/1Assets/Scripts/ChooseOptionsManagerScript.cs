@@ -20,7 +20,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	private Question currentQuestion;
 
-	private int level = 1;
+	public static int level = 1;
 
 	GameSceneScript scoreScript;
 
@@ -50,6 +50,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void OnSubmit(){
+
+		// remove highlight
+
 		//Check the selected option with correct option
 		string option = ActiveOption ();
 		char multiplier = option.ToCharArray () [0];
@@ -114,6 +117,11 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void LoadNextQuestion(){
 		SampleQuestionAnswerScript script = GetComponent<SampleQuestionAnswerScript>();
+
+
+		// store the current player location before loading next question
+
+
 		//Load next question
 		currentQuestion = script.GetQuestion(level,1);
 		Debug.Log (currentQuestion.answer);
@@ -127,6 +135,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		string[] options = new string[4];
 		int correctIndex = Random.Range (0, 3);
 		options [correctIndex] = currentQuestion.answer;
+
+
+		//highlight player
 
 		//Load random opponents
 		for(int i=0;i<4;++i)
