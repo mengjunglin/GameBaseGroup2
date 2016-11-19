@@ -37,7 +37,7 @@ public class FieldController : MonoBehaviour {
                 ps.HighlightPlayer();
             }
         if (Input.GetKeyDown(KeyCode.T))
-            TimerScript.instance.StartTimer(4, 90);
+            TimerScript.instance.StartTimer(4);
     }
 
     public void UpdatePlayerGrid(bool isDense, int level)
