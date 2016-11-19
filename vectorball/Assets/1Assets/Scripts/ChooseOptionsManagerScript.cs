@@ -14,19 +14,57 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle isOptionD;
 
 	public GameObject ball;
+
 	//Question textbox
 	public Text questionText;
 
 	private Question currentQuestion;
 
-	private static int level = 1;
+	public static int level = 1;
+
+	GameSceneScript scoreScript;
+
+	public int MaxQuestionsInLevel = 3;
+
+	private int levelCounter = 1;
 
 	public void Start(){
+		scoreScript = GetComponent<GameSceneScript> ();
 		//LoadNextQuestion ();
 	}
 
-	//Check which option is active
-	public string ActiveOption(){
+	public void Update(){
+		//Check if all questions for level complete 
+		if (levelCounter == MaxQuestionsInLevel) {
+			levelCounter = 1;
+			scoreScript.LevelComplete ();
+		}
+	}
+
+    void OnEnable()
+    {
+        TimerScript.instance.TimeoutEvent += OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent += OnTimerUpdate;
+    }
+
+    void OnDisable()
+    {
+        TimerScript.instance.TimeoutEvent -= OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent -= OnTimerUpdate;
+    }
+
+    void OnTimeOut()
+    {
+        Debug.Log("Timed out");
+    }
+
+    void OnTimerUpdate(float percent)
+    {
+        Debug.Log("Timer percent" + percent);
+    }
+
+    //Check which option is active
+    public string ActiveOption(){
 		//Set the chosen option as A or B or C or D below
 		string option = " ";
 		if (isOptionA.isOn)
@@ -41,6 +79,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void OnSubmit(){
+
+		++levelCounter;
+		// remove highlight
+
 		//Check the selected option with correct option
 		string option = ActiveOption ();
 		char multiplier = option.ToCharArray () [0];
@@ -68,19 +110,29 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void IfCorrectOption(string option){
+		//increase score
+		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
+		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+
 		//function to display vector notation
 		Debug.Log(option);
-		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(true,level,option);
+
 		//Increase level
 		++level;
-		FieldController.instance.UpdatePlayerGrid (true, 1);
-		LoadNextQuestion ();
+
+		//FieldController.instance.UpdatePlayerGrid (true, 1);
+		//LoadNextQuestion ();
 	}
 
 	public void IfIncorrectOption(string option){
-		//Hint Popup. Maintain hint also in TextAsset
-		VectorRepresentationScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<VectorRepresentationScript>();
+		//increase opponent's score
+		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
+		GameSceneScript scoreScript = GetComponent<GameSceneScript>();
+		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+
+		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(false,level,option);
 	}
 
@@ -94,22 +146,34 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 	public void LoadNextQuestion(){
-		SampleQuestionAnswerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<SampleQuestionAnswerScript>();
+		SampleQuestionAnswerScript script = GetComponent<SampleQuestionAnswerScript>();
+
+
+		// store the current player location before loading next question
+
+
 		//Load next question
 		currentQuestion = script.GetQuestion(level,1);
 		Debug.Log (currentQuestion.answer);
 		Debug.Log (currentQuestion.question);
 		Debug.Log (currentQuestion.level);
+
 		//Set the question in the text box
 		questionText.text = currentQuestion.question;
 
-		//Laod the options for the question
+		//Laod the current answer for the question
 		string[] options = new string[4];
 		int correctIndex = Random.Range (0, 3);
 		options [correctIndex] = currentQuestion.answer;
+
+
+		//highlight player
+
+		//Load random opponents
 		for(int i=0;i<4;++i)
 		{
 			if (correctIndex != i) {
+				FieldController.instance.UpdatePlayerGrid (true,0);
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
 				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
 				while(options.Contains(positionIndices)){

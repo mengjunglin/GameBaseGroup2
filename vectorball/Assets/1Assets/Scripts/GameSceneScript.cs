@@ -1,30 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameSceneScript : MonoBehaviour {
-	static public int level = 1;
-	private int playerScore = 0;
-	private int opponentScore = 0;
+
+	private int playerScore;
+	private int opponentScore;
+
+
+	//Score text box
+	public Text scoreText;
+	public Text opponentScoreText;
 
 	// Use this for initialization
 	void Start () {
 		//these should be updated throughout the game
-		playerScore = 1;
-		opponentScore = 2;
-		Debug.Log("GameLevel="+level);
+		playerScore = 0;
+		opponentScore = 0;
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	public void Update(){
+		scoreText.text = playerScore.ToString();
+		opponentScoreText.text = opponentScore.ToString();
+	}
+
+	public void SetPlayerScore(int score){
+		playerScore = score;
+	}
+
+	public void SetOpponentPlayerScore(int score){
+		opponentScore = score;
+	}
+
+	public int GetPlayerScore(){
+		return playerScore;
+	}
+
+	public int GetOpponentPlayerScore(){
+		return opponentScore;
 	}
 
 	public void LevelComplete()
 	{
+		//if player score>opponentand , update grid => next level
 		if (playerScore > opponentScore) {
 			//direct to next level
-			level++; //advance to next level
-			Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
+			FieldController.instance.UpdatePlayerGrid (true, 1);
+			GetComponent<ChooseOptionsManagerScript>().LoadNextQuestion ();
+			//level++; //advance to next level - commeneted next line as we are using same scene for level 2 as well
+			//Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
 		} else {
 			Application.LoadLevel ("GameOverScene");
 		}

@@ -22,21 +22,23 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-        UpdatePlayerGrid(true,0);
+		UpdatePlayerGrid(true,1);
 	}
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.H))
-    //        AnimatePlayerMood(true);
-    //    if (Input.GetKeyDown(KeyCode.U))
-    //        AnimatePlayerMood(false);
-    //    if (Input.GetKeyDown(KeyCode.P))
-    //        foreach (PlayerScript ps in playerScripts)
-    //        {
-    //            ps.HighlightPlayer();
-    //        }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+            AnimatePlayerMood(true);
+        if (Input.GetKeyDown(KeyCode.U))
+            AnimatePlayerMood(false);
+        if (Input.GetKeyDown(KeyCode.P))
+            foreach (PlayerScript ps in playerScripts)
+            {
+                ps.HighlightPlayer();
+            }
+        if (Input.GetKeyDown(KeyCode.T))
+            TimerScript.instance.StartTimer(4, 90);
+    }
 
     public void UpdatePlayerGrid(bool isDense, int level)
     {
@@ -51,6 +53,7 @@ public class FieldController : MonoBehaviour {
 		{
 			ps.ball = ballPrefab.transform;
 
+            
             //In case we need labels in future
             //Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
             //label.localPosition = new Vector2(0, 30);
@@ -61,16 +64,14 @@ public class FieldController : MonoBehaviour {
             positionMarker.localPosition = new Vector2(0, 35);
             positionMarker.gameObject.SetActive(false);
             ps.arrowMarker = positionMarker.GetComponent<SpriteRenderer>();
-            //positionMarker.rotation = Quaternion.Euler(0, -90, 0);
-
-            if (level == 0)
+			if(level == 1)
             {
                 Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
                 string[] xy = positionIndices.Value.Split(',');
                 if(ps.label)
                     ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
             }
-			else if (level == 1) {
+			else if (level == 2) {
 				// Set new positions for level 2 
 
 				//Find orignal positions.

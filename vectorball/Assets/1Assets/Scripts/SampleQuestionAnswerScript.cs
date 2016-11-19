@@ -40,7 +40,7 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 				++counter;
 			}
 
-            ChooseOptionsManagerScript script = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<ChooseOptionsManagerScript>();
+            ChooseOptionsManagerScript script = GetComponent<ChooseOptionsManagerScript>();
             script.LoadNextQuestion();
         }
     }
