@@ -429,7 +429,6 @@ GameObject:
   - 114: {fileID: 114000010237466820}
   - 114: {fileID: 114000011389560266}
   - 114: {fileID: 114000011102694386}
-  - 114: {fileID: 114000012738588330}
   - 114: {fileID: 114000013939911338}
   m_Layer: 5
   m_Name: ChooseOptionsManager
@@ -1133,19 +1132,6 @@ MonoBehaviour:
   m_Text: 'Submit
 
 '
---- !u!114 &114000012738588330
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013673663626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acced7cd1b25246e6a17cbb150b628df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 114000013896042760}
-  opponentScoreText: {fileID: 114000012563121654}
 --- !u!114 &114000013251152260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1367,6 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed8a7db1b044d842aa84d41bcae0a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  content: {fileID: 0}
 --- !u!114 &114000014016192636
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -57,7 +57,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
     void OnTimeOut()
     {
-        Debug.Log("Timed out");
+		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+		Debug.Log("Timed out");
     }
 
     void OnTimerUpdate(float percent)
@@ -133,7 +134,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public void IfIncorrectOption(string option){
 		//increase opponent's score
 		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
-		GameSceneScript scoreScript = GetComponent<GameSceneScript>();
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
