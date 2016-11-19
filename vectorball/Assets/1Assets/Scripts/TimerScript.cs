@@ -26,7 +26,8 @@ public class TimerScript : MonoBehaviour {
 
 	public void StartTimer(float seconds)
     {
-        this.countTillSecs = seconds;
+		Debug.Log ("Inside StartTimer");
+		this.countTillSecs = seconds;
         eventCalled = false;
     }
 
@@ -43,6 +44,7 @@ public class TimerScript : MonoBehaviour {
 
             if (TimeoutEvent != null)
             {
+				Debug.Log (percent);
 				percent = secsPassed / countTillSecs;
 				TimerUpdateEvent(percent);
             }
