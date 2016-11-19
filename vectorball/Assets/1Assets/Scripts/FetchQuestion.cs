@@ -5,8 +5,8 @@ public class FetchQuestion : MonoBehaviour {
 
     // Use this for initialization
     public GameObject question;
-    string[][] questions;
-    public string ques; 
+    string[] questions;
+    int ques_line;
     void Start () {
         question.GetComponent<TextMesh>().text = getQuestion(getLevel());
     }
@@ -17,8 +17,11 @@ public class FetchQuestion : MonoBehaviour {
 	}
     string getQuestion(int level)
     {
-        //Function will read the questions - Done by Hussain
-        return "Question 2";
+        ques_line = new Random().Next(((level*5)-5), (level*5));
+        questions = System.IO.File.ReadAllLines(@"C:\Users\hussa\OneDrive\Documents\GitHub\GameBaseGroup2\vectorball\Assets\1Assets\Questions\Questions.txt");
+        int first = questions[ques_line].IndexOf("<");
+        int last = questions[ques_line].IndexOf(">");
+        return questions[ques_line].Substring(first, last);
     }
     string[] getOptions(int level)
     {
