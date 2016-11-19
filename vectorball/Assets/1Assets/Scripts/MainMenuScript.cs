@@ -24,9 +24,9 @@ public class MainMenuScript : MonoBehaviour {
 	}
 
 	//one method for each button, correspond to different levels
-	public void OpenLevel1()
+	public void OpenLevel1(int level)
 	{
-		ChooseOptionsManagerScript.level = 1;
+		ChooseOptionsManagerScript.level = level;
 		Application.LoadLevel (1);
 	}
 }

@@ -18,7 +18,7 @@ public class FindPlayer : MonoBehaviour {
         row = pos[1];
         while (true)
         {
-            temp = new Random().Next(10);
+			temp = Random.Range(0,10);
             if (player_pos[temp, 1] == row && player_pos[temp, 0] != pos[0])
             {
                 break;
