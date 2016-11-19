@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonHandler : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -18,4 +18,5 @@ public class ButtonHandler : MonoBehaviour {
     {
         SceneManager.LoadScene("Level 1");
     }
+    
 }
