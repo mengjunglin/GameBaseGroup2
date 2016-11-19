@@ -19,9 +19,11 @@ public class BallMoveBehavior : MonoBehaviour {
 		}
 		*/
 		Rigidbody rb = GetComponent<Rigidbody>();
-		if((_bullseye != null) && (((float)_bullseye.position.x - (float)transform.position.x) < 2) && (((float)_bullseye.position.x - (float)transform.position.x) > 0)){
+
+		if((_bullseye != null) && (((float)_bullseye.position.x - (float)transform.position.x) < 3) && (((float)_bullseye.position.x - (float)transform.position.x) > 0)){
 			rb.velocity = Vector3.zero;
 			rb.angularVelocity = Vector3.zero;
+
 		}
 	}
 
