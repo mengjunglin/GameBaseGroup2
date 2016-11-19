@@ -24,6 +24,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	GameSceneScript scoreScript;
 
+	PlayerScript targetPlayer;
+
 	public int MaxQuestionsInLevel = 3;
 
 	private int levelCounter = 1;
@@ -81,7 +83,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public void OnSubmit(){
 
 		++levelCounter;
+
 		// remove highlight
+		targetPlayer.ResetPlayer();
 
 		//Check the selected option with correct option
 		string option = ActiveOption ();
@@ -166,9 +170,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		int correctIndex = Random.Range (0, 3);
 		options [correctIndex] = currentQuestion.answer;
 
-
-		//highlight player
-
 		//Load random opponents
 		for(int i=0;i<4;++i)
 		{
@@ -196,6 +197,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		isOptionB.GetComponentInChildren<Text>().text = options[1];
 		isOptionC.GetComponentInChildren<Text>().text = options[2];
 		isOptionD.GetComponentInChildren<Text>().text = options[3];
+
+		//highlight player
+		string currentIndices = Regex.Match (currentQuestion.answer, "(?<=\\().+?(?=\\))").Value;
+		string[] indices = currentIndices.Split(',');
+		targetPlayer = FieldController.instance.GetPlayerAt(int.Parse(indices[0]),int.Parse(indices[1]));
+		targetPlayer.HighlightPlayer ();
+
+		TimerScript.instance.StartTimer (10);
 
 	}
 
