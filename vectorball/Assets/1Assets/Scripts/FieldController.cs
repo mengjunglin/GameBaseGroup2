@@ -22,7 +22,7 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-		UpdatePlayerGrid(true,1);
+		UpdatePlayerGrid(true);
 	}
 
     void Update()
@@ -40,7 +40,7 @@ public class FieldController : MonoBehaviour {
             TimerScript.instance.StartTimer(4);
     }
 
-    public void UpdatePlayerGrid(bool isDense, int level)
+    public void UpdatePlayerGrid(bool isDense)
     {
 		this.isDense = isDense;
 
@@ -64,26 +64,10 @@ public class FieldController : MonoBehaviour {
             positionMarker.localPosition = new Vector2(0, 35);
             positionMarker.gameObject.SetActive(false);
             ps.arrowMarker = positionMarker.GetComponent<SpriteRenderer>();
-			if(level == 1)
-            {
-                Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
-                string[] xy = positionIndices.Value.Split(',');
-                if(ps.label)
+            Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
+           	string[] xy = positionIndices.Value.Split(',');
+           	if(ps.label)
                     ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
-            }
-			else if (level == 2) {
-				// Set new positions for level 2 
-
-				//Find orignal positions.
-				Match positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])");
-				string[] xy = positionIndices.Value.Split (',');
-				ps.setMultiplier (Random.Range (1, 4));
-				int[] positions = { ps.getMultiplier () * int.Parse (xy [0]), ps.getMultiplier () * int.Parse (xy [1]) };
-				string newPositions = positions [0].ToString () + "," + positions [1].ToString ();
-				ps.name = "PositionA [" + newPositions + "]";
-
-                ps.label.text = "(" + positions[0] + "," + positions[1] + ")";
-            }
 		}
 
 		int count = 0;
@@ -110,7 +94,6 @@ public class FieldController : MonoBehaviour {
 
     public PlayerScript GetPlayerAt(int x, int y)
     {
-        //Debug.Log("Raw x: " + x + " y:" + y);
         if (!isDense)
         {
             if (y > 2)
@@ -119,7 +102,6 @@ public class FieldController : MonoBehaviour {
                 y++;
         }
 
-        //Debug.Log("Processed x: " + x + " y:" + y);
         PlayerScript selected = null;
         Match positionIndices;
         string[] xy = null;
@@ -131,14 +113,11 @@ public class FieldController : MonoBehaviour {
             xy = positionIndices.Value.Split(',');
             if (xy[0] == x.ToString() && xy[1] == y.ToString())
             {
-                selected = ps;
-                //Debug.Log(ps.name + " => x: " + xy[0] + " y:" + xy[1]);
-
+				selected = ps;
                 return selected;
             }
         }
 
-        //Debug.LogError("X,Y not foundin player Grid.");
         return null;
     }
 
