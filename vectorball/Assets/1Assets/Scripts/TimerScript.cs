@@ -22,7 +22,8 @@ public class TimerScript : MonoBehaviour {
 
     public void StartTimer(float seconds)
     {
-        this.countTillSecs = seconds;
+		this.secsPassed = 0;
+		this.countTillSecs = seconds;
         eventCalled = false;
         if(TimerUpdateEvent != null)
             TimerUpdateEvent(0);

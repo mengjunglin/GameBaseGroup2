@@ -11,6 +11,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle[] isOptioni;
 	public ToggleGroup optionsToggle;
 
+	private bool finished;
+
 	public GameObject ball;
 
     public Image timerBar;
@@ -32,12 +34,20 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	private int levelCounter = 1;
 
 	public void Start(){
+		finished = false;
 		scoreScript = GetComponent<GameSceneScript> ();
 		startPositions = new int[] {0,0};
 		LoadNextQuestion ();
 	}
 
 	public void Update(){
+		if (Input.GetKeyDown (KeyCode.H) && finished == false) {
+			finished = true;
+			// store the current player location before loading next question
+			startPositions = targetPositions;
+
+			LoadNextQuestion ();
+		}
 		//Check if all questions for level complete 
 		if (levelCounter == MaxQuestionsInLevel) {
 			levelCounter = 1;
@@ -86,6 +96,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		++levelCounter;
 
+		TimerScript.instance.StopTimer();
+
+		for (int i = 0; i < 4; ++i) {
+			isOptioni [i].interactable = false;
+		}
+
 		// remove highlight
 		targetPlayer.ResetPlayer();
 
@@ -105,14 +121,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfCorrectOption (targetPositions);
 		else
 			IfIncorrectOption (new int[]{x,y});
-
-        TimerScript.instance.StopTimer();
-
-
-		// store the current player location before loading next question
-		startPositions = targetPositions;
-
-		LoadNextQuestion ();
 	}
 
 	public void IfCorrectOption(int[] option){
@@ -121,7 +129,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//function to display vector notation
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
-		script.convertResultToVector(true,level,option);
+		script.convertResultToVector("Hurray! That was an awesome pass. You passed to",option);
+
 	}
 
 	public void IfIncorrectOption(int[] option){
@@ -129,7 +138,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
-		script.convertResultToVector(false,level,option);
+		script.convertResultToVector("Whoops! You gave the ball to opponent. You passed to",option);
 	}
 
 	public void MoveBall(int x, int y){
@@ -218,7 +227,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		}
 
 		//start timer
-		TimerScript.instance.StartTimer (10);
+		TimerScript.instance.StartTimer (50);
+
+		finished = false;
 
 	}
 		
