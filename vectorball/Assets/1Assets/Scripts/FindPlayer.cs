@@ -33,8 +33,6 @@ public class FindPlayer : MonoBehaviour
             int next_row = Convert.ToInt32(current_path[indexOCR + 1], 10);
             while (true){
                 temp = Random.Range(0, 10);
-                //DELETE if (player_pos[temp, 1] == row && player_pos[temp, 0] != pos[0]){
-                //DELETE temp = new Random().Next(10);
 
                 // player_pos[next_row,y,level]
                 //bad code below. Inefficient, bad design, but works
