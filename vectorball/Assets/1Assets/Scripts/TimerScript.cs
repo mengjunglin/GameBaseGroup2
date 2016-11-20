@@ -15,6 +15,11 @@ public class TimerScript : MonoBehaviour {
 
     bool eventCalled = true;
 
+	void Start()
+	{
+		instance = this;
+	}
+
     void Awake()
     {
         instance = this;
