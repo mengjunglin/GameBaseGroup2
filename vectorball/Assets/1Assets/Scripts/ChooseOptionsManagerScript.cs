@@ -15,14 +15,18 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public GameObject ball;
 
-	//Question textbox
-	public Text questionText;
+    public Image timerBar;
+
+    //Question textbox
+    public Text questionText;
 
 	private Question currentQuestion;
 
 	public static int level = 1;
 
 	GameSceneScript scoreScript;
+
+	PlayerScript targetPlayer;
 
 	public int MaxQuestionsInLevel = 3;
 
@@ -55,12 +59,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
     void OnTimeOut()
     {
-        Debug.Log("Timed out");
+		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+		Debug.Log("Timed out");
     }
 
     void OnTimerUpdate(float percent)
     {
-        Debug.Log("Timer percent" + percent);
+       timerBar.fillAmount = 1 - percent;
     }
 
     //Check which option is active
@@ -81,7 +86,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public void OnSubmit(){
 
 		++levelCounter;
+
 		// remove highlight
+		targetPlayer.ResetPlayer();
 
 		//Check the selected option with correct option
 		string option = ActiveOption ();
@@ -104,9 +111,11 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfCorrectOption (option);
 		else
 			IfIncorrectOption (option);
-		//Maintain TextAsset with q and a. 
-		//Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
-		//Can use same for generating question and display on canvas
+        //Maintain TextAsset with q and a. 
+        //Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
+        //Can use same for generating question and display on canvas
+
+        TimerScript.instance.StopTimer();
 	}
 
 	public void IfCorrectOption(string option){
@@ -129,7 +138,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public void IfIncorrectOption(string option){
 		//increase opponent's score
 		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
-		GameSceneScript scoreScript = GetComponent<GameSceneScript>();
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
@@ -166,9 +174,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		int correctIndex = Random.Range (0, 3);
 		options [correctIndex] = currentQuestion.answer;
 
-
-		//highlight player
-
 		//Load random opponents
 		for(int i=0;i<4;++i)
 		{
@@ -196,6 +201,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		isOptionB.GetComponentInChildren<Text>().text = options[1];
 		isOptionC.GetComponentInChildren<Text>().text = options[2];
 		isOptionD.GetComponentInChildren<Text>().text = options[3];
+
+		//highlight player
+		string currentIndices = Regex.Match (currentQuestion.answer, "(?<=\\().+?(?=\\))").Value;
+		string[] indices = currentIndices.Split(',');
+		targetPlayer = FieldController.instance.GetPlayerAt(int.Parse(indices[0]),int.Parse(indices[1]));
+		targetPlayer.HighlightPlayer ();
+
+		TimerScript.instance.StartTimer (10);
 
 	}
 

@@ -20,11 +20,18 @@ public class TimerScript : MonoBehaviour {
         instance = this;
     }
 
-    public void StartTimer(float seconds, float percent )
+    public void StartTimer(float seconds)
     {
-        this.percent = percent;
         this.countTillSecs = seconds;
         eventCalled = false;
+        if(TimerUpdateEvent != null)
+            TimerUpdateEvent(0);
+    }
+
+    public void StopTimer()
+    {
+        eventCalled = true;
+        secsPassed = countTillSecs;
     }
 
     void Update()

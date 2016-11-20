@@ -17,7 +17,7 @@ public class FetchQuestion : MonoBehaviour {
 	}
     string getQuestion(int level)
     {
-        ques_line = new Random().Next(((level*5)-5), (level*5));
+        ques_line = Random.Range(((level*5)-5), (level*5));
         questions = System.IO.File.ReadAllLines(@"C:\Users\hussa\OneDrive\Documents\GitHub\GameBaseGroup2\vectorball\Assets\1Assets\Questions\Questions.txt");
         int first = questions[ques_line].IndexOf("<");
         int last = questions[ques_line].IndexOf(">");
