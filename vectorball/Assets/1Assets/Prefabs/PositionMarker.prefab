@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000014061297102}
   - 212: {fileID: 212000010435788978}
+  - 114: {fileID: 114000014036380940}
   m_Layer: 0
   m_Name: PositionMarker
   m_TagString: Untagged
@@ -40,6 +41,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000014036380940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011467793250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f689f9d3f8cc4cd7a95305cfee7513a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!212 &212000010435788978
 SpriteRenderer:
   m_ObjectHideFlags: 1
