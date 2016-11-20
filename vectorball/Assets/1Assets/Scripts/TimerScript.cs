@@ -24,6 +24,14 @@ public class TimerScript : MonoBehaviour {
     {
         this.countTillSecs = seconds;
         eventCalled = false;
+        if(TimerUpdateEvent != null)
+            TimerUpdateEvent(0);
+    }
+
+    public void StopTimer()
+    {
+        eventCalled = true;
+        secsPassed = countTillSecs;
     }
 
     void Update()

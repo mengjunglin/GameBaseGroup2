@@ -111,9 +111,11 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfCorrectOption (option);
 		else
 			IfIncorrectOption (option);
-		//Maintain TextAsset with q and a. 
-		//Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
-		//Can use same for generating question and display on canvas
+        //Maintain TextAsset with q and a. 
+        //Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
+        //Can use same for generating question and display on canvas
+
+        TimerScript.instance.StopTimer();
 	}
 
 	public void IfCorrectOption(string option){
