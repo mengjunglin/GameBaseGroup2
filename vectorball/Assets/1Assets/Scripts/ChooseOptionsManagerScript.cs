@@ -9,6 +9,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	//Toggle Game Objects
 	public Toggle[] isOptioni;
+	public ToggleGroup optionsToggle;
 
 	public GameObject ball;
 
@@ -58,6 +59,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
     void OnTimeOut()
     {
+		for (int i = 0; i < 4; ++i) {
+			isOptioni [i].interactable = false;
+		}
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
     }
@@ -98,9 +102,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		MoveBall (x,y);
 
 		if (x == targetPositions[0] && y == targetPositions[1])
-			IfCorrectOption (option);
+			IfCorrectOption (targetPositions);
 		else
-			IfIncorrectOption (option);
+			IfIncorrectOption (new int[]{x,y});
 
         TimerScript.instance.StopTimer();
 
@@ -111,7 +115,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		LoadNextQuestion ();
 	}
 
-	public void IfCorrectOption(string option){
+	public void IfCorrectOption(int[] option){
 		//increase score
 		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
 
@@ -120,7 +124,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		script.convertResultToVector(true,level,option);
 	}
 
-	public void IfIncorrectOption(string option){
+	public void IfIncorrectOption(int[] option){
 		//increase opponent's score
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
@@ -138,6 +142,15 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 	public void LoadNextQuestion(){
+
+		//Make toggles clickable
+		for (int i = 0; i < 4; ++i) {
+			isOptioni [i].interactable = true;
+		}
+
+		//Clear all toggles
+		optionsToggle.SetAllTogglesOff ();
+
 		FindPlayer findPlayerScript = GetComponent<FindPlayer>();
 
 		//Find next player to pass ball to
