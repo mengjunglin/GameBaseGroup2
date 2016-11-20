@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour {
 
@@ -16,37 +15,26 @@ public class TimerScript : MonoBehaviour {
 
     bool eventCalled = true;
 
-	[SerializeField]
-	private Image content;
-
     void Awake()
     {
         instance = this;
     }
 
-	public void StartTimer(float seconds)
+    public void StartTimer(float seconds)
     {
-		Debug.Log ("Inside StartTimer");
-		this.countTillSecs = seconds;
+        this.countTillSecs = seconds;
         eventCalled = false;
     }
 
-	private void HandleBar(){
-		content.fillAmount = 1 - percent;
-	}
-
     void Update()
     {
-		HandleBar ();
-		if(secsPassed < countTillSecs)
+        if(secsPassed < countTillSecs)
         {
             secsPassed += Time.deltaTime;
 
             if (TimeoutEvent != null)
             {
-				Debug.Log (percent);
-				percent = secsPassed / countTillSecs;
-				TimerUpdateEvent(percent);
+                TimerUpdateEvent(secsPassed / countTillSecs);
             }
         }
         else

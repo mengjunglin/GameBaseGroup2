@@ -15,8 +15,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public GameObject ball;
 
-	//Question textbox
-	public Text questionText;
+    public Image timerBar;
+
+    //Question textbox
+    public Text questionText;
 
 	private Question currentQuestion;
 
@@ -63,7 +65,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
     void OnTimerUpdate(float percent)
     {
-        Debug.Log("Timer percent" + percent);
+       timerBar.fillAmount = 1 - percent;
     }
 
     //Check which option is active
