@@ -83733,9 +83733,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010171388942
 MonoBehaviour:
@@ -83764,9 +83764,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010281182518
 MonoBehaviour:
@@ -83824,9 +83824,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010319031694
 MonoBehaviour:
@@ -83841,9 +83841,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010320458302
 MonoBehaviour:
@@ -83886,9 +83886,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010443736822
 MonoBehaviour:
@@ -83961,9 +83961,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000010543892190
 MonoBehaviour:
@@ -84063,9 +84063,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000011125617424
 MonoBehaviour:
@@ -84123,9 +84123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000011224398020
 MonoBehaviour:
@@ -84183,9 +84183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000011337205682
 MonoBehaviour:
@@ -84271,9 +84271,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000011630395846
 MonoBehaviour:
@@ -84288,9 +84288,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000011651993714
 MonoBehaviour:
@@ -84505,9 +84505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012050822100
 MonoBehaviour:
@@ -84522,9 +84522,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012077127796
 MonoBehaviour:
@@ -84581,9 +84581,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012299471728
 MonoBehaviour:
@@ -84598,9 +84598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012310398434
 MonoBehaviour:
@@ -84687,9 +84687,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012464515754
 MonoBehaviour:
@@ -84762,9 +84762,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012531236468
 MonoBehaviour:
@@ -84779,11 +84779,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   denseGridHolderL: {fileID: 1000013102707528}
   denseGridHolderR: {fileID: 1000010272408714}
-  ballPrefab: {fileID: 0}
   positionLabel: {fileID: 1000012699834794, guid: cae06b717c5f3824f919895641525473,
     type: 2}
   arrowSprite: {fileID: 1000011467793250, guid: de27d1009d181314cab2021abd2f368d,
     type: 2}
+  ballMono: {fileID: 0}
 --- !u!114 &114000012554824458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84797,9 +84797,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012584879034
 MonoBehaviour:
@@ -84814,9 +84814,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000012592434816
 MonoBehaviour:
@@ -85272,9 +85272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000014038942484
 MonoBehaviour:
@@ -85289,9 +85289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000014089843930
 MonoBehaviour:
@@ -85335,9 +85335,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000014135328000
 MonoBehaviour:
@@ -85380,9 +85380,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpponent: 0
   anim: {fileID: 0}
-  ball: {fileID: 0}
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
+  idlePosition: {x: 0, y: 0, z: 0}
   faceAnimController: {fileID: 0}
 --- !u!114 &114000014206685254
 MonoBehaviour:
