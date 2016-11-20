@@ -11,8 +11,9 @@ public class FieldController : MonoBehaviour {
 	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR, positionLabel, arrowSprite;
-    [SerializeField]
-    private BallMoveBehavior ballMono;
+  
+	[SerializeField]
+	private BallMoveBehavior ballMono;
 
     public bool isDense { private set; get; }
 
