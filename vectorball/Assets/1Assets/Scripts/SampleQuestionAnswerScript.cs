@@ -36,7 +36,6 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 				questions [counter].subLevel = subLevelCounter;
 				questions [counter].question = questionElements [1];
 				questions [counter].answer = questionElements [2];	
-				Debug.Log (questions [counter].question = questionElements [1]);
 				++counter;
 			}
 
@@ -47,7 +46,6 @@ public class SampleQuestionAnswerScript : MonoBehaviour {
 		
 	public Question GetQuestion(int level,int sublevel){
 		foreach (Question question in questions) {
-			Debug.Log (question);
 			if (question.level == level && question.subLevel == sublevel) {
 				return question;
 			}

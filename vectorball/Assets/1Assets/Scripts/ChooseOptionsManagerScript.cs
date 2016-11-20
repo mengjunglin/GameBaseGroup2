@@ -60,7 +60,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
     void OnTimeOut()
     {
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
-		Debug.Log("Timed out");
+
     }
 
     void OnTimerUpdate(float percent)
@@ -94,7 +94,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		string option = ActiveOption ();
 		char multiplier = option.ToCharArray () [0];
 		string positionIndices = Regex.Match (option, "(?<=\\().+?(?=\\))").Value;
-		Debug.Log("User chose "+ positionIndices);
+
 		string[] coordinates = positionIndices.Split(',');
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
@@ -124,7 +124,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
 
 		//function to display vector notation
-		Debug.Log(option);
+
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(true,level,option);
 
@@ -162,9 +162,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//Load next question
 		currentQuestion = script.GetQuestion(level,1);
-		Debug.Log (currentQuestion.answer);
-		Debug.Log (currentQuestion.question);
-		Debug.Log (currentQuestion.level);
 
 		//Set the question in the text box
 		questionText.text = currentQuestion.question;

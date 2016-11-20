@@ -21,7 +21,6 @@ public class GameOverScript : MonoBehaviour {
 	public void BackToLevel()
 	{
 		//int level = GameSceneScript.level;
-		Debug.Log("Level="+ChooseOptionsManagerScript.level);
 		Application.LoadLevel ("GameScene");
 	}
 }
