@@ -8,10 +8,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 	//Toggle Game Objects
-	public Toggle isOptionA;
-	public Toggle isOptionB;
-	public Toggle isOptionC;
-	public Toggle isOptionD;
+	public Toggle[] isOptioni;
 
 	public GameObject ball;
 
@@ -20,13 +17,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
     //Question textbox
     public Text questionText;
 
-	private Question currentQuestion;
-
-	public static int level = 1;
+	public static int level = 2;
 
 	GameSceneScript scoreScript;
 
 	PlayerScript targetPlayer;
+
+	private int[] startPositions;
+	private int[] targetPositions;
 
 	public int MaxQuestionsInLevel = 3;
 
@@ -34,7 +32,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void Start(){
 		scoreScript = GetComponent<GameSceneScript> ();
-		//LoadNextQuestion ();
+		startPositions = new int[] {0,0};
+		LoadNextQuestion ();
 	}
 
 	public void Update(){
@@ -60,7 +59,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
     void OnTimeOut()
     {
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
-		Debug.Log("Timed out");
+
     }
 
     void OnTimerUpdate(float percent)
@@ -72,14 +71,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
     public string ActiveOption(){
 		//Set the chosen option as A or B or C or D below
 		string option = " ";
-		if (isOptionA.isOn)
-			option = isOptionA.GetComponentInChildren<Text>().text;
-		else if (isOptionB.isOn)
-			option = isOptionB.GetComponentInChildren<Text>().text;
-		else if (isOptionC.isOn)
-			option = isOptionC.GetComponentInChildren<Text>().text;
-		else if (isOptionD.isOn)
-			option = isOptionD.GetComponentInChildren<Text>().text;
+		for (int i = 0; i < 4; ++i) {
+			if(isOptioni[i].isOn)
+				option = isOptioni[i].transform.FindChild("Answer").GetComponent<Text>().text;
+		}
 		return option;
 	}
 
@@ -92,52 +87,41 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//Check the selected option with correct option
 		string option = ActiveOption ();
-		char multiplier = option.ToCharArray () [0];
+
 		string positionIndices = Regex.Match (option, "(?<=\\().+?(?=\\))").Value;
-		Debug.Log("User chose "+ positionIndices);
+
 		string[] coordinates = positionIndices.Split(',');
+
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
-		if ('(' != multiplier) {
-			int m = int.Parse (multiplier.ToString());
-			x = x * m;
-			y = y * m;
-		}
 
 		MoveBall (x,y);
 
-		//If ActiveOption() == CorrectOptionForQuestion() call IfCorrectOption()
-		if (option.Equals(currentQuestion.answer))
+		if (x == targetPositions[0] && y == targetPositions[1])
 			IfCorrectOption (option);
 		else
 			IfIncorrectOption (option);
-        //Maintain TextAsset with q and a. 
-        //Script to make TextAsset values into array. CorrectOptionForQuestion(index) return ans(index)
-        //Can use same for generating question and display on canvas
 
         TimerScript.instance.StopTimer();
+
+
+		// store the current player location before loading next question
+		startPositions = targetPositions;
+
+		LoadNextQuestion ();
 	}
 
 	public void IfCorrectOption(string option){
 		//increase score
-		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
 		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
 
 		//function to display vector notation
-		Debug.Log(option);
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector(true,level,option);
-
-		//Increase level
-		++level;
-
-		//FieldController.instance.UpdatePlayerGrid (true, 1);
-		//LoadNextQuestion ();
 	}
 
 	public void IfIncorrectOption(string option){
 		//increase opponent's score
-		//GameSceneScript scoreScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<GameSceneScript>();
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
@@ -154,70 +138,75 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 	public void LoadNextQuestion(){
-		SampleQuestionAnswerScript script = GetComponent<SampleQuestionAnswerScript>();
+		FindPlayer findPlayerScript = GetComponent<FindPlayer>();
 
+		//Find next player to pass ball to
+		//targetPositions = findPlayerScript.find_teammate(level, startPositions);
+		targetPositions = new int[]{2,3};
+		targetPlayer = FieldController.instance.GetPlayerAt (targetPositions [0], targetPositions [1]);
 
-		// store the current player location before loading next question
-
-
-		//Load next question
-		currentQuestion = script.GetQuestion(level,1);
-		Debug.Log (currentQuestion.answer);
-		Debug.Log (currentQuestion.question);
-		Debug.Log (currentQuestion.level);
+		//highlight player
+		targetPlayer.HighlightPlayer ();
 
 		//Set the question in the text box
-		questionText.text = currentQuestion.question;
+		questionText.text = "Pass the ball to the hightlighted player";
 
-		//Laod the current answer for the question
 		string[] options = new string[4];
+		int[,] optionValues = new int[4,2];
+
+		//Choose a random position to set correct option in
 		int correctIndex = Random.Range (0, 3);
-		options [correctIndex] = currentQuestion.answer;
+		optionValues [correctIndex,0] = targetPositions[0] - startPositions[0];
+		optionValues [correctIndex,1] = targetPositions[1] - startPositions[1];
+		options [correctIndex] = "("+ targetPositions[0].ToString() + "," + targetPositions [1].ToString() + ")";
 
 		//Load random opponents
 		for(int i=0;i<4;++i)
 		{
 			if (correctIndex != i) {
-				FieldController.instance.UpdatePlayerGrid (true,0);
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
 				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
 				while(options.Contains(positionIndices)){
 					ps = FieldController.instance.GetRandomOpponent ();
 					positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
 				}
-				if (0 != ps.getMultiplier()) {
-					string[] xy = positionIndices.Split (',');
-					int[] positions = { int.Parse (xy [0])/ps.getMultiplier (), int.Parse (xy [1])/ps.getMultiplier () };
-					string newPositions = ps.getMultiplier () + "(" + positions [0].ToString () + "," + positions [1].ToString () + ")";
-					options [i] = newPositions;
-				} else {
-					options [i] = "(" + positionIndices + ")";
-				}
+				optionValues [i,0] = int.Parse(positionIndices.Split (',')[0]) - startPositions[0];
+				optionValues [i,1] = int.Parse(positionIndices.Split (',')[1]) - startPositions[1];
+				options [i] = "("+ positionIndices + ")";
+			}
+
+			isOptioni[i].transform.FindChild("Answer").GetComponent<Text>().text = options[i];
+
+		}
+
+		if (level == 1) {
+			for (int i = 0; i < 4; ++i) {
+
+				Text optionText = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Value").GetComponent<Text>();
+				optionText.text = string.Format ("{0} \n{1}", optionValues [i, 0], optionValues [i, 1]);
+			}
+					
+		} else if (level == 2) {
+			for (int i = 0; i < 4; ++i) {
+				int multiplier = Random.Range (2, 5);
+				optionValues [i,0] *= multiplier;
+				optionValues [i,1] *= multiplier;
+		
+				Text optionText = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Value").GetComponent<Text>();
+				optionText.text = string.Format ("{0} \n{1}", optionValues [i, 0], optionValues [i, 1]);
+
+				Text multiplierText = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Multiplier1").GetComponent<Text>();
+				multiplierText.text = string.Format ("{0}\n---\n{1}", 1, multiplier);
+
+				GameObject multiplierObj = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Multiplier1").gameObject;
+				multiplierObj.SetActive (true);
+
 			}
 		}
 
-		//Set the options in the toggles
-		isOptionA.GetComponentInChildren<Text>().text = options[0];
-		isOptionB.GetComponentInChildren<Text>().text = options[1];
-		isOptionC.GetComponentInChildren<Text>().text = options[2];
-		isOptionD.GetComponentInChildren<Text>().text = options[3];
-
-		//highlight player
-		string currentIndices = Regex.Match (currentQuestion.answer, "(?<=\\().+?(?=\\))").Value;
-		string[] indices = currentIndices.Split(',');
-		targetPlayer = FieldController.instance.GetPlayerAt(int.Parse(indices[0]),int.Parse(indices[1]));
-		targetPlayer.HighlightPlayer ();
-
+		//start timer
 		TimerScript.instance.StartTimer (10);
 
-	}
-
-	// Function to get current question number for a particular level
-	public int GetCurrentQuestionNumber(){
-		if (currentQuestion != null) {
-			return currentQuestion.subLevel;
-		}
-		return -1;
 	}
 		
 }

@@ -32,7 +32,7 @@ public class VectorRepresentationScript : MonoBehaviour {
 
 
 		GameObject resultObj = GameObject.FindGameObjectWithTag ("Result");
-		GameObject resultBoxObj = GameObject.FindGameObjectWithTag ("Result");
+
 		if (!status) {
 			dialogueMessage = "Whoops! You gave the ball to opponent. Try again!";
 			//resultObj.GetComponent<Text> ().text.

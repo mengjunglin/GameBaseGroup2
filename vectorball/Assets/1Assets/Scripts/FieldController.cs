@@ -10,7 +10,10 @@ public class FieldController : MonoBehaviour {
 	[SerializeField]
 	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
-    private GameObject denseGridHolderL, denseGridHolderR, ballPrefab, positionLabel, arrowSprite;
+    private GameObject denseGridHolderL, denseGridHolderR, positionLabel, arrowSprite;
+  
+	[SerializeField]
+	private BallMoveBehavior ballMono;
 
     public bool isDense { private set; get; }
 
@@ -22,8 +25,52 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
-		UpdatePlayerGrid(true,1);
+		UpdatePlayerGrid(true);
 	}
+
+    void OnEnable()
+    {
+        TimerScript.instance.TimeoutEvent += OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent += OnTimerUpdate;
+    }
+
+    void OnDisable()
+    {
+        TimerScript.instance.TimeoutEvent -= OnTimeOut;
+        TimerScript.instance.TimerUpdateEvent -= OnTimerUpdate;
+    }
+
+    void OnTimeOut()
+    {
+        Debug.Log("Timed out");
+    }
+
+    void OnTimerUpdate(float percent)
+    {
+        if(percent > PlayerScript.chargePercent)
+        {
+            PlayerScript ps = ballMono.target.GetComponent<PlayerScript>();
+            PlayerScript attacker = GetNearestPlayer(ps);
+            if (attacker)
+                attacker.ChargeTowardsBall(percent, ballMono.target.position);
+            else
+                print("Err" + ps);
+        }
+    }
+
+    PlayerScript GetNearestPlayer(PlayerScript target)
+    {
+        Vector2 coordinates = GetXYOfPlayer(target);
+        PlayerScript playerBehind = GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y - 1));
+        if (playerBehind && playerBehind.isOpponent != target.isOpponent)
+        {
+            return playerBehind;
+        }
+        else
+        {
+            return GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y + 1));
+        }
+    }
 
     void Update()
     {
@@ -31,16 +78,16 @@ public class FieldController : MonoBehaviour {
             AnimatePlayerMood(true);
         if (Input.GetKeyDown(KeyCode.U))
             AnimatePlayerMood(false);
-        if (Input.GetKeyDown(KeyCode.P))
-            foreach (PlayerScript ps in playerScripts)
-            {
-                ps.HighlightPlayer();
-            }
-        if (Input.GetKeyDown(KeyCode.T))
-            TimerScript.instance.StartTimer(4);
+        //if (Input.GetKeyDown(KeyCode.P))
+        //    foreach (PlayerScript ps in playerScripts)
+        //    {
+        //        ps.HighlightPlayer();
+        //    }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //    TimerScript.instance.StartTimer(4);
     }
 
-    public void UpdatePlayerGrid(bool isDense, int level)
+    public void UpdatePlayerGrid(bool isDense)
     {
 		this.isDense = isDense;
 
@@ -49,11 +96,12 @@ public class FieldController : MonoBehaviour {
 
         playerScripts = GetComponentsInChildren<PlayerScript>();
 
-		foreach(PlayerScript ps in playerScripts)
-		{
-			ps.ball = ballPrefab.transform;
+        PlayerScript.ball = ballMono.transform;
 
-            
+        foreach (PlayerScript ps in playerScripts)
+		{
+            ps.idlePosition = ps.transform.position;
+
             //In case we need labels in future
             //Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
             //label.localPosition = new Vector2(0, 30);
@@ -64,26 +112,10 @@ public class FieldController : MonoBehaviour {
             positionMarker.localPosition = new Vector2(0, 35);
             positionMarker.gameObject.SetActive(false);
             ps.arrowMarker = positionMarker.GetComponent<SpriteRenderer>();
-			if(level == 1)
-            {
-                Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
-                string[] xy = positionIndices.Value.Split(',');
-                if(ps.label)
+            Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
+           	string[] xy = positionIndices.Value.Split(',');
+           	if(ps.label)
                     ps.label.text = "(" + xy[0] + "," + xy[1] + ")";
-            }
-			else if (level == 2) {
-				// Set new positions for level 2 
-
-				//Find orignal positions.
-				Match positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])");
-				string[] xy = positionIndices.Value.Split (',');
-				ps.setMultiplier (Random.Range (1, 4));
-				int[] positions = { ps.getMultiplier () * int.Parse (xy [0]), ps.getMultiplier () * int.Parse (xy [1]) };
-				string newPositions = positions [0].ToString () + "," + positions [1].ToString ();
-				ps.name = "PositionA [" + newPositions + "]";
-
-                ps.label.text = "(" + positions[0] + "," + positions[1] + ")";
-            }
 		}
 
 		int count = 0;
@@ -103,14 +135,13 @@ public class FieldController : MonoBehaviour {
 		PlayerScript selectedPlayer = GetPlayerAt(x, y);
 
         if (selectedPlayer)
-            return selectedPlayer.transform.position;
+            return selectedPlayer.idlePosition;
         else
             return Vector3.zero;
     }
 
     public PlayerScript GetPlayerAt(int x, int y)
     {
-        //Debug.Log("Raw x: " + x + " y:" + y);
         if (!isDense)
         {
             if (y > 2)
@@ -119,7 +150,6 @@ public class FieldController : MonoBehaviour {
                 y++;
         }
 
-        //Debug.Log("Processed x: " + x + " y:" + y);
         PlayerScript selected = null;
         Match positionIndices;
         string[] xy = null;
@@ -131,15 +161,20 @@ public class FieldController : MonoBehaviour {
             xy = positionIndices.Value.Split(',');
             if (xy[0] == x.ToString() && xy[1] == y.ToString())
             {
-                selected = ps;
-                //Debug.Log(ps.name + " => x: " + xy[0] + " y:" + xy[1]);
-
+				selected = ps;
                 return selected;
             }
         }
 
-        //Debug.LogError("X,Y not foundin player Grid.");
         return null;
+    }
+
+    public Vector2 GetXYOfPlayer(PlayerScript ps)
+    {
+        Match positionIndices = Regex.Match(ps.name, "(?<=\\[).+?(?=\\])");
+        //if match not found throw error
+        string[] xy = positionIndices.Value.Split(',');
+        return new Vector2(int.Parse(xy[0]), int.Parse(xy[1]));
     }
 
 	public PlayerScript GetRandomOpponent(){
