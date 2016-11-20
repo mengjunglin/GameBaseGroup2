@@ -5,34 +5,98 @@ public class PlayerScript : MonoBehaviour {
 
     public bool isOpponent;
     public Animator anim;
-    public Transform ball;
 	private int multiplier=0;
     public TextMesh label;
     public SpriteRenderer arrowMarker;
+    public Vector3 idlePosition, lastPosition;
 
-    [SerializeField]
+    bool currentlyCharging = false;
+
     PlayFaceAnimations faceAnimController;
+    Character_Animations playerAnimator;
+    float idleLerpCounter = 0;
+    Vector3 lookAtTarget = Vector3.zero;
+
+    public static Transform ball;
+    public static float chargePercent = 0.6f;
+
+    const float stopAtPercent = .92f;
+    const float kickDelay = 2;
+    const float animDelay = 1.7f;
+    const float reverseSpeedFactor = 2;
 
     void Awake()
     {
         isOpponent = (name.Contains("PositionB"));
         anim = GetComponentInChildren<Animator>();
         faceAnimController = GetComponentInChildren<PlayFaceAnimations>();
+        playerAnimator = GetComponentInChildren<Character_Animations>();
     }
 
     void Update()
     {
-        if (ball)
+        if(playerAnimator.v != 0 && idleLerpCounter > kickDelay)
         {
-            Vector3 target = new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z);
-            anim.transform.LookAt(target);
+            lookAtTarget = new Vector3(idlePosition.x, transform.position.y, idlePosition.z);
+        }
+        else if (ball)
+        {
+            lookAtTarget = new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z);            
+        }
+
+        if (transform.position != idlePosition)
+        {
+            if(idleLerpCounter > animDelay)
+            {
+                playerAnimator.v = 1;
+                playerAnimator.run = 0.18f;
+            }
+            if (idleLerpCounter > kickDelay )
+            {
+                transform.position = Vector3.Lerp(lastPosition, idlePosition, (idleLerpCounter - kickDelay) / reverseSpeedFactor);
+            }
+
+            idleLerpCounter += Time.deltaTime;
+
+            if((idleLerpCounter - kickDelay) / reverseSpeedFactor > stopAtPercent)
+                playerAnimator.v = 0;
+        }
+        //else
+        //    playerAnimator.v = 0;
+
+        anim.transform.LookAt(lookAtTarget);
+    }
+
+    public void ChargeTowardsBall(float percent, Vector3 targetPosition)
+    {
+        idleLerpCounter = 0;
+        if (percent < stopAtPercent)
+        {            
+            transform.position = Vector3.Lerp(idlePosition, targetPosition + new Vector3(0,0,5.5f), (percent - chargePercent) * (1 / (1 - chargePercent)));
+            //print(gameObject.name + " " + (percent - chargePercent) * (1 / (1 - chargePercent)) + targetPosition);
+            lastPosition = transform.position;
+            playerAnimator.v = 1;
+            playerAnimator.run = 0.18f;
+        }
+        else
+        {
+            if (playerAnimator.v != 0)
+            {
+                ball.GetComponent<BallMoveBehavior>().target = transform;
+                PlayerScript ps = FieldController.instance.GetRandomOpponent();
+                Vector2 coordinates = FieldController.instance.GetXYOfPlayer(ps);
+                KickBallTowards(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
+            }
+            playerAnimator.v = 0;
+            playerAnimator.run = 0;
         }
     }
 
     public void KickBallTowards(int x, int y)
     {
         PlayerScript target = FieldController.instance.GetPlayerAt(x, y);
-        ball.GetComponent<BallMoveBehavior>().setTarget(target.transform);
+        BallMoveBehavior ballMono = ball.GetComponent<BallMoveBehavior>();
+        ballMono.setTarget(target.transform);
     }
 
     public void PlayKickAnimation()

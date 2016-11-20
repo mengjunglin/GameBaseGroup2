@@ -28,6 +28,7 @@ public class BallMoveBehavior : MonoBehaviour {
 	}
 
 	public void setTarget(Transform target){
+        print("Owner changed " + target);
         Transform ballOwner = this.target;
         this.target = target;
 		this._bullseye = target;
@@ -35,6 +36,7 @@ public class BallMoveBehavior : MonoBehaviour {
         //If u get an error here. Be sure to give a player0:0 reference to target(this script's target field) by default
         ballOwner.GetComponent<PlayerScript>().PlayKickAnimation();
 
+        CancelInvoke("Launch");
 		Invoke("Launch", kickDelay);
 	}
 
