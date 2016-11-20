@@ -292,16 +292,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000014038942484, guid: 03c57bae66b522e4e8f6237172bfc8c4,
-        type: 2}
-      propertyPath: ball
-      value: 
-      objectReference: {fileID: 375354014}
     - target: {fileID: 114000012531236468, guid: 03c57bae66b522e4e8f6237172bfc8c4,
         type: 2}
-      propertyPath: ballPrefab
+      propertyPath: ballMono
       value: 
-      objectReference: {fileID: 375354010}
+      objectReference: {fileID: 425480179}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03c57bae66b522e4e8f6237172bfc8c4, type: 2}
   m_IsPrefabParent: 0
@@ -1091,11 +1086,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011479395642, guid: cddd395770a2bbd4abc2bebb904be293,
     type: 2}
   m_PrefabInternal: {fileID: 425480178}
---- !u!4 &375354014 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4000010164220374, guid: cddd395770a2bbd4abc2bebb904be293,
-    type: 2}
-  m_PrefabInternal: {fileID: 425480178}
 --- !u!1 &376569469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1340,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cddd395770a2bbd4abc2bebb904be293, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &425480179 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000012037108836, guid: cddd395770a2bbd4abc2bebb904be293,
+    type: 2}
+  m_PrefabInternal: {fileID: 425480178}
+  m_Script: {fileID: 11500000, guid: 4bdaf61f9c17b4e14bd2d806b736a7ae, type: 3}
 --- !u!1 &432523223
 GameObject:
   m_ObjectHideFlags: 0
