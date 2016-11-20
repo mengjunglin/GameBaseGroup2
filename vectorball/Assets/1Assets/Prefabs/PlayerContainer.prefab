@@ -74269,7 +74269,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -74354,7 +74354,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -74745,7 +74745,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -75391,7 +75391,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -75765,7 +75765,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -76241,7 +76241,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -77380,7 +77380,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -77397,7 +77397,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -77754,7 +77754,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -78468,7 +78468,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -78944,7 +78944,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -79998,7 +79998,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -80899,7 +80899,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -81324,7 +81324,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -81528,7 +81528,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -81681,7 +81681,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -81766,7 +81766,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -82021,7 +82021,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -82718,7 +82718,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -83211,7 +83211,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -83245,7 +83245,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -83432,7 +83432,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -83551,7 +83551,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 8d382404ede7e1944970218b83a887c8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -83736,7 +83736,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010171388942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83767,7 +83767,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010281182518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83827,7 +83827,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010319031694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83844,7 +83844,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010320458302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83889,7 +83889,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010443736822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83964,7 +83964,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010543892190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84066,7 +84066,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000011125617424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84126,7 +84126,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000011224398020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84186,7 +84186,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000011337205682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84274,7 +84274,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000011630395846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84291,7 +84291,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000011651993714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84508,7 +84508,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012050822100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84525,7 +84525,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012077127796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84584,7 +84584,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012299471728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84601,7 +84601,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012310398434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84690,7 +84690,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012464515754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84765,7 +84765,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012531236468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84800,7 +84800,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012584879034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84817,7 +84817,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012592434816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85275,7 +85275,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014038942484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85292,7 +85292,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014089843930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85338,7 +85338,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014135328000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85383,7 +85383,7 @@ MonoBehaviour:
   label: {fileID: 0}
   arrowMarker: {fileID: 0}
   idlePosition: {x: 0, y: 0, z: 0}
-  faceAnimController: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114000014206685254
 MonoBehaviour:
   m_ObjectHideFlags: 1
