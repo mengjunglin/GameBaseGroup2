@@ -20,38 +20,37 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
     //Question textbox
     public Text questionText;
 
-	public static int level = 2;
-
 	GameSceneScript scoreScript;
+
+	FindPlayer findPlayerScript;
 
 	PlayerScript targetPlayer;
 
 	private int[] startPositions;
 	private int[] targetPositions;
 
-	public int MaxQuestionsInLevel = 3;
+	public int MaxQuestionsInLevel;
 
-	private int levelCounter = 1;
+	public int MaxFlowsInLevel;
+
+	public static int levelCounter = 1;
+
+	public static int level = 1;
+
+	public static int flow = 1;
 
 	public void Start(){
-		finished = false;
 		scoreScript = GetComponent<GameSceneScript> ();
+		findPlayerScript = GetComponent<FindPlayer>();
 		startPositions = new int[] {0,0};
+		targetPositions = new int[] {0,0};
 		LoadNextQuestion ();
 	}
 
 	public void Update(){
-		if (Input.GetKeyDown (KeyCode.H) && finished == false) {
+		if (Input.GetKey (KeyCode.H) && finished == false) {
 			finished = true;
-			// store the current player location before loading next question
-			startPositions = targetPositions;
-
 			LoadNextQuestion ();
-		}
-		//Check if all questions for level complete 
-		if (levelCounter == MaxQuestionsInLevel) {
-			levelCounter = 1;
-			scoreScript.LevelComplete ();
 		}
 	}
 
@@ -94,7 +93,18 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void OnSubmit(){
 
-		++levelCounter;
+		++flow;
+
+		if (flow > MaxFlowsInLevel) {
+			levelCounter++;
+			flow = 1;
+		}
+
+		//Check if all questions for level complete 
+		if (levelCounter > MaxQuestionsInLevel) {
+			levelCounter = 1;
+			scoreScript.LevelComplete ();
+		}
 
 		TimerScript.instance.StopTimer();
 
@@ -152,6 +162,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void LoadNextQuestion(){
 
+
 		//Make toggles clickable
 		for (int i = 0; i < 4; ++i) {
 			isOptioni [i].interactable = true;
@@ -160,11 +171,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//Clear all toggles
 		optionsToggle.SetAllTogglesOff ();
 
-		FindPlayer findPlayerScript = GetComponent<FindPlayer>();
 
 		//Find next player to pass ball to
-		//targetPositions = findPlayerScript.find_teammate(level, startPositions);
-		targetPositions = new int[]{2,3};
+		startPositions[0] = targetPositions[0];
+		startPositions[1] = targetPositions[1];
+
+		targetPositions = findPlayerScript.find_teammate(level, startPositions,flow);
+		//targetPositions = new int[]{2,3};
 		targetPlayer = FieldController.instance.GetPlayerAt (targetPositions [0], targetPositions [1]);
 
 		//highlight player
@@ -194,13 +207,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 				}
 				optionValues [i,0] = int.Parse(positionIndices.Split (',')[0]) - startPositions[0];
 				optionValues [i,1] = int.Parse(positionIndices.Split (',')[1]) - startPositions[1];
+
 				options [i] = "("+ positionIndices + ")";
 			}
 
 			isOptioni[i].transform.FindChild("Answer").GetComponent<Text>().text = options[i];
 
 		}
-
 		if (level == 1) {
 			for (int i = 0; i < 4; ++i) {
 
@@ -230,7 +243,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		TimerScript.instance.StartTimer (50);
 
 		finished = false;
-
 	}
 		
 }
