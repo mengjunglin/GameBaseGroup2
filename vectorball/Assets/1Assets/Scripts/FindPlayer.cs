@@ -11,46 +11,59 @@ public class FindPlayer : MonoBehaviour
     int row, temp;
     int[] next_player = new int[2];
     string[] path;
+	int selected_line;
+
+	public TextAsset pathfile;
+
     void Start() {
-        path = System.IO.File.ReadAllLines(@"C:\Users\hussa\OneDrive\Documents\GitHub\GameBaseGroup2\vectorball\Assets\1Assets\Questions\path.txt");
+        //path = System.IO.File.ReadAllLines(@"C:\Users\hussa\OneDrive\Documents\GitHub\GameBaseGroup2\vectorball\Assets\1Assets\Questions\path.txt");
+		path = pathfile.text.Split('\n');
     }
 
     void Update() {
 
     }
 
-    public int[] find_teammate(int level, int[] pos) {
+	public int[] find_teammate(int level, int[] pos,int flow) {
+		int flag = -1;
         row = pos[1];
-        int selected_line = new Random().Next(((level * 5) - 5), (level * 5));
+		if (1 == flow) {
+			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
+		}
+		if (null == path) {
+			path = pathfile.text.Split('\n');
+		}
+			
         string current_path = path[selected_line];
 
         //To search where in path you are currently, and where to go to next, converting int to String, in order to use String Search methods.
 
-        string current_row = Convert.ToString(row, 10);
+        string current_row = System.Convert.ToString(row, 10);
         int indexOCR = current_path.IndexOf(current_row);
-        if (indexOCR < (current_path.Length - 1)) {
-            //Uh, this might be incorrect - the line below
-            int next_row = Convert.ToInt32(current_path[indexOCR + 1], 10);
-            while (true){
-                temp = Random.Range(0, 10);
+		if (indexOCR != -1) {
+			//Uh, this might be incorrect - the line below
+			int next_row = int.Parse (current_path.ToCharArray () [indexOCR + 1].ToString ());
+			while (flag == -1) {
+				flag = Random.Range (0, 10);
 
-                // player_pos[next_row,y,level]
-                //bad code below. Inefficient, bad design, but works
+				// player_pos[next_row,y,level]
+				//bad code below. Inefficient, bad design, but works
 
-                int flag = 0;
-                for (int x = 0; x < 10; x++) {
-                    if (temp == player_pos[level, x, 0] && player_pos[level, x, 1] == next_row){
-                        flag = x;
-                    }
-                }
-                if (flag != 0){ //that means we've found our random player in the next row
-                    break;
-                }
-            }
-            next_player[0] = player_pos[level, flag, 0];
-            next_player[1] = player_pos[level, flag, 1];
-            return next_player;
-        }
+				if (player_pos [level, flag, 1] == next_row) {
+					break;
+				} else {
+					flag = -1;
+				}
+			}
+			next_player [0] = player_pos [level, flag, 0];
+			next_player [1] = player_pos [level, flag, 1];
+
+		} /*else {
+			flag = Random.Range (2, 6);
+			next_player [0] = player_pos [level, flag, 0];
+			next_player [1] = player_pos [level, flag, 1];
+		}*/
+		return next_player;
     }
 }
 

@@ -1869,9 +1869,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 570472367}
+  - 114: {fileID: 570472368}
   - 114: {fileID: 570472363}
   - 114: {fileID: 570472366}
-  - 114: {fileID: 570472365}
   - 114: {fileID: 570472364}
   m_Layer: 5
   m_Name: ChooseOptionsManager
@@ -1901,7 +1901,8 @@ MonoBehaviour:
   ball: {fileID: 375354010}
   timerBar: {fileID: 2055405731}
   questionText: {fileID: 444779508}
-  MaxQuestionsInLevel: 3
+  MaxQuestionsInLevel: 2
+  MaxFlowsInLevel: 2
 --- !u!114 &570472364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1916,19 +1917,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 412799357}
   opponentScoreText: {fileID: 2133771967}
---- !u!114 &570472365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011389560266, guid: 4a3dbf8a9cd00bc47b10754badf81381,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 570472362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07f79175bd080b439102bb16ecda9d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionsFile: {fileID: 4900000, guid: bd397bd2b1f67044ca7af0e774173cfd, type: 3}
 --- !u!114 &570472366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1956,6 +1944,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1226498947}
   m_RootOrder: 0
+--- !u!114 &570472368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 570472362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7610e981c48bf1947b20e3c9a26e1c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathfile: {fileID: 4900000, guid: 4545cfa4354813548ad8aa8bcd04599d, type: 3}
 --- !u!1 &576474540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,7 +2979,7 @@ Prefab:
         type: 2}
       propertyPath: ball
       value: 
-      objectReference: {fileID: 375354010}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000010237466820, guid: 4a3dbf8a9cd00bc47b10754badf81381,
         type: 2}
       propertyPath: dialogueCanvasObj
