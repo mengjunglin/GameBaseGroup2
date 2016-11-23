@@ -10,7 +10,11 @@ public class HighlightPositionScript : MonoBehaviour {
 		var pos = RandomCircle(center, 10);
 		// make the object face the center
 		var rot = Quaternion.FromToRotation(Vector3.forward, center);
-			Instantiate(highlightPrefab, pos, Quaternion.Euler(new Vector3(90,90,0)));
+		Instantiate(highlightPrefab, pos, Quaternion.Euler(new Vector3(90,90,0)));
+
+		PlayerScript ps = transform.GetComponent<PlayerScript>();
+		ps.idlePosition.z = 100;
+
 		/*for (i = 0; i < numObjects; i++){
 			var pos = RandomCircle(center, 10);
 			// make the object face the center
