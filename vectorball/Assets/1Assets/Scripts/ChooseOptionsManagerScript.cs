@@ -127,6 +127,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		MoveBall (x,y);
 
+        Analytics.SelectedAnswer(x, y, flow, levelCounter);
+
 		if (x == targetPositions[0] && y == targetPositions[1])
 			IfCorrectOption (targetPositions);
 		else
