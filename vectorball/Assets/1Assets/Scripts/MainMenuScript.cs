@@ -12,14 +12,10 @@ public class MainMenuScript : MonoBehaviour {
 
         for(int i=0;i < levelButtons.Length; i++)
         {
-            levelButtons[i].enabled = (i < unlockedLevel);
+            levelButtons[i].interactable = (i < unlockedLevel + 1);
         }
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void ClickExit()
 	{

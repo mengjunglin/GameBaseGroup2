@@ -50,8 +50,9 @@ public class GameSceneScript : MonoBehaviour {
 			//FieldController.instance.UpdatePlayerGrid (true, 1);
 			//GetComponent<ChooseOptionsManagerScript>().LoadNextQuestion ();
 			ChooseOptionsManagerScript.level++; //advance to next level - commeneted next line as we are using same scene for level 2 as well
-			//Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
-		} else {
+            PlayerPrefs.SetInt("UnlockedTillLevel", ChooseOptionsManagerScript.level);
+            //Application.LoadLevel (0); //TODO: replace 0 with next level's scene name
+        } else {
 			Application.LoadLevel ("GameOverScene");
 		}
 	}

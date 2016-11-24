@@ -882,7 +882,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300018, guid: d906db4021a884643adac052c2804eba, type: 3}
+  m_Sprite: {fileID: 21300028, guid: d906db4021a884643adac052c2804eba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1049,7 +1049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1153109844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2345,7 +2345,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.409}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2509,6 +2509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18387c27e14048529d238068364b052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelButtons:
+  - {fileID: 718761702}
+  - {fileID: 1228804839}
+  - {fileID: 939518702}
 --- !u!4 &2021887832
 Transform:
   m_ObjectHideFlags: 0
