@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
 
+    [SerializeField] Button[] levelButtons;
+
 	// Use this for initialization
 	void Start () {
-	
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedTillLevel", -1);
+
+        for(int i=0;i < levelButtons.Length; i++)
+        {
+            levelButtons[i].enabled = (i < unlockedLevel);
+        }
 	}
 	
 	// Update is called once per frame
