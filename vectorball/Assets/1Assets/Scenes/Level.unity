@@ -297,10 +297,6 @@ Prefab:
       propertyPath: ballMono
       value: 
       objectReference: {fileID: 425480179}
-    - target: {fileID: 1000012604829734, guid: 03c57bae66b522e4e8f6237172bfc8c4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03c57bae66b522e4e8f6237172bfc8c4, type: 2}
   m_IsPrefabParent: 0

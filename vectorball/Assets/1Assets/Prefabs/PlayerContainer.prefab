@@ -17216,7 +17216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012606059436
 GameObject:
   m_ObjectHideFlags: 1
@@ -26836,6 +26836,25 @@ GameObject:
   - 4: {fileID: 4000012022068372}
   m_Layer: 0
   m_Name: r_knee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1000013996355586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000014116285018}
+  - 33: {fileID: 33000013355730540}
+  - 23: {fileID: 23000012527021206}
+  - 114: {fileID: 114000014290363432}
+  - 114: {fileID: 114000010553645892}
+  m_Layer: 0
+  m_Name: TubeRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49077,6 +49096,7 @@ Transform:
   - {fileID: 4000013014345920}
   - {fileID: 4000011062092660}
   - {fileID: 4000011073595808}
+  - {fileID: 4000014116285018}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &4000013383466094
@@ -52957,6 +52977,19 @@ Transform:
   - {fileID: 4000012201414758}
   m_Father: {fileID: 4000010461715356}
   m_RootOrder: 1
+--- !u!4 &4000014116285018
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013996355586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000013382230298}
+  m_RootOrder: 17
 --- !u!4 &4000014119473414
 Transform:
   m_ObjectHideFlags: 1
@@ -63354,6 +63387,35 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!23 &23000012527021206
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013996355586}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!23 &23000012527954568
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -73196,6 +73258,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013757616166}
   m_Mesh: {fileID: 4300000, guid: b9973861ce2008d4ab4810d60bc94d36, type: 3}
+--- !u!33 &33000013355730540
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013996355586}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33000013362336582
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -83979,6 +84048,18 @@ MonoBehaviour:
   v: 0
   h: 0
   run: 0
+--- !u!114 &114000010553645892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013996355586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6159ee1f5d8f3a74487480ab30ea1276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionList: []
 --- !u!114 &114000010652022692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85415,6 +85496,29 @@ MonoBehaviour:
   v: 0
   h: 0
   run: 0
+--- !u!114 &114000014290363432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013996355586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0970e7f31b8341f4f97503cfb9da2266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertices:
+  - point: {x: 0, y: 0, z: 0}
+    radius: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - point: {x: 1, y: 0, z: 0}
+    radius: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+  material: {fileID: 2100000, guid: b2cbda714cba3f04d9de13182e88443d, type: 2}
+  crossSegments: 9
+  flatAtDistance: -1
+  movePixelsForRebuild: 6
+  maxRebuildTime: 0.1
 --- !u!137 &137000010057427560
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
