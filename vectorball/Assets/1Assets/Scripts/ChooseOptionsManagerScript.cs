@@ -11,8 +11,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	public Toggle[] isOptioni;
 	public ToggleGroup optionsToggle;
 
-	private bool finished;
-
 	public GameObject ball;
 
     public Image timerBar;
@@ -29,15 +27,15 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	private int[] startPositions;
 	private int[] targetPositions;
 
-	public int MaxQuestionsInLevel;
-
 	public int MaxFlowsInLevel;
 
-	public static int levelCounter = 1;
+	public int MaxPassesInFlow;
+
+	public static int flow = 1;
 
 	public static int level = 1;
 
-	public static int flow = 1;
+	public static int pass = 1;
 
 	public void Start(){
 		scoreScript = GetComponent<GameSceneScript> ();
@@ -48,10 +46,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void Update(){
-		if (Input.GetKey (KeyCode.H) && finished == false) {
+		/*if (Input.GetKey (KeyCode.H) && finished == false) {
 			finished = true;
 			LoadNextQuestion ();
-		}
+		}*/
 	}
 
     void OnEnable()
@@ -93,16 +91,16 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void OnSubmit(){
 
-		++flow;
+		++pass; 
 
-		if (flow > MaxFlowsInLevel) {
-			levelCounter++;
-			flow = 1;
+		if (pass == MaxPassesInFlow) {
+			flow++; 
+			pass = 1;
 		}
 
 		//Check if all questions for level complete 
-		if (levelCounter > MaxQuestionsInLevel) {
-			levelCounter = 1;
+		if (flow == MaxFlowsInLevel) {
+			flow = 1;
 			scoreScript.LevelComplete ();
 		}
 
@@ -127,7 +125,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		MoveBall (x,y);
 
-        Analytics.SelectedAnswer(x, y, flow, levelCounter);
+        Analytics.SelectedAnswer(x, y, pass, flow);
 
 		if (x == targetPositions[0] && y == targetPositions[1])
 			IfCorrectOption (targetPositions);
@@ -178,7 +176,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		startPositions[0] = targetPositions[0];
 		startPositions[1] = targetPositions[1];
 
-		targetPositions = findPlayerScript.find_teammate(level, startPositions,flow);
+		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
 		//targetPositions = new int[]{2,3};
 		targetPlayer = FieldController.instance.GetPlayerAt (targetPositions [0], targetPositions [1]);
 
@@ -243,8 +241,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//start timer
 		TimerScript.instance.StartTimer (50);
-
-		finished = false;
 	}
 		
 }
