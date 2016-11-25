@@ -23436,7 +23436,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013349779498}
   m_Layer: 0
-  m_Name: StartPos
+  m_Name: OurGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26032,7 +26032,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011073595808}
   m_Layer: 0
-  m_Name: EndPos
+  m_Name: OpponentGoal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35585,7 +35585,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013861988498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 150, y: 0, z: 0}
+  m_LocalPosition: {x: 212.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -48932,7 +48932,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013501828528}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -150, y: 0, z: 0}
+  m_LocalPosition: {x: -215, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -84784,6 +84784,9 @@ MonoBehaviour:
   arrowSprite: {fileID: 1000011467793250, guid: de27d1009d181314cab2021abd2f368d,
     type: 2}
   ballMono: {fileID: 0}
+  goalsTransform:
+  - {fileID: 4000013349779498}
+  - {fileID: 4000011073595808}
 --- !u!114 &114000012554824458
 MonoBehaviour:
   m_ObjectHideFlags: 1

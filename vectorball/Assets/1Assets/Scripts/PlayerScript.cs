@@ -134,4 +134,26 @@ public class PlayerScript : MonoBehaviour {
         faceAnimController.Eye = Eyes_Expressions.Closed_happy;
         //Invoke("ResetPlayer", 2f);
     }
+
+    public void PassToLastPlayerAndScore()
+    {
+        int yAxis = (isOpponent ? 1 : 5);
+
+        KickBallTowards(0, yAxis);
+        PlayerScript target = FieldController.instance.GetPlayerAt(0, yAxis);
+
+        target.Invoke("KickToGoal", 8);
+    }
+
+    public void KickToGoal()
+    {
+        int index;
+
+        index = (isOpponent ? 0 : 1);
+
+        Vector3 offset = new Vector3(0, Random.Range(10f,35f) * (Random.Range(0,2) == 0 ? -1 : 1), Random.Range(0, 30f));
+
+        BallMoveBehavior ballMono = ball.GetComponent<BallMoveBehavior>();
+        ballMono.setTarget(FieldController.instance.goalsTransform[index]);
+    }
 }

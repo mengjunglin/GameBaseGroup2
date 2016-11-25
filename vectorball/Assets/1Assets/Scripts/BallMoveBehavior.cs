@@ -27,7 +27,6 @@ public class BallMoveBehavior : MonoBehaviour {
 	}
 
 	public void setTarget(Transform target){
-        print("Owner changed " + target);
         Transform ballOwner = this.target;
         this.target = target;
 		this._bullseye = target;
