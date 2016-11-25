@@ -16,9 +16,9 @@ public class VectorRepresentationScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.H)) {
+		/*if (Input.GetKey (KeyCode.H)) {
 			dialogueCanvasObj.SetActive (false);
-		}
+		}*/
 	}
 
 	public void convertResultToVector (string message,int[] result)

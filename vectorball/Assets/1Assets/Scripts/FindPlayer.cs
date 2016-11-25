@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class FindPlayer : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class FindPlayer : MonoBehaviour
 	public int[] find_teammate(int level, int[] pos,int flow) {
 		int flag = -1;
         row = pos[1];
+		HashSet<int> exclude = new HashSet<int>() ;
 		if (1 == flow) {
 			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
 		}
@@ -44,7 +47,11 @@ public class FindPlayer : MonoBehaviour
 			//Uh, this might be incorrect - the line below
 			int next_row = int.Parse (current_path.ToCharArray () [indexOCR + 1].ToString ());
 			while (flag == -1) {
-				flag = Random.Range (0, 10);
+				//flag = Random.Range (0, 10);
+				IEnumerable<int> range = Enumerable.Range(0, 10).Where(i => !exclude.Contains(i));
+				int index = new System.Random().Next(0, 10 - exclude.Count);
+				flag = range.ElementAt(index);
+				exclude.Add (flag);
 
 				// player_pos[next_row,y,level]
 				//bad code below. Inefficient, bad design, but works
@@ -55,14 +62,14 @@ public class FindPlayer : MonoBehaviour
 					flag = -1;
 				}
 			}
-			next_player [0] = player_pos [level, flag, 0];
-			next_player [1] = player_pos [level, flag, 1];
 
-		} /*else {
+		} /* else {
 			flag = Random.Range (2, 6);
 			next_player [0] = player_pos [level, flag, 0];
 			next_player [1] = player_pos [level, flag, 1];
-		}*/
+		} */
+		next_player [0] = player_pos [level, flag, 0];
+		next_player [1] = player_pos [level, flag, 1];
 		return next_player;
     }
 }
