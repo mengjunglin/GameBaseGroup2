@@ -19,9 +19,14 @@ public class BallMoveBehavior : MonoBehaviour {
 		}
 		*/
 		Rigidbody rb = GetComponent<Rigidbody>();
+		SphereCollider sc = GetComponent<SphereCollider> ();
+
 		if((_bullseye != null) && (((float)_bullseye.position.x - (float)transform.position.x) < 6.5) && (((float)_bullseye.position.x - (float)transform.position.x) > 0)){
 			rb.velocity = Vector3.zero;
 			rb.angularVelocity = Vector3.zero;
+			if((sc != null) && sc.enabled.Equals(false)){
+				sc.enabled = true;
+			}
 			//transform.position = _bullseye.position;
 		}
 	}
@@ -50,7 +55,7 @@ public class BallMoveBehavior : MonoBehaviour {
 		// rotate the object to face the target
 		transform.LookAt(target);
 
-		// calculate initival velocity required to land the cube on target using the formula (9)
+		// calculate initival velocity required to land the ball on target using the formula (9)
 		float Vi = Mathf.Sqrt(dist * -Physics.gravity.y / (Mathf.Sin(Mathf.Deg2Rad * _angle * 2)));
 		float Vy, Vz;   // y,z components of the initial velocity
 
@@ -63,7 +68,10 @@ public class BallMoveBehavior : MonoBehaviour {
 		// transform it to global vector
 		Vector3 globalVelocity = transform.TransformVector(localVelocity);
 
-		// launch the cube by setting its initial velocity
+		// Before launching the ball, disable it's collision
+		GetComponent<SphereCollider>().enabled = false;
+
+		// launch the ball by setting its initial velocity
 		GetComponent<Rigidbody>().velocity = globalVelocity;
 
 	}
