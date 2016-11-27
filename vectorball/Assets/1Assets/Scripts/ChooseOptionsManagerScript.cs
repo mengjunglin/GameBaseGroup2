@@ -31,11 +31,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public int MaxPassesInFlow;
 
-	public static int flow = 1;
+	public static int flow = 0;
 
 	public static int level = 1;
 
-	public static int pass = 1;
+	public static int pass = 0;
+
+	private int tries = 0;
 
 	public void Start(){
 		scoreScript = GetComponent<GameSceneScript> ();
@@ -91,19 +93,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void OnSubmit(){
 
-		++pass; 
-
-		if (pass == MaxPassesInFlow) {
-			flow++; 
-			pass = 1;
-		}
-
-		//Check if all questions for level complete 
-		if (flow == MaxFlowsInLevel) {
-			flow = 1;
-			scoreScript.LevelComplete ();
-		}
-
 		TimerScript.instance.StopTimer();
 
 		for (int i = 0; i < 4; ++i) {
@@ -125,17 +114,38 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		MoveBall (x,y);
 
-        Analytics.SelectedAnswer(x, y, pass, flow);
+		Analytics.SelectedAnswer(x, y, pass, flow);
 
 		if (x == targetPositions[0] && y == targetPositions[1])
 			IfCorrectOption (targetPositions);
 		else
 			IfIncorrectOption (new int[]{x,y});
+
 	}
 
+	public void BeforeLoad(){
+		if (pass == MaxPassesInFlow) {
+			//increase score
+			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+			flow++; 
+			pass = 1;
+			FieldController.instance.UpdatePlayerGrid (true);
+			MoveBall (0, 0);
+			startPositions = new int[] {0,0};
+			targetPositions = new int[] {0,0};
+		}
+
+		//Check if all questions for level complete 
+		if (flow == MaxFlowsInLevel) {
+			flow = 1;
+			scoreScript.LevelComplete ();
+		}
+	}
+
+
 	public void IfCorrectOption(int[] option){
-		//increase score
-		scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+
+		++pass; 
 
 		//function to display vector notation
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
@@ -144,9 +154,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 	public void IfIncorrectOption(int[] option){
-		//increase opponent's score
-		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
+		if (tries == 2) {
+			//increase opponent's score
+			scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+		} else {
+			++tries;
+		}
+						
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector("Whoops! You gave the ball to opponent. You passed to",option);
 	}
@@ -162,6 +177,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void LoadNextQuestion(){
 
+		BeforeLoad ();
 
 		//Make toggles clickable
 		for (int i = 0; i < 4; ++i) {

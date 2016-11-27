@@ -6,10 +6,10 @@ using System.Linq;
 public class FindPlayer : MonoBehaviour
 {
 
-    int[,,] player_pos = new int[4, 10, 2] { { { 0, 0 }, { 0, 2 }, { -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 }, { -1, 1 }, { 1, 1 } },      //level 1 grid
-                                        { { 0, 0 }, { 0, 2 }, { -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 }, { -1, 1 }, { 1, 1 } },         //level 2 grid - to be changed accordingly
-                                        { { 0, 0 }, { 0, 2 }, { -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 }, { -1, 1 }, { 1, 1 } },         //level 3 grid - to be changed accordingly
-                                        { { 0, 0 }, { 0, 2 }, { -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 }, { -1, 1 }, { 1, 1 } } };       //level 4 grid - to be changed accordingly
+	int[,,] player_pos = new int[4, 12, 2] { { { 0, 0 },{ -1, 1 },{ 1, 1 },{ 0, 2 },{ -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 },{ -1, 4 }, { 1, 4 } },      //level 1 grid
+		{ { 0, 0 },{ -1, 1 },{ 1, 1 },{ 0, 2 },{ -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 },{ -1, 4 }, { 1, 4 } },         //level 2 grid - to be changed accordingly
+		{ { 0, 0 },{ -1, 1 },{ 1, 1 },{ 0, 2 },{ -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 },{ -1, 4 }, { 1, 4 } },         //level 3 grid - to be changed accordingly
+		{ { 0, 0 },{ -1, 1 },{ 1, 1 },{ 0, 2 },{ -1, 2 }, { 1, 2 }, { 0, 3 }, { -2, 3 }, { 2, 3 }, { 0, 5 },{ -1, 4 }, { 1, 4 } } };       //level 4 grid - to be changed accordingly
     int row, temp;
     int[] next_player = new int[2];
     string[] path;
@@ -48,8 +48,8 @@ public class FindPlayer : MonoBehaviour
 			int next_row = int.Parse (current_path.ToCharArray () [indexOCR + 1].ToString ());
 			while (flag == -1) {
 				//flag = Random.Range (0, 10);
-				IEnumerable<int> range = Enumerable.Range(0, 10).Where(i => !exclude.Contains(i));
-				int index = new System.Random().Next(0, 10 - exclude.Count);
+				IEnumerable<int> range = Enumerable.Range(0, 12).Where(i => !exclude.Contains(i));
+				int index = new System.Random().Next(0, 12 - exclude.Count);
 				flag = range.ElementAt(index);
 				exclude.Add (flag);
 

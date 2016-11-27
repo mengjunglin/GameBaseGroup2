@@ -15,6 +15,9 @@ public class FieldController : MonoBehaviour {
 	[SerializeField]
 	private BallMoveBehavior ballMono;
 
+	[SerializeField]
+	private Transform startTransform;
+
     public bool isDense { private set; get; }
 
     public static FieldController instance;
@@ -96,10 +99,13 @@ public class FieldController : MonoBehaviour {
 
         playerScripts = GetComponentsInChildren<PlayerScript>();
 
+		ballMono.transform.position = startTransform.position;
+
         PlayerScript.ball = ballMono.transform;
 
         foreach (PlayerScript ps in playerScripts)
 		{
+			
             ps.idlePosition = ps.transform.position;
 
             //In case we need labels in future

@@ -36,4 +36,8 @@ public class VectorRepresentationScript : MonoBehaviour {
 		resultObj.GetComponent<Text> ().text = string.Format ("{0} \n{1}", result [0], result [1]);
 	}
 
+	public void disableCanvas(){
+		dialogueCanvasObj.SetActive (false);
+	}
+
 }
