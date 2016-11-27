@@ -33,7 +33,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public static int flow = 0;
 
-	public static int level = 1;
+	public static int level = 3;
 
 	public static int pass = 0;
 
@@ -251,6 +251,23 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 				GameObject multiplierObj = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Multiplier1").gameObject;
 				multiplierObj.SetActive (true);
+
+			}
+		} else if (level == 3) {
+			for (int i = 0; i < 4; ++i) {
+				int x = Random.Range (-2, optionValues [i,0]-1);
+				int y = Random.Range (-2, optionValues [i,1]-1);
+
+				Text optionText1 = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Value").GetComponent<Text>();
+				optionText1.text = string.Format ("{0} \n{1}", x, y);
+
+				Text optionText2 = isOptioni [i].transform.FindChild ("VectorValue2").transform.FindChild ("Value").GetComponent<Text>();
+				optionText2.text = string.Format ("{0} \n{1}", optionValues [i, 0] - x, optionValues [i, 1] - y);
+
+				GameObject optionObj2 = isOptioni [i].transform.FindChild ("VectorValue2").transform.gameObject;
+				optionObj2.SetActive (true);
+
+				isOptioni [i].transform.FindChild ("Addition").gameObject.SetActive (true);
 
 			}
 		}
