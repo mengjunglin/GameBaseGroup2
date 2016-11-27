@@ -11,12 +11,15 @@ public class FieldController : MonoBehaviour {
 	private static PlayerScript[] opponentPlayerScripts;
     [SerializeField]
     private GameObject denseGridHolderL, denseGridHolderR, positionLabel, arrowSprite;
-  
+
 	[SerializeField]
 	private BallMoveBehavior ballMono;
 
 	[SerializeField]
 	private Transform startTransform;
+
+    [SerializeField]
+    public Transform[] goalsTransform;
 
     public bool isDense { private set; get; }
 
@@ -88,6 +91,11 @@ public class FieldController : MonoBehaviour {
         //    }
         //if (Input.GetKeyDown(KeyCode.T))
         //    TimerScript.instance.StartTimer(4);
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ballMono.target.GetComponent<PlayerScript>().PassToLastPlayerAndScore();
+        }
     }
 
     public void UpdatePlayerGrid(bool isDense)
