@@ -15,8 +15,7 @@ public class FieldController : MonoBehaviour {
 	[SerializeField]
 	private BallMoveBehavior ballMono;
 
-	[SerializeField]
-	private Transform startTransform;
+	public static Transform startTransform;
 
     [SerializeField]
     public Transform[] goalsTransform;
@@ -31,6 +30,7 @@ public class FieldController : MonoBehaviour {
     }
 
     void Start () {
+		startTransform = ballMono.transform;
 		UpdatePlayerGrid(true);
 	}
 

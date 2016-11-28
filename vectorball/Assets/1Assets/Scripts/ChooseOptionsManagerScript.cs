@@ -33,7 +33,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public static int flow = 0;
 
-	public static int level = 3;
+	public static int level = 1;
 
 	public static int pass = 0;
 
@@ -125,12 +125,21 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void BeforeLoad(){
 		if (pass == MaxPassesInFlow) {
+
+			//score goal animation
+			FieldController.instance.GetPlayerAt(targetPositions[0],targetPositions[1]).PassToLastPlayerAndScore();
+
 			//increase score
 			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+
+			//Set counter to next question
 			flow++; 
 			pass = 1;
+
+			//Reset field
 			FieldController.instance.UpdatePlayerGrid (true);
-			MoveBall (0, 0);
+			GameObject ball = GameObject.FindGameObjectWithTag ("Ball").gameObject;
+			ball.transform.position = FieldController.startTransform.position;
 			startPositions = new int[] {0,0};
 			targetPositions = new int[] {0,0};
 		}
