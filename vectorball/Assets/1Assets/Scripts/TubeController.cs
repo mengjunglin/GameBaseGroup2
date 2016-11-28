@@ -31,7 +31,7 @@ public class TubeController : MonoBehaviour {
 
     void UpdateLine()
     {
-        tube.SetPoints(positionList.ToArray(), 1, Color.green);
+        tube.SetPoints(positionList.ToArray(), 3, Color.green);
     }
 
 }
