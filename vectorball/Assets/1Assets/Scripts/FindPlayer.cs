@@ -26,11 +26,11 @@ public class FindPlayer : MonoBehaviour
 
     }
 
-	public int[] find_teammate(int level, int[] pos,int flow) {
+	public int[] find_teammate(int level, int[] pos,int pass) {
 		int flag = -1;
         row = pos[1];
 		HashSet<int> exclude = new HashSet<int>() ;
-		if (1 == flow) {
+		if (1 == pass) {
 			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
 		}
 		if (null == path) {
@@ -43,7 +43,7 @@ public class FindPlayer : MonoBehaviour
 
         string current_row = System.Convert.ToString(row, 10);
         int indexOCR = current_path.IndexOf(current_row);
-		if (indexOCR != -1) {
+		if (indexOCR != -1 && indexOCR != current_path.Length-1) {
 			//Uh, this might be incorrect - the line below
 			int next_row = int.Parse (current_path.ToCharArray () [indexOCR + 1].ToString ());
 			while (flag == -1) {
@@ -53,9 +53,6 @@ public class FindPlayer : MonoBehaviour
 				flag = range.ElementAt(index);
 				exclude.Add (flag);
 
-				// player_pos[next_row,y,level]
-				//bad code below. Inefficient, bad design, but works
-
 				if (player_pos [level, flag, 1] == next_row) {
 					break;
 				} else {
@@ -63,11 +60,10 @@ public class FindPlayer : MonoBehaviour
 				}
 			}
 
-		} /* else {
-			flag = Random.Range (2, 6);
-			next_player [0] = player_pos [level, flag, 0];
-			next_player [1] = player_pos [level, flag, 1];
-		} */
+		} else {
+			next_player [0] = player_pos [level, 9, 0];
+			next_player [1] = player_pos [level, 9, 1];
+		} 
 		next_player [0] = player_pos [level, flag, 0];
 		next_player [1] = player_pos [level, flag, 1];
 		return next_player;

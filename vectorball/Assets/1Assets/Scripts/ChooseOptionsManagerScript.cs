@@ -125,12 +125,21 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void BeforeLoad(){
 		if (pass == MaxPassesInFlow) {
+
+			//score goal animation
+			FieldController.instance.GetPlayerAt(targetPositions[0],targetPositions[1]).PassToLastPlayerAndScore();
+
 			//increase score
 			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
+
+			//Set counter to next question
 			flow++; 
 			pass = 1;
+
+			//Reset field
 			FieldController.instance.UpdatePlayerGrid (true);
-			MoveBall (0, 0);
+			GameObject ball = GameObject.FindGameObjectWithTag ("Ball").gameObject;
+			ball.transform.position = FieldController.startTransform.position;
 			startPositions = new int[] {0,0};
 			targetPositions = new int[] {0,0};
 		}
@@ -251,6 +260,23 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 				GameObject multiplierObj = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Multiplier1").gameObject;
 				multiplierObj.SetActive (true);
+
+			}
+		} else if (level == 3) {
+			for (int i = 0; i < 4; ++i) {
+				int x = Random.Range (-2, optionValues [i,0]-1);
+				int y = Random.Range (-2, optionValues [i,1]-1);
+
+				Text optionText1 = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Value").GetComponent<Text>();
+				optionText1.text = string.Format ("{0} \n{1}", x, y);
+
+				Text optionText2 = isOptioni [i].transform.FindChild ("VectorValue2").transform.FindChild ("Value").GetComponent<Text>();
+				optionText2.text = string.Format ("{0} \n{1}", optionValues [i, 0] - x, optionValues [i, 1] - y);
+
+				GameObject optionObj2 = isOptioni [i].transform.FindChild ("VectorValue2").transform.gameObject;
+				optionObj2.SetActive (true);
+
+				isOptioni [i].transform.FindChild ("Addition").gameObject.SetActive (true);
 
 			}
 		}
