@@ -26,6 +26,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	private int[] startPositions;
 	private int[] targetPositions;
+	private int[] chosenPositions;
 
 	public int MaxFlowsInLevel;
 
@@ -43,15 +44,18 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		scoreScript = GetComponent<GameSceneScript> ();
 		findPlayerScript = GetComponent<FindPlayer>();
 		startPositions = new int[] {0,0};
-		targetPositions = new int[] {0,0};
+		chosenPositions = new int[] {0,0};
+
+		//Find next player to pass ball to
+		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
 		LoadNextQuestion ();
 	}
 
 	public void Update(){
-		/*if (Input.GetKey (KeyCode.H) && finished == false) {
+		/* if (Input.GetKey (KeyCode.H) && finished == false) {
 			finished = true;
 			LoadNextQuestion ();
-		}*/
+		} */
 	}
 
     void OnEnable()
@@ -115,62 +119,47 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		MoveBall (x,y);
 
 		Analytics.SelectedAnswer(x, y, pass, flow);
+		chosenPositions [0] = x;
+		chosenPositions [1] = y;
 
-		if (x == targetPositions[0] && y == targetPositions[1])
-			IfCorrectOption (targetPositions);
-		else
-			IfIncorrectOption (new int[]{x,y});
-
-	}
-
-	public void BeforeLoad(){
-		if (pass == MaxPassesInFlow) {
-
-			//score goal animation
-			FieldController.instance.GetPlayerAt(targetPositions[0],targetPositions[1]).PassToLastPlayerAndScore();
-
-			//increase score
-			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore() + 1);
-
-			//Set counter to next question
-			flow++; 
-			pass = 1;
-
-			//Reset field
-			FieldController.instance.UpdatePlayerGrid (true);
-			GameObject ball = GameObject.FindGameObjectWithTag ("Ball").gameObject;
-			ball.transform.position = FieldController.startTransform.position;
-			startPositions = new int[] {0,0};
-			targetPositions = new int[] {0,0};
+		if (x == targetPositions [0] && y == targetPositions [1]) {
+			startPositions [0] = targetPositions [0];
+			startPositions [1] = targetPositions [1];
+			IfCorrectOption (chosenPositions);
 		}
-
-		//Check if all questions for level complete 
-		if (flow == MaxFlowsInLevel) {
-			flow = 1;
-			scoreScript.LevelComplete ();
+		else {
+			IfIncorrectOption (chosenPositions);
 		}
+			
 	}
-
-
 	public void IfCorrectOption(int[] option){
 
 		++pass; 
+		tries = 0;
 
 		//function to display vector notation
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
-		script.convertResultToVector("Hurray! That was an awesome pass. You passed to",option);
+		script.convertResultToVector ("Hurray! That was an awesome pass. You passed to", option);
+
+		BeforeLoad ();
 
 	}
 
 	public void IfIncorrectOption(int[] option){
 
+		++tries;
 		if (tries == 2) {
 			//increase opponent's score
 			scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
-		} else {
-			++tries;
-		}
-						
+
+			//reset counters
+			tries = 0;
+			pass = 0;
+
+			//Call this after some animation - delay
+			ResetField ();
+		} 
+
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector("Whoops! You gave the ball to opponent. You passed to",option);
 	}
@@ -183,10 +172,44 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 
 
+	public void BeforeLoad(){
+		if (pass == MaxPassesInFlow) {
+			//increase score
+			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore () + 1);
+
+			//score goal animation
+
+			//Set counter to next question
+			flow++; 
+			pass = 0;
+
+			//Call after some delay - goal animation
+			ResetField ();
+		}
+
+		//Check if all questions for level complete 
+		if (flow == MaxFlowsInLevel) {
+			flow = 0;
+			scoreScript.LevelComplete ();
+		}
+
+		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
+	}
+
+
+
+
+	public void ResetField(){
+
+		//Reset field
+		FieldController.instance.UpdatePlayerGrid (true);
+		MoveBall(0,0);
+		startPositions = new int[] {0,0};
+		chosenPositions = new int[]{0,0};
+	}
+
 
 	public void LoadNextQuestion(){
-
-		BeforeLoad ();
 
 		//Make toggles clickable
 		for (int i = 0; i < 4; ++i) {
@@ -196,13 +219,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//Clear all toggles
 		optionsToggle.SetAllTogglesOff ();
 
-
-		//Find next player to pass ball to
-		startPositions[0] = targetPositions[0];
-		startPositions[1] = targetPositions[1];
-
-		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
-		//targetPositions = new int[]{2,3};
 		targetPlayer = FieldController.instance.GetPlayerAt (targetPositions [0], targetPositions [1]);
 
 		//highlight player
@@ -216,8 +232,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//Choose a random position to set correct option in
 		int correctIndex = Random.Range (0, 3);
-		optionValues [correctIndex,0] = targetPositions[0] - startPositions[0];
-		optionValues [correctIndex,1] = targetPositions[1] - startPositions[1];
+		optionValues [correctIndex,0] = targetPositions[0] - chosenPositions[0];
+		optionValues [correctIndex,1] = targetPositions[1] - chosenPositions[1];
 		options [correctIndex] = "("+ targetPositions[0].ToString() + "," + targetPositions [1].ToString() + ")";
 
 		//Load random opponents
@@ -226,10 +242,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			if (correctIndex != i) {
 				PlayerScript ps = FieldController.instance.GetRandomOpponent ();
 				string positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
-				while(options.Contains(positionIndices)){
-					ps = FieldController.instance.GetRandomOpponent ();
-					positionIndices = Regex.Match (ps.name, "(?<=\\[).+?(?=\\])").Value;
-				}
 				optionValues [i,0] = int.Parse(positionIndices.Split (',')[0]) - startPositions[0];
 				optionValues [i,1] = int.Parse(positionIndices.Split (',')[1]) - startPositions[1];
 
