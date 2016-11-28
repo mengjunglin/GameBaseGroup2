@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -23,6 +24,8 @@ public class FieldController : MonoBehaviour {
     public bool isDense { private set; get; }
 
     public static FieldController instance;
+
+	HashSet<int> exclude = new HashSet<int>() ;
 
     void Awake()
     {
@@ -192,7 +195,13 @@ public class FieldController : MonoBehaviour {
     }
 
 	public PlayerScript GetRandomOpponent(){
-		return opponentPlayerScripts[Random.Range(0,opponentPlayerScripts.Length)];
+		IEnumerable<int> range = Enumerable.Range(0, opponentPlayerScripts.Length).Where(i => !exclude.Contains(i));
+		int index = new System.Random().Next(0, opponentPlayerScripts.Length - exclude.Count);
+		int flag = range.ElementAt(index);
+		exclude.Add (flag);
+		if (3 == exclude.Count)
+			exclude.Clear ();
+		return opponentPlayerScripts[flag];
 	}
 
     public void AnimatePlayerMood(bool homeTeamWon)

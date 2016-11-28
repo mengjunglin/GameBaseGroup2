@@ -30,7 +30,7 @@ public class FindPlayer : MonoBehaviour
 		int flag = -1;
         row = pos[1];
 		HashSet<int> exclude = new HashSet<int>() ;
-		if (1 == pass) {
+		if (0 == pass) {
 			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
 		}
 		if (null == path) {
