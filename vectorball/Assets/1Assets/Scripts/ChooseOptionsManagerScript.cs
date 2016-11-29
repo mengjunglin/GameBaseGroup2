@@ -116,8 +116,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
 
-		MoveBall (x,y);
-
 		Analytics.SelectedAnswer(x, y, pass, flow);
 		chosenPositions [0] = x;
 		chosenPositions [1] = y;
@@ -130,6 +128,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		else {
 			IfIncorrectOption (chosenPositions);
 		}
+
+		MoveBall (x,y);
+
+
 			
 	}
 	public void IfCorrectOption(int[] option){
@@ -137,11 +139,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		++pass; 
 		tries = 0;
 
+		BeforeLoad ();
+
 		//function to display vector notation
 		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
 		script.convertResultToVector ("Hurray! That was an awesome pass. You passed to", option);
 
-		BeforeLoad ();
+
 
 	}
 
@@ -156,7 +160,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			tries = 0;
 			pass = 0;
 
-			//Call this after some animation - delay
+			//Call this after some animation - delay - Opponent Goal animation
+			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
+			ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
 			ResetField ();
 		} 
 
@@ -177,13 +183,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			//increase score
 			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore () + 1);
 
-			//score goal animation
 
 			//Set counter to next question
 			flow++; 
 			pass = 0;
 
 			//Call after some delay - goal animation
+			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
+			ball.GetComponent<BallMoveBehavior> ().lastPass = "Goal";
 			ResetField ();
 		}
 
@@ -203,7 +210,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		//Reset field
 		FieldController.instance.UpdatePlayerGrid (true);
-		MoveBall(0,0);
+		//MoveBall(0,0);
 		startPositions = new int[] {0,0};
 		chosenPositions = new int[]{0,0};
 	}

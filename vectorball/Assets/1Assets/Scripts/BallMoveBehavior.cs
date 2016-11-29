@@ -12,6 +12,8 @@ public class BallMoveBehavior : MonoBehaviour {
     float kickDelay;
 
 	public float speed;
+
+	public string lastPass;
 	void Update() {
 		float step = speed * Time.deltaTime;
 		/*if (target != null && !transform.position.Equals(target.position)) {
@@ -27,8 +29,28 @@ public class BallMoveBehavior : MonoBehaviour {
 			if((sc != null) && sc.enabled.Equals(false)){
 				sc.enabled = true;
 			}
+			if (lastPass.Equals("Goal")) {
+				transform.position = new Vector3(-144.7f,11.22563f,-0.6000003f);
+
+				//score goal animation
+				AudioSource cheerAudio = GetComponent<AudioSource>();
+				cheerAudio.Play();
+				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
+
+				lastPass = "";
+			}else if (lastPass.Equals("OpponentGoal")) {
+				transform.position = new Vector3(-144.7f,11.22563f,-0.6000003f);
+
+				//score goal animation
+				//AudioSource cheerAudio = GetComponent<AudioSource>();
+				//cheerAudio.Play();
+				//GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
+
+				lastPass = "";
+			}
 			//transform.position = _bullseye.position;
 		}
+
 	}
 
 	public void setTarget(Transform target){
