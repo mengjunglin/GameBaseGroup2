@@ -77,7 +77,22 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		for (int i = 0; i < 4; ++i) {
 			isOptioni [i].interactable = false;
 		}
+	
+		//increase opponent's score
 		scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
+
+		//reset counters
+		tries = 0;
+		pass = 0;
+
+		//Call this after some animation - delay - Opponent Goal animation
+		GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
+		ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
+		// remove highlight
+		targetPlayer.ResetPlayer();
+		ResetField ();
+		BeforeLoad();
+		LoadNextQuestion ();
 
     }
 
