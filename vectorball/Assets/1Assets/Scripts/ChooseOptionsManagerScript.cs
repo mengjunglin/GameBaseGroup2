@@ -24,6 +24,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	PlayerScript targetPlayer;
 
+	private int index=0;
+
 	private int[] startPositions;
 	private int[] targetPositions;
 	private int[] chosenPositions;
@@ -120,6 +122,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		chosenPositions [0] = x;
 		chosenPositions [1] = y;
 
+		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
+		e.tubeOptions [index,0] = chosenPositions [0];
+		e.tubeOptions [index,1] = chosenPositions [1];
+		++index;
+			
+
 		if (x == targetPositions [0] && y == targetPositions [1]) {
 			startPositions [0] = targetPositions [0];
 			startPositions [1] = targetPositions [1];
@@ -187,6 +195,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			//Set counter to next question
 			flow++; 
 			pass = 0;
+			index=0;
 
 			//Call after some delay - goal animation
 			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
@@ -218,6 +227,11 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void LoadNextQuestion(){
 
+		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
+		if (null != e.tb) {
+			e.tb.clearLine ();
+
+		}
 		//Make toggles clickable
 		for (int i = 0; i < 4; ++i) {
 			isOptioni [i].interactable = true;

@@ -14,6 +14,16 @@ public class BallMoveBehavior : MonoBehaviour {
 	public float speed;
 
 	public string lastPass;
+
+	public int[,] tubeOptions; 
+
+	public TubeController tb;
+
+	void Start(){
+		tubeOptions = new int[10,2]; 
+		tb = TubeController.instance;
+		tb.AddPosition(FieldController.instance.GetAbsolutePosition (0,0));
+	}
 	void Update() {
 		float step = speed * Time.deltaTime;
 		/*if (target != null && !transform.position.Equals(target.position)) {
@@ -36,6 +46,13 @@ public class BallMoveBehavior : MonoBehaviour {
 				AudioSource cheerAudio = GetComponent<AudioSource>();
 				cheerAudio.Play();
 				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
+
+				for(int i=0;i<10;++i){
+					if (tubeOptions[i,0] == 0 && tubeOptions[i,1] == 0)
+						break;
+					tb.AddPosition(FieldController.instance.GetAbsolutePosition (tubeOptions[i,0],tubeOptions[i,1]));
+				}
+
 
 				lastPass = "";
 			}else if (lastPass.Equals("OpponentGoal")) {

@@ -33,4 +33,10 @@ public class MainMenuScript : MonoBehaviour {
 		ChooseOptionsManagerScript.level = level;
 		Application.LoadLevel (1);
 	}
+
+	public void Deleteprefs()
+	{
+		PlayerPrefs.DeleteAll ();
+		Application.Quit ();
+	}
 }
