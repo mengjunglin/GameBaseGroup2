@@ -10,6 +10,7 @@ TagManager:
   - DialogueCanvas
   - OptionsManager
   - Ball
+  - GoalText
   layers:
   - Default
   - TransparentFX
