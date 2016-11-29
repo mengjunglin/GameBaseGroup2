@@ -10,6 +10,7 @@ public class TubeController : MonoBehaviour {
 
     public static TubeController instance;
     TubeRenderer tube;
+	public Material tubeMat;
 
 	void Awake ()
     {
@@ -31,7 +32,14 @@ public class TubeController : MonoBehaviour {
 
     void UpdateLine()
     {
-        tube.SetPoints(positionList.ToArray(), 3, Color.green);
+		tube.crossSegments = 2;
+        tube.SetPoints(positionList.ToArray(), 2, Color.green);
     }
 
+	public void clearLine()
+	{
+		
+		tube.Reset();
+	}
+		
 }
