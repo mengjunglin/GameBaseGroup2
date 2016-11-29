@@ -11,6 +11,7 @@ TagManager:
   - OptionsManager
   - Ball
   - GoalText
+  - TubeRenderer
   layers:
   - Default
   - TransparentFX

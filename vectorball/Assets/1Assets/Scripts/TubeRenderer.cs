@@ -46,7 +46,7 @@ public class TubeRenderer : MonoBehaviour
     public float maxRebuildTime = 0.1f;
     private float lastRebuildTime = 0.00f;
 
-    void Reset()
+    public void Reset()
     {
 
         vertices = new TubeVertex[]
@@ -176,4 +176,9 @@ public class TubeRenderer : MonoBehaviour
             vertices[p + 1] = new TubeVertex(points[p], radius, col);
         }
     }
+
+	public void SetTubeMaterial(Material mat)
+	{
+		gameObject.GetComponent<MeshRenderer>().material = mat;
+	}
 }

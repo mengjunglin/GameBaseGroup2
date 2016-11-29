@@ -35,7 +35,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Update()
     {
-        if(playerAnimator.v != 0 && idleLerpCounter > kickDelay)
+        if(playerAnimator != null && playerAnimator.v != 0 && idleLerpCounter > kickDelay)
         {
             lookAtTarget = new Vector3(idlePosition.x, transform.position.y, idlePosition.z);
         }
@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour {
         }
         //else
         //    playerAnimator.v = 0;
-
+		if(anim != null)
         anim.transform.LookAt(lookAtTarget);
     }
 
