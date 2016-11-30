@@ -53,7 +53,7 @@ public class BallMoveBehavior : MonoBehaviour {
 				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
 				//score goal animation
-				AudioSource cheerAudio = GetComponent<AudioSource> ();
+				AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
 				cheerAudio.Play ();
 				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
 
@@ -70,8 +70,8 @@ public class BallMoveBehavior : MonoBehaviour {
 				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
 				//score goal animation
-				//AudioSource cheerAudio = GetComponent<AudioSource>();
-				//cheerAudio.Play();
+				AudioSource booAudio = GameObject.Find("Boo").GetComponent<AudioSource>();
+				booAudio.Play();
 				//GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
 
 				lastPass = "Done";
