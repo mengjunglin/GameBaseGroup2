@@ -10,6 +10,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	//Toggle Game Objects
 	public Toggle[] isOptioni;
 	public ToggleGroup optionsToggle;
+	private bool isCorrect;
 
 	public GameObject ball;
 
@@ -42,6 +43,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	private int tries = 0;
 
+	public GameObject dialogueCanvasObj;
+
 	public void Start(){
 		scoreScript = GetComponent<GameSceneScript> ();
 		findPlayerScript = GetComponent<FindPlayer>();
@@ -49,15 +52,16 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		chosenPositions = new int[] {0,0};
 
 		//Find next player to pass ball to
-		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
+		isCorrect = true;
 		LoadNextQuestion ();
 	}
 
 	public void Update(){
-		/* if (Input.GetKey (KeyCode.H) && finished == false) {
-			finished = true;
-			LoadNextQuestion ();
-		} */
+		//Check if all questions for level complete 
+		if (ball.GetComponent<BallMoveBehavior> ().lastPass.Equals("Done") && flow == MaxFlowsInLevel) {
+			flow = 0;
+			scoreScript.LevelComplete ();
+		}
 	}
 
     void OnEnable()
@@ -91,7 +95,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		// remove highlight
 		targetPlayer.ResetPlayer();
 		ResetField ();
-		BeforeLoad();
 		LoadNextQuestion ();
 
     }
@@ -152,6 +155,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfIncorrectOption (chosenPositions);
 		}
 
+		BeforeLoad ();
 		MoveBall (x,y);
 
 
@@ -159,22 +163,23 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 	}
 	public void IfCorrectOption(int[] option){
 
+		isCorrect = true;
 		++pass; 
 		tries = 0;
 
-		BeforeLoad ();
-
 		//function to display vector notation
-		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
-		script.convertResultToVector ("Hurray! That was an awesome pass. You passed to", option);
-
-
-
+		GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
+		BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
+		script.message = "Hurray! That was an awesome pass. You passed to";
+		script.result = option;
+		script.printed = false;
 	}
 
 	public void IfIncorrectOption(int[] option){
 
+		isCorrect = false;
 		++tries;
+		GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
 		if (tries == 2) {
 			//increase opponent's score
 			scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
@@ -184,13 +189,14 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			pass = 0;
 
 			//Call this after some animation - delay - Opponent Goal animation
-			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
 			ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
 			ResetField ();
 		} 
 
-		VectorRepresentationScript script = GetComponent<VectorRepresentationScript>();
-		script.convertResultToVector("Whoops! You gave the ball to opponent. You passed to",option);
+		BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
+		script.message = "Whoops! You gave the ball to opponent. You passed to";
+		script.result = option;
+		script.printed = false;
 	}
 
 	public void MoveBall(int x, int y){
@@ -203,6 +209,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void BeforeLoad(){
 		if (pass == MaxPassesInFlow) {
+			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
 			//increase score
 			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore () + 1);
 
@@ -213,18 +220,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			index=0;
 
 			//Call after some delay - goal animation
-			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
 			ball.GetComponent<BallMoveBehavior> ().lastPass = "Goal";
 			ResetField ();
 		}
 
-		//Check if all questions for level complete 
-		if (flow == MaxFlowsInLevel) {
-			flow = 0;
-			scoreScript.LevelComplete ();
-		}
-
-		targetPositions = findPlayerScript.find_teammate(level, startPositions,pass);
 	}
 
 
@@ -237,10 +236,15 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//MoveBall(0,0);
 		startPositions = new int[] {0,0};
 		chosenPositions = new int[]{0,0};
+
 	}
 
 
 	public void LoadNextQuestion(){
+
+		if (isCorrect) {
+			targetPositions = findPlayerScript.find_teammate (level, startPositions, pass);
+		}
 
 		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
 		if (null != e.tb) {
@@ -332,5 +336,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//start timer
 		TimerScript.instance.StartTimer (50);
 	}
+
+
+
 		
 }

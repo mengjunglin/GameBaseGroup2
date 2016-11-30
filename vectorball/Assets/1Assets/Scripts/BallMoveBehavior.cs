@@ -19,10 +19,20 @@ public class BallMoveBehavior : MonoBehaviour {
 
 	public TubeController tb;
 
+	public string message;
+
+	public int[] result;
+
+	GameObject optionsManager;
+	public VectorRepresentationScript script;
+	public bool printed = false;
+
 	void Start(){
 		tubeOptions = new int[10,2]; 
 		tb = TubeController.instance;
 		tb.AddPosition(FieldController.instance.GetAbsolutePosition (0,0));
+		optionsManager = GameObject.FindGameObjectWithTag ("OptionsManager");
+		script = optionsManager.GetComponent<VectorRepresentationScript>();
 	}
 	void Update() {
 		float step = speed * Time.deltaTime;
@@ -39,32 +49,40 @@ public class BallMoveBehavior : MonoBehaviour {
 			if((sc != null) && sc.enabled.Equals(false)){
 				sc.enabled = true;
 			}
-			if (lastPass.Equals("Goal")) {
-				transform.position = new Vector3(-144.7f,11.22563f,-0.6000003f);
+			if (lastPass.Equals ("Goal")) {
+				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
 				//score goal animation
-				AudioSource cheerAudio = GetComponent<AudioSource>();
-				cheerAudio.Play();
-				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
+				AudioSource cheerAudio = GetComponent<AudioSource> ();
+				cheerAudio.Play ();
+				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
 
-				for(int i=0;i<10;++i){
-					if (tubeOptions[i,0] == 0 && tubeOptions[i,1] == 0)
+				for (int i = 0; i < 10; ++i) {
+					if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
 						break;
-					tb.AddPosition(FieldController.instance.GetAbsolutePosition (tubeOptions[i,0],tubeOptions[i,1]));
+					tb.AddPosition (FieldController.instance.GetAbsolutePosition (tubeOptions [i, 0], tubeOptions [i, 1]));
 				}
+				tubeOptions = new int[10,2];
 
 
-				lastPass = "";
-			}else if (lastPass.Equals("OpponentGoal")) {
-				transform.position = new Vector3(-144.7f,11.22563f,-0.6000003f);
+				lastPass = "Done";
+			} else if (lastPass.Equals ("OpponentGoal")) {
+				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
 				//score goal animation
 				//AudioSource cheerAudio = GetComponent<AudioSource>();
 				//cheerAudio.Play();
 				//GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
 
-				lastPass = "";
-			}
+				lastPass = "Done";
+			} 
+
+				//function to display vector notation
+				if (!printed) {
+					script.convertResultToVector (message, result);
+					printed = true;
+				}
+
 			//transform.position = _bullseye.position;
 		}
 
@@ -114,4 +132,9 @@ public class BallMoveBehavior : MonoBehaviour {
 		GetComponent<Rigidbody>().velocity = globalVelocity;
 
 	}
+
+	public void closeCanvas(){
+		script.disableCanvas ();
+	}
+
 }
