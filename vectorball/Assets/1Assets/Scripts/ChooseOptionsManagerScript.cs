@@ -136,7 +136,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		int x = int.Parse(coordinates[0]);
 		int y = int.Parse(coordinates[1]);
 
-		Analytics.SelectedAnswer(x, y, pass, flow);
 		chosenPositions [0] = x;
 		chosenPositions [1] = y;
 
@@ -155,6 +154,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfIncorrectOption (chosenPositions);
 		}
 
+
+		Analytics.SelectedAnswer(x, y, level, flow+1, pass, isCorrect);
 		BeforeLoad ();
 		MoveBall (x,y);
 
