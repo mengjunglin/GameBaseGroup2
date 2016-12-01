@@ -12,3 +12,7 @@
 /Users/Shared/Unity/GameFinal/vectorball/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/Shared/Unity/GameFinal/vectorball/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/Shared/Unity/GameFinal/vectorball/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/Shared/Unity/GameFinal/vectorball/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Shared/Unity/GameFinal/vectorball/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Shared/Unity/GameFinal/vectorball/obj/Debug/Assembly-CSharp.dll
+/Users/Shared/Unity/GameFinal/vectorball/obj/Debug/Assembly-CSharp.dll.mdb
