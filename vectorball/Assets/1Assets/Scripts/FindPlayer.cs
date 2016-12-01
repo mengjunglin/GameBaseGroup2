@@ -30,14 +30,15 @@ public class FindPlayer : MonoBehaviour
 		int flag = -1;
         row = pos[1];
 		HashSet<int> exclude = new HashSet<int>() ;
-		if (0 == pass) {
-			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
-		}
 		if (null == path) {
 			path = pathfile.text.Split('\n');
 		}
+		if (0 == pass) {
+			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
+		}
 			
         string current_path = path[selected_line];
+		Analytics.SelectedPath (current_path);
 
         //To search where in path you are currently, and where to go to next, converting int to String, in order to use String Search methods.
 
