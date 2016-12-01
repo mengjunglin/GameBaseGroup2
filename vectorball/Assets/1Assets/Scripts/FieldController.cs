@@ -30,6 +30,8 @@ public class FieldController : MonoBehaviour {
     void Awake()
     {
         instance = this;
+		startTransform = ballMono.transform;
+		UpdatePlayerGrid(true);
     }
 
     void Start () {
@@ -118,7 +120,7 @@ public class FieldController : MonoBehaviour {
 		{
 			
             ps.idlePosition = ps.transform.position;
-
+			ps.permPosition = new Vector3(ps.idlePosition.x,ps.idlePosition.y,ps.idlePosition.z);
             //In case we need labels in future
             //Transform label = ((GameObject) GameObject.Instantiate(positionLabel, ps.transform)).transform;
             //label.localPosition = new Vector2(0, 30);
@@ -156,6 +158,16 @@ public class FieldController : MonoBehaviour {
         else
             return Vector3.zero;
     }
+
+	public Vector3 GetPermanentPosition(int x, int y)
+	{
+		PlayerScript selectedPlayer = GetPlayerAt(x, y);
+
+		if (selectedPlayer)
+			return selectedPlayer.permPosition;
+		else
+			return Vector3.zero;
+	}
 
     public PlayerScript GetPlayerAt(int x, int y)
     {

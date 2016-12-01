@@ -20,8 +20,8 @@ public class TubeController : MonoBehaviour {
 
     public void AddPosition(Vector3 position)
     {
-        positionList.Add(position);
-        UpdateLine();
+		positionList.Add (position);
+		UpdateLine ();
     }
 
     public void AddPosition(Transform position)
@@ -38,8 +38,19 @@ public class TubeController : MonoBehaviour {
 
 	public void clearLine()
 	{
-		
+		positionList.Clear ();
 		tube.Reset();
 	}
-		
+
+	public void SetTubeThickness(int thickness){
+		tube.crossSegments = 2;
+		tube.SetPoints(positionList.ToArray(), 1, Color.green);
+	}
+
+	public void CreateTube(int[] x){
+		clearLine ();
+		for (int i = 0; i < 8; i = i + 2) {
+			AddPosition (FieldController.instance.GetAbsolutePosition (x[i], x[i+1]));
+		}
+	}
 }

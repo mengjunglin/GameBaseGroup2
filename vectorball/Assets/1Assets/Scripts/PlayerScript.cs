@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour {
 	private int multiplier=0;
     public TextMesh label;
     public SpriteRenderer arrowMarker;
-    public Vector3 idlePosition, lastPosition;
+	public Vector3 idlePosition, lastPosition, permPosition;
 
     bool currentlyCharging = false;
 
@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour {
 
         if (transform.position != idlePosition)
         {
-            if(idleLerpCounter > animDelay)
+			if((idleLerpCounter > animDelay) && playerAnimator != null)
             {
                 playerAnimator.v = 1;
                 playerAnimator.run = 0.18f;
