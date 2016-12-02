@@ -58,14 +58,6 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		LoadNextQuestion ();
 	}
 
-	public void Update(){
-		//Check if all questions for level complete 
-		if (ball.GetComponent<BallMoveBehavior> ().lastPass.Equals("Done") && flow == MaxFlowsInLevel) {
-			flow = 0;
-			scoreScript.LevelComplete ();
-		}
-	}
-
     void OnEnable()
     {
         TimerScript.instance.TimeoutEvent += OnTimeOut;
@@ -83,23 +75,10 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		for (int i = 0; i < 4; ++i) {
 			isOptioni [i].interactable = false;
 		}
-
-		//increase opponent's score
-
-        //Opponent score won't be incremented here. Would be incremented only after scoring a goal
-		//scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
-
-		//reset counters
+        
 		tries += 1;
-		pass = 0;
 
-        //Call this after some animation - delay - Opponent Goal animation
-  //      GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
-		//ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
-		// remove highlight
 		targetPlayer.ResetPlayer();
-		//ResetField ();
-		//LoadNextQuestion ();
     }
 
     void OnTimerUpdate(float percent)
@@ -147,8 +126,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		e.tubeOptions [index,1] = chosenPositions [1];
 		++index;
 			
-
-		if (x == targetPositions [0] && y == targetPositions [1]) {
+        if (x == targetPositions [0] && y == targetPositions [1]) {
 			startPositions [0] = targetPositions [0];
 			startPositions [1] = targetPositions [1];
 			IfCorrectOption (chosenPositions);
@@ -156,15 +134,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		else {
 			IfIncorrectOption (chosenPositions);
 		}
-
-
+        
 		Analytics.SelectedAnswer(x, y, level, flow+1, pass, isCorrect);
 		BeforeLoad ();
 		MoveBall (x,y);
-
-
-			
 	}
+
 	public void IfCorrectOption(int[] option){
 
 		isCorrect = true;
@@ -239,12 +214,8 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
             //ResetField ();
 		}
-
 	}
-
-
-
-
+    
 	public void ResetField(){
 
 		//Reset field
@@ -260,16 +231,23 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
         flow++;
         pass = 0;
 
+        if(flow >=MaxFlowsInLevel)
+        {
+            flow = 0;
+            scoreScript.LevelComplete();
+        }
+
+        CancelInvoke("LoadNextQuestion");
         Invoke("LoadNextQuestion", inOpponentsGoal ? 5 : 2);
     }
 
 
 	public void LoadNextQuestion(){
-        print("Load next question");
-        CancelInvoke("LoadNextQuestion");
+        print("Load next question " + flow + " " + pass + " " + level);
         VectorRepresentationScript.instance.disableCanvas();
 
-        if (ball.GetComponent<BallMoveBehavior>().target.name.Contains("Goal"))
+        if (ball.GetComponent<BallMoveBehavior>().target.name.Contains("Goal") || IsInvoking("LoadNextQuestion") 
+            || tries > 1 || pass >= MaxPassesInFlow)
         {
             print("Ignore load next");
             return;

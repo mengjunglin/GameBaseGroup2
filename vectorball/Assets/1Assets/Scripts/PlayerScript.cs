@@ -176,11 +176,12 @@ public class PlayerScript : MonoBehaviour {
     IEnumerator KickToGoal()
     {
         int delay = 0;
-        while(delay < 8)
+        int waitFor = 5;
+        while(delay < waitFor)
         {
             yield return new WaitForSeconds(1);
             delay += 1;
-            print("Kicking to " + isOpponent + name + " goal in:" + (8 - delay));
+            print("Kicking to " + isOpponent + name + " goal in:" + (waitFor - delay));
         }
 
         int index;
