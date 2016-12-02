@@ -1842,8 +1842,10 @@ MonoBehaviour:
   ball: {fileID: 375354010}
   timerBar: {fileID: 2055405731}
   questionText: {fileID: 444779508}
+  defaultPlayer: {fileID: 1631244099}
   MaxFlowsInLevel: 3
   MaxPassesInFlow: 5
+  tries: 0
   dialogueCanvasObj: {fileID: 211043170}
 --- !u!114 &570472364
 MonoBehaviour:

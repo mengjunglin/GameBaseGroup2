@@ -23,7 +23,9 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	FindPlayer findPlayerScript;
 
-	PlayerScript targetPlayer;
+    PlayerScript targetPlayer;
+    [SerializeField]
+    Transform defaultPlayer;
 
 	private int index=0;
 
@@ -217,13 +219,13 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		if (pass == MaxPassesInFlow) {
 			GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
 			//increase score
-			scoreScript.SetPlayerScore (scoreScript.GetPlayerScore () + 1);
+			//scoreScript.SetPlayerScore (scoreScript.GetPlayerScore () + 1);
 
 
 			//Set counter to next question
-			flow++; 
-			pass = 0;
-			index=0;
+			//flow++; 
+			//pass = 0;
+			//index = 0;
 
             //Call after some delay - goal animation
             //ball.GetComponent<BallMoveBehavior> ().lastPass = "Goal";
@@ -246,11 +248,21 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		startPositions = new int[] {0,0};
 		chosenPositions = new int[]{0,0};
         print("Reset field");
-	}
+        bool inOpponentsGoal = ball.GetComponent<BallMoveBehavior>().target.name.Contains("Opponent");
+        ball.GetComponent<BallMoveBehavior>().setTarget(defaultPlayer);
+        tries = 0;
+        index = 0;
+        flow++;
+        pass = 0;
+
+        Invoke("LoadNextQuestion", inOpponentsGoal ? 5 : 2);
+    }
 
 
 	public void LoadNextQuestion(){
         print("Load next question");
+        CancelInvoke("LoadNextQuestion");
+        VectorRepresentationScript.instance.disableCanvas();
 
         if (ball.GetComponent<BallMoveBehavior>().target.name.Contains("Goal"))
         {
