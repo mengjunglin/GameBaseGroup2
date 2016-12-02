@@ -144,15 +144,15 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		isCorrect = true;
 		++pass; 
-		//tries = 0;
+		tries = 0;
 
 		//function to display vector notation
-		//GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
-		//BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
-		//script.message = ;
-		//script.result = option;
-        VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to:", option);
-		//script.printed = false;
+		GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
+		BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
+		script.message = "Hurray! That was an awesome pass. You passed to:";
+		script.result = option;
+        //VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to:", option);
+		script.printed = false;
 	}
 
 	public void IfIncorrectOption(int[] option){
@@ -164,12 +164,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			//increase opponent's score
 			scoreScript.SetOpponentPlayerScore (scoreScript.GetOpponentPlayerScore () + 1);
 
-			//reset counters
-			tries = 0;
-			pass = 0;
+					//reset counters
+					tries = 0;
+					pass = 0;
 
             //Call this after some animation - delay - Opponent Goal animation
-            //ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
+            ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
 
             ball.GetComponent<BallMoveBehavior>().ballOwner.PassToLastPlayerAndScore(true);
 		}
@@ -179,12 +179,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
             ballMono.setTarget(FieldController.instance.GetPlayerAt(option[0], option[1]).transform);
         }
 
-		//BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
-		//script.message = "Whoops! You gave the ball to opponent. You passed to";
-		//script.result = option;
-		//script.printed = false;
+		BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
+		script.message = "Whoops! You gave the ball to opponent. You passed to";
+		script.result = option;
+		script.printed = false;
 
-        VectorRepresentationScript.instance.convertResultToVector("Whoops! You gave the ball to opponent. You passed to:", option);
+        //VectorRepresentationScript.instance.convertResultToVector("Whoops! You gave the ball to opponent. You passed to:", option);
     }
 
 	public void MoveBall(int x, int y){
@@ -203,12 +203,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 
 			//Set counter to next question
-			//flow++; 
-			//pass = 0;
-			//index = 0;
+			flow++; 
+			pass = 0;
+			index = 0;
 
             //Call after some delay - goal animation
-            //ball.GetComponent<BallMoveBehavior> ().lastPass = "Goal";
+            ball.GetComponent<BallMoveBehavior> ().lastPass = "Goal";
 
             ball.GetComponent<BallMoveBehavior>().ballOwner.PassToLastPlayerAndScore(false);
 

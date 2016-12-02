@@ -28,7 +28,7 @@ public class BallMoveBehavior : MonoBehaviour {
 
 	GameObject optionsManager;
 	public VectorRepresentationScript script;
-	//public bool printed = false;
+	public bool printed = false;
     //*/
 
 
@@ -55,23 +55,24 @@ public class BallMoveBehavior : MonoBehaviour {
 			if((sc != null) && sc.enabled.Equals(false)){
 				sc.enabled = true;
 			}
-			//if (lastPass.Equals ("Goal")) {
-			//	transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
+			if (lastPass.Equals ("Goal")) {
+				//	transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
-			//	//score goal animation
-			//	AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
-			//	cheerAudio.Play ();
-			//	GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
+				//	//score goal animation
+				//	AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
+				//	cheerAudio.Play ();
+				//	GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
 
-			//	for (int i = 0; i < 10; ++i) {
-			//		if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
-			//			break;
-			//		tb.AddPosition (FieldController.instance.GetAbsolutePosition (tubeOptions [i, 0], tubeOptions [i, 1]));
-			//	}
-			//	tubeOptions = new int[10,2];
+				for (int i = 0; i < 10; ++i) {
+					if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
+						break;
+					tb.AddPosition (FieldController.instance.GetAbsolutePosition (tubeOptions [i, 0], tubeOptions [i, 1]));
+				}
+				tubeOptions = new int[10, 2];
 
 
-			//	lastPass = "Done";
+				lastPass = "Done";
+			}
 			//} else if (lastPass.Equals ("OpponentGoal")) {
 			//	transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
@@ -84,10 +85,10 @@ public class BallMoveBehavior : MonoBehaviour {
 			//} 
 
 			//	//function to display vector notation
-			//	if (!printed) {
-			//		script.convertResultToVector (message, result);
-			//		printed = true;
-			//	}
+				if (!printed) {
+					script.convertResultToVector (message, result);
+					printed = true;
+				}
 
 			//transform.position = _bullseye.position;
 		}
