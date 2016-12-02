@@ -335,7 +335,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		}
 
 		//start timer
-		TimerScript.instance.StartTimer (50);
+		TimerScript.instance.StartTimer (12);
 	}
 
 
