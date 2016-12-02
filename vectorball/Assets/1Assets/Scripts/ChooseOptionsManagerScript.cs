@@ -151,7 +151,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
 		//script.message = ;
 		//script.result = option;
-        VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to", option);
+        VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to:", option);
 		//script.printed = false;
 	}
 
@@ -184,7 +184,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		//script.result = option;
 		//script.printed = false;
 
-        VectorRepresentationScript.instance.convertResultToVector("Whoops!You gave the ball to opponent.You passed to", option);
+        VectorRepresentationScript.instance.convertResultToVector("Whoops! You gave the ball to opponent. You passed to:", option);
     }
 
 	public void MoveBall(int x, int y){

@@ -64,7 +64,7 @@ public class FieldController : MonoBehaviour {
         }
         else
         {
-            VectorRepresentationScript.instance.convertResultToVector("Opponent team score a goal at", new int[] { 0, 0 });
+            VectorRepresentationScript.instance.convertResultToVector("Opponent team scored a goal at:", new int[] { 0, -1 });
         }
     }
 
