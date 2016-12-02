@@ -61,7 +61,7 @@ public class FieldController : MonoBehaviour {
         if(percent > PlayerScript.chargePercent)
         {
             PlayerScript ps = ballMono.target.GetComponent<PlayerScript>();
-            PlayerScript attacker = GetNearestPlayer(ps);
+            PlayerScript attacker = GetNearestOpponent(ps);
             if (attacker)
                 attacker.ChargeTowardsBall(percent, ballMono.target.position);
             else
@@ -69,17 +69,33 @@ public class FieldController : MonoBehaviour {
         }
     }
 
-    PlayerScript GetNearestPlayer(PlayerScript target)
+    PlayerScript GetNearestOpponent(PlayerScript target)
     {
         Vector2 coordinates = GetXYOfPlayer(target);
-        PlayerScript playerBehind = GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y - 1));
-        if (playerBehind && playerBehind.isOpponent != target.isOpponent)
+        PlayerScript opponent = GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y - 1));
+        if (opponent && opponent.isOpponent != target.isOpponent)
         {
-            return playerBehind;
+            return opponent;
+        }
+        opponent = GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y + 1));
+        if (opponent && opponent.isOpponent != target.isOpponent)
+        {
+            return opponent;
+        }
+        opponent = GetPlayerAt(Mathf.RoundToInt(coordinates.x) + 1, Mathf.RoundToInt(coordinates.y));
+        if (opponent && opponent.isOpponent != target.isOpponent)
+        {
+            return opponent;
+        }
+        opponent = GetPlayerAt(Mathf.RoundToInt(coordinates.x) -1, Mathf.RoundToInt(coordinates.y));
+        if (opponent && opponent.isOpponent != target.isOpponent)
+        {
+            return opponent;
         }
         else
         {
-            return GetPlayerAt(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y + 1));
+            Debug.LogError("No opponent found");
+            return null;
         }
     }
 
@@ -97,10 +113,10 @@ public class FieldController : MonoBehaviour {
         //if (Input.GetKeyDown(KeyCode.T))
         //    TimerScript.instance.StartTimer(4);
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ballMono.target.GetComponent<PlayerScript>().PassToLastPlayerAndScore();
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    ballMono.target.GetComponent<PlayerScript>().PassToLastPlayerAndScore();
+        //}
     }
 
     public void UpdatePlayerGrid(bool isDense)
