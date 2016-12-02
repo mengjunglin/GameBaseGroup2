@@ -75,6 +75,7 @@ public class GameSceneScript : MonoBehaviour {
             AudioSource cheerAudio = GameObject.Find("Cheer").GetComponent<AudioSource>();
             cheerAudio.Play();
             GameObject.FindGameObjectWithTag("GoalText").GetComponent<ParticleSystem>().Play();
+            FieldController.instance.AnimatePlayerMood(true);
         }
         else
         {
@@ -82,6 +83,7 @@ public class GameSceneScript : MonoBehaviour {
             AudioSource booAudio = GameObject.Find("Boo").GetComponent<AudioSource>();
             booAudio.Play();
             GameObject.FindGameObjectWithTag("GoalText").GetComponent<ParticleSystem>().Play();
+            FieldController.instance.AnimatePlayerMood(false);
         }
 
         yield return new WaitForSeconds(2);
