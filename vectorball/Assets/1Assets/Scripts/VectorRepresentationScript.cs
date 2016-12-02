@@ -7,6 +7,13 @@ public class VectorRepresentationScript : MonoBehaviour {
 
 	public GameObject dialogueCanvasObj;
 
+    public static VectorRepresentationScript instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
 	// Use this for initialization
 	void Start () {
 
@@ -32,7 +39,6 @@ public class VectorRepresentationScript : MonoBehaviour {
 		GameObject resultObj = GameObject.FindGameObjectWithTag ("Result");
 
 		dialogueObj.GetComponent<Text> ().text = message;
-				
 		resultObj.GetComponent<Text> ().text = string.Format ("{0} \n{1}", result [0], result [1]);
 	}
 

@@ -26,6 +26,7 @@ public class FieldController : MonoBehaviour {
     public static FieldController instance;
 
 	HashSet<int> exclude = new HashSet<int>() ;
+    ChooseOptionsManagerScript optionsManagerScript;
 
     void Awake()
     {
@@ -37,7 +38,8 @@ public class FieldController : MonoBehaviour {
     void Start () {
 		startTransform = ballMono.transform;
 		UpdatePlayerGrid(true);
-	}
+        optionsManagerScript = GameObject.FindGameObjectWithTag("OptionsManager").GetComponent<ChooseOptionsManagerScript>();
+    }
 
     void OnEnable()
     {
@@ -54,6 +56,16 @@ public class FieldController : MonoBehaviour {
     void OnTimeOut()
     {
         Debug.Log("Timed out");
+
+        if (optionsManagerScript.tries < 2)
+        {
+            Vector2 coords = GetXYOfPlayer(ballMono.ballOwner);
+            VectorRepresentationScript.instance.convertResultToVector("Opponent tackled the ball to:", new int[] { (int)coords.x, (int)coords.y });
+        }
+        else
+        {
+            VectorRepresentationScript.instance.convertResultToVector("Opponent team score a goal at", new int[] { 0, 0 });
+        }
     }
 
     void OnTimerUpdate(float percent)

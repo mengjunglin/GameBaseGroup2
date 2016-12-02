@@ -1349,6 +1349,11 @@ Prefab:
       objectReference: {fileID: 1631244099}
     - target: {fileID: 114000012037108836, guid: cddd395770a2bbd4abc2bebb904be293,
         type: 2}
+      propertyPath: ballOwner
+      value: 
+      objectReference: {fileID: 1161769231}
+    - target: {fileID: 114000012037108836, guid: cddd395770a2bbd4abc2bebb904be293,
+        type: 2}
       propertyPath: script
       value: 
       objectReference: {fileID: 570472366}
@@ -3204,6 +3209,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152473846}
+--- !u!114 &1161769231 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014038942484, guid: 03c57bae66b522e4e8f6237172bfc8c4,
+    type: 2}
+  m_PrefabInternal: {fileID: 137502813}
+  m_Script: {fileID: 11500000, guid: e12a2a4efa47cf346bc7ae12815f62f1, type: 3}
 --- !u!1001 &1172782057
 Prefab:
   m_ObjectHideFlags: 0

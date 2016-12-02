@@ -319,6 +319,7 @@ MonoBehaviour:
   _angle: 30
   kickDelay: 0.5
   speed: 100
+  ballOwner: {fileID: 0}
   lastPass: 
   tb: {fileID: 0}
   message: 

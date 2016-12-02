@@ -25,12 +25,20 @@ public class PlayerScript : MonoBehaviour {
     const float animDelay = 1.7f;
     const float reverseSpeedFactor = 2;
 
+    [SerializeField ]
+    ChooseOptionsManagerScript chooseOptionsScript;
+    [SerializeField]
+    GameSceneScript gameSceneScript;
+
     void Awake()
     {
         isOpponent = (name.Contains("PositionB"));
         anim = GetComponentInChildren<Animator>();
         faceAnimController = GetComponentInChildren<PlayFaceAnimations>();
         playerAnimator = GetComponentInChildren<Character_Animations>();
+
+        chooseOptionsScript = FindObjectOfType<ChooseOptionsManagerScript>();
+        gameSceneScript = FindObjectOfType<GameSceneScript>();
     }
 
     void Update()
@@ -82,10 +90,27 @@ public class PlayerScript : MonoBehaviour {
         {
             if (playerAnimator.v != 0)
             {
-                ball.GetComponent<BallMoveBehavior>().target = transform;
-                PlayerScript ps = FieldController.instance.GetRandomOpponent();
+                BallMoveBehavior bmb = ball.GetComponent<BallMoveBehavior>();
+                bmb.target = transform;
+                PlayerScript ps = null;
+
+                while (ps == null || ps == this)
+                {
+                    ps = FieldController.instance.GetRandomOpponent();
+                }
+
                 Vector2 coordinates = FieldController.instance.GetXYOfPlayer(ps);
-                KickBallTowards(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
+
+                if (chooseOptionsScript.tries < 1)
+                {
+                    KickBallTowards(Mathf.RoundToInt(coordinates.x), Mathf.RoundToInt(coordinates.y));
+                    print("pass to:" + coordinates);
+                }
+                else
+                {
+                    PassToLastPlayerAndScore(true);
+                    print("pass to LAST player");
+                }
             }
             playerAnimator.v = 0;
             playerAnimator.run = 0;
@@ -135,18 +160,29 @@ public class PlayerScript : MonoBehaviour {
         //Invoke("ResetPlayer", 2f);
     }
 
-    public void PassToLastPlayerAndScore()
+    /// <summary>
+    /// Only called to score own teams goal
+    /// </summary>
+    public void PassToLastPlayerAndScore(bool opponent)
     {
-        int yAxis = (isOpponent ? 1 : 5);
+        int yAxis = (opponent ? 1 : 5);
 
         KickBallTowards(0, yAxis);
         PlayerScript target = FieldController.instance.GetPlayerAt(0, yAxis);
-
-        target.Invoke("KickToGoal", 8);
+        print(target + " target" + name);
+        target.StartCoroutine("KickToGoal");
     }
 
-    public void KickToGoal()
+    IEnumerator KickToGoal()
     {
+        int delay = 0;
+        while(delay < 8)
+        {
+            yield return new WaitForSeconds(1);
+            delay += 1;
+            print("Kicking to " + isOpponent + name + " goal in:" + (8 - delay));
+        }
+
         int index;
 
         index = (isOpponent ? 0 : 1);
@@ -155,5 +191,9 @@ public class PlayerScript : MonoBehaviour {
 
         BallMoveBehavior ballMono = ball.GetComponent<BallMoveBehavior>();
         ballMono.setTarget(FieldController.instance.goalsTransform[index]);
+
+        TimerScript.instance.StopTimer();
+
+        gameSceneScript.OnGoalScored(!isOpponent);
     }
 }

@@ -13,6 +13,9 @@ public class BallMoveBehavior : MonoBehaviour {
 
 	public float speed;
 
+    public PlayerScript ballOwner;
+
+    ///*
 	public string lastPass;
 
 	public int[,] tubeOptions; 
@@ -25,7 +28,9 @@ public class BallMoveBehavior : MonoBehaviour {
 
 	GameObject optionsManager;
 	public VectorRepresentationScript script;
-	public bool printed = false;
+	//public bool printed = false;
+    //*/
+
 
 	void Start(){
 		tubeOptions = new int[10,2]; 
@@ -34,6 +39,7 @@ public class BallMoveBehavior : MonoBehaviour {
 		optionsManager = GameObject.FindGameObjectWithTag ("OptionsManager");
 		script = optionsManager.GetComponent<VectorRepresentationScript>();
 	}
+
 	void Update() {
 		float step = speed * Time.deltaTime;
 		/*if (target != null && !transform.position.Equals(target.position)) {
@@ -49,39 +55,39 @@ public class BallMoveBehavior : MonoBehaviour {
 			if((sc != null) && sc.enabled.Equals(false)){
 				sc.enabled = true;
 			}
-			if (lastPass.Equals ("Goal")) {
-				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
+			//if (lastPass.Equals ("Goal")) {
+			//	transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
-				//score goal animation
-				AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
-				cheerAudio.Play ();
-				GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
+			//	//score goal animation
+			//	AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
+			//	cheerAudio.Play ();
+			//	GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
 
-				for (int i = 0; i < 10; ++i) {
-					if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
-						break;
-					tb.AddPosition (FieldController.instance.GetAbsolutePosition (tubeOptions [i, 0], tubeOptions [i, 1]));
-				}
-				tubeOptions = new int[10,2];
+			//	for (int i = 0; i < 10; ++i) {
+			//		if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
+			//			break;
+			//		tb.AddPosition (FieldController.instance.GetAbsolutePosition (tubeOptions [i, 0], tubeOptions [i, 1]));
+			//	}
+			//	tubeOptions = new int[10,2];
 
 
-				lastPass = "Done";
-			} else if (lastPass.Equals ("OpponentGoal")) {
-				transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
+			//	lastPass = "Done";
+			//} else if (lastPass.Equals ("OpponentGoal")) {
+			//	transform.position = new Vector3 (-144.7f, 11.22563f, -0.6000003f);
 
-				//score goal animation
-				AudioSource booAudio = GameObject.Find("Boo").GetComponent<AudioSource>();
-				booAudio.Play();
-				//GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
+			//	//score goal animation
+			//	AudioSource booAudio = GameObject.Find("Boo").GetComponent<AudioSource>();
+			//	booAudio.Play();
+			//	//GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play();
 
-				lastPass = "Done";
-			} 
+			//	lastPass = "Done";
+			//} 
 
-				//function to display vector notation
-				if (!printed) {
-					script.convertResultToVector (message, result);
-					printed = true;
-				}
+			//	//function to display vector notation
+			//	if (!printed) {
+			//		script.convertResultToVector (message, result);
+			//		printed = true;
+			//	}
 
 			//transform.position = _bullseye.position;
 		}
@@ -89,12 +95,13 @@ public class BallMoveBehavior : MonoBehaviour {
 	}
 
 	public void setTarget(Transform target){
-        Transform ballOwner = this.target;
         this.target = target;
 		this._bullseye = target;
 
         //If u get an error here. Be sure to give a player0:0 reference to target(this script's target field) by default
-        ballOwner.GetComponent<PlayerScript>().PlayKickAnimation();
+        ballOwner = target.GetComponent<PlayerScript>();
+        if(ballOwner)
+            ballOwner.PlayKickAnimation();
 
         CancelInvoke("Launch");
 		Invoke("Launch", kickDelay);
@@ -102,6 +109,8 @@ public class BallMoveBehavior : MonoBehaviour {
 
 	private void Launch()
 	{
+        print("Launch");
+
 		// source and target positions
 		Vector3 pos = transform.position;
 		Vector3 target = _bullseye.position;

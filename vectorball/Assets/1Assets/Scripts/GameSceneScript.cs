@@ -12,13 +12,15 @@ public class GameSceneScript : MonoBehaviour {
 	public Text scoreText;
 	public Text opponentScoreText;
 
-	// Use this for initialization
-	void Start () {
+    ChooseOptionsManagerScript chooseOptionsScript;
+
+    // Use this for initialization
+    void Start () {
 		//these should be updated throughout the game
 		playerScore = 0;
 		opponentScore = 0;
-
-	}
+        chooseOptionsScript = FindObjectOfType<ChooseOptionsManagerScript>();
+    }
 	
 	// Update is called once per frame
 	public void Update(){
@@ -57,4 +59,33 @@ public class GameSceneScript : MonoBehaviour {
 			Application.LoadLevel ("GameOverScene");
 		}
 	}
+
+    public void OnGoalScored(bool opponentsGoalScored)
+    {
+        StartCoroutine(ActOnGoal(opponentsGoalScored));
+    }
+
+    IEnumerator ActOnGoal(bool opponentsGoalScored)
+    {
+        yield return new WaitForSeconds(3.8f);
+
+        if (opponentsGoalScored)
+        {
+            SetPlayerScore(playerScore + 1);
+            AudioSource cheerAudio = GameObject.Find("Cheer").GetComponent<AudioSource>();
+            cheerAudio.Play();
+            GameObject.FindGameObjectWithTag("GoalText").GetComponent<ParticleSystem>().Play();
+        }
+        else
+        {
+            SetOpponentPlayerScore(opponentScore + 1);
+            AudioSource booAudio = GameObject.Find("Boo").GetComponent<AudioSource>();
+            booAudio.Play();
+            GameObject.FindGameObjectWithTag("GoalText").GetComponent<ParticleSystem>().Play();
+        }
+
+        yield return new WaitForSeconds(2);
+
+        chooseOptionsScript.ResetField();
+    }
 }
