@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour {
 
         for(int i=0;i < levelButtons.Length; i++)
         {
-            levelButtons[i].interactable = (i < unlockedLevel + 1);
+            levelButtons[i].interactable = (i < unlockedLevel -1);
         }
 	}
 	
