@@ -169,7 +169,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 		isCorrect = true;
 		++pass; 
-		tries = 0;
+		//tries = 0;
 
 		//function to display vector notation
 		//GameObject ball = GameObject.FindGameObjectWithTag ("Ball");
@@ -197,7 +197,12 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
             //ball.GetComponent<BallMoveBehavior> ().lastPass = "OpponentGoal";
 
             ball.GetComponent<BallMoveBehavior>().ballOwner.PassToLastPlayerAndScore(true);
-		} 
+		}
+        else
+        {
+            BallMoveBehavior ballMono = ball.GetComponent<BallMoveBehavior>();
+            ballMono.setTarget(FieldController.instance.GetPlayerAt(option[0], option[1]).transform);
+        }
 
 		//BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
 		//script.message = "Whoops! You gave the ball to opponent. You passed to";
