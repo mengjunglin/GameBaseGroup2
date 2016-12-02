@@ -98,10 +98,12 @@ public class BallMoveBehavior : MonoBehaviour {
         this.target = target;
 		this._bullseye = target;
 
+        if (ballOwner)
+            ballOwner.PlayKickAnimation();
+
         //If u get an error here. Be sure to give a player0:0 reference to target(this script's target field) by default
         ballOwner = target.GetComponent<PlayerScript>();
-        if(ballOwner)
-            ballOwner.PlayKickAnimation();
+        
 
         CancelInvoke("Launch");
 		Invoke("Launch", kickDelay);
