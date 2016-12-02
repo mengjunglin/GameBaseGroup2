@@ -6,6 +6,9 @@ public class MainMenuScript : MonoBehaviour {
 
     [SerializeField] Button[] levelButtons;
 
+    [SerializeField]
+    GameObject creditsPopUp, character;
+
 	// Use this for initialization
 	void Start () {
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedTillLevel", -1);
@@ -14,9 +17,10 @@ public class MainMenuScript : MonoBehaviour {
         {
             levelButtons[i].interactable = (i < unlockedLevel -1);
         }
-	}
-	
 
+        CloseCreditsScreen();
+	}
+    
 	public void ClickExit()
 	{
 		Application.Quit ();
@@ -39,4 +43,16 @@ public class MainMenuScript : MonoBehaviour {
 		PlayerPrefs.DeleteAll ();
 		Application.Quit ();
 	}
+
+    public void OpenCreditsScreen()
+    {
+        creditsPopUp.SetActive(true);
+        character.SetActive(false);
+    }
+
+    public void CloseCreditsScreen()
+    {
+        creditsPopUp.SetActive(false);
+        character.SetActive(true);
+    }
 }
