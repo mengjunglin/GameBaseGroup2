@@ -15,7 +15,8 @@ public class MainMenuScript : MonoBehaviour {
 
         for(int i=0;i < levelButtons.Length; i++)
         {
-            levelButtons[i].interactable = (i < unlockedLevel -1);
+            //levelButtons[i].interactable = (i < unlockedLevel -1);
+			levelButtons[i].interactable = true;
         }
 
         CloseCreditsScreen();
@@ -28,14 +29,15 @@ public class MainMenuScript : MonoBehaviour {
 		
 	public void OpenScene()
 	{
-		Application.LoadLevel (1);
+		Application.LoadLevel (ChooseOptionsManagerScript.level);
 	}
+		
 
 	//one method for each button, correspond to different levels
 	public void OpenLevel1(int level)
 	{
 		ChooseOptionsManagerScript.level = level;
-		Application.LoadLevel (1);
+		Application.LoadLevel ("Intro"+level);
 	}
 
 	public void Deleteprefs()
@@ -55,4 +57,8 @@ public class MainMenuScript : MonoBehaviour {
         creditsPopUp.SetActive(false);
         character.SetActive(true);
     }
+
+	public void OpenUnit2Screen(){
+		Application.LoadLevel (3);
+	}
 }

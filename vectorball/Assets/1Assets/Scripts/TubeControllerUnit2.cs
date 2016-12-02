@@ -110,8 +110,8 @@ public class TubeControllerUnit2 : MonoBehaviour {
 
 	public void LoadTarget(){
 
-		//if (quesNumber == 2)
-		//	Application.LoadLevel ("MainMenu");
+		if (quesNumber == 2)
+			Application.LoadLevel (7);
 
 		if (null == unit2path) {
 			unit2path = unit2.text.Split('\n');
@@ -174,13 +174,13 @@ public class TubeControllerUnit2 : MonoBehaviour {
 		}
 
 		for (int j = 0; j < 8; j+=2) {
-		/*	FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).lastPosition = FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).idlePosition;
-			FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).idlePosition = targetPlayers [j / 2].permPosition; 
-			players[j/2] = FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]); */
+			/*PlayerScript startPlayer = FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]);
+			FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).lastPosition = FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).idlePosition;
+			FieldController.instance.GetPlayerAt (startPositions [j], startPositions [j + 1]).idlePosition = targetPlayers[j/2].permPosition; */
 
 			playerRefs[j/2].lastPosition = playerRefs[j/2].idlePosition;
-			playerRefs[j/2].idlePosition = targetPlayers [j / 2].permPosition; 
-			// players[j/2] = playerRefs[j/2];
+			playerRefs[j/2].idlePosition = targetPlayers [j / 2].permPosition;
+			//players[j/2] = playerRefs[j/2];
 			playerReachCount = 0;
 
 

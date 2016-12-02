@@ -16,7 +16,8 @@ public class ButtonHandler : MonoBehaviour {
 
     public void click()
     {
-        SceneManager.LoadScene("Level 1");
+		Application.LoadLevel (1);
     }
+
     
 }

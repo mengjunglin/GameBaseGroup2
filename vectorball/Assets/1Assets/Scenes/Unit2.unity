@@ -260,6 +260,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013309597136, guid: 85636c9d7c7d741c49d8d2742f172abd,
+        type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013309597136, guid: 85636c9d7c7d741c49d8d2742f172abd,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010889906010, guid: 85636c9d7c7d741c49d8d2742f172abd,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 85636c9d7c7d741c49d8d2742f172abd, type: 2}
   m_IsPrefabParent: 0
@@ -857,7 +872,7 @@ Prefab:
         type: 2}
       propertyPath: timerBar
       value: 
-      objectReference: {fileID: 955005308}
+      objectReference: {fileID: 2055405731}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48bd64512b55843268af310c3f7b72f5, type: 2}
   m_IsPrefabParent: 0
@@ -1321,8 +1336,10 @@ MonoBehaviour:
   ball: {fileID: 375354010}
   timerBar: {fileID: 2055405731}
   questionText: {fileID: 444779508}
+  defaultPlayer: {fileID: 0}
   MaxFlowsInLevel: 0
   MaxPassesInFlow: 0
+  tries: 0
   dialogueCanvasObj: {fileID: 0}
 --- !u!114 &570472364
 MonoBehaviour:
@@ -2183,12 +2200,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 909919612}
---- !u!114 &955005308 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000013309597136, guid: 85636c9d7c7d741c49d8d2742f172abd,
-    type: 2}
-  m_PrefabInternal: {fileID: 43899744}
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &960532456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,6 +3567,10 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011068812366, guid: 3ee93e547898b4b26a66474eed37fc0a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ee93e547898b4b26a66474eed37fc0a, type: 2}
