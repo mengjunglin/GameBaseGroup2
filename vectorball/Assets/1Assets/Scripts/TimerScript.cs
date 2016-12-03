@@ -5,7 +5,7 @@ public class TimerScript : MonoBehaviour {
 
     public static TimerScript instance;
 
-    float percent, secsPassed, countTillSecs;
+    public float percent, secsPassed, countTillSecs;
 
     public event CallOnTimeOut TimeoutEvent;
     public delegate void CallOnTimeOut();

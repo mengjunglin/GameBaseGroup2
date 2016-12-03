@@ -76,9 +76,17 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			isOptioni [i].interactable = false;
 		}
         
-		tries += 1;
+		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
 
+		tries += 1;
+		Analytics.SelectedAnswer(0, 0, targetPositions[0],targetPositions[1], level, flow+1, pass, isCorrect,TimerScript.instance.secsPassed);
+		Vector2 ballOwnerCoords = FieldController.instance.GetXYOfPlayer (e.ballOwner);
+		chosenPositions [0] = (int)ballOwnerCoords.x;
+		chosenPositions [1] = (int)ballOwnerCoords.y;
+		isCorrect = false;
 		targetPlayer.ResetPlayer();
+		LoadNextQuestion ();
+		//ResetField ();
     }
 
     void OnTimerUpdate(float percent)
@@ -99,6 +107,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 	public void OnSubmit(){
 
+		float timeTaken = TimerScript.instance.secsPassed;
 		TimerScript.instance.StopTimer();
 
 		for (int i = 0; i < 4; ++i) {
@@ -135,7 +144,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 			IfIncorrectOption (chosenPositions);
 		}
         
-		Analytics.SelectedAnswer(x, y, level, flow+1, pass, isCorrect);
+		Analytics.SelectedAnswer(x, y, targetPositions[0],targetPositions[1],level, flow+1, pass, isCorrect,timeTaken);
 		BeforeLoad ();
 		MoveBall (x,y);
 	}
@@ -151,7 +160,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		BallMoveBehavior script = ball.GetComponent<BallMoveBehavior>();
 		script.message = "Hurray! That was an awesome pass. You passed to:";
 		script.result = option;
-        //VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to:", option);
+       // VectorRepresentationScript.instance.convertResultToVector("Hurray! That was an awesome pass. You passed to:", option);
 		script.printed = false;
 	}
 
@@ -231,7 +240,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
         flow++;
         pass = 0;
 
-        if(flow >=MaxFlowsInLevel)
+        if(flow > MaxFlowsInLevel)
         {
             flow = 0;
             scoreScript.LevelComplete();
@@ -254,7 +263,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
         }
 
 		if (isCorrect) {
-			targetPositions = findPlayerScript.find_teammate (level, startPositions, pass);
+			targetPositions = findPlayerScript.find_teammate (level, startPositions, pass , flow);
 		}
 
 		BallMoveBehavior e = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallMoveBehavior>();
@@ -307,6 +316,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 
 				Text optionText = isOptioni [i].transform.FindChild ("VectorValue1").transform.FindChild ("Value").GetComponent<Text>();
 				optionText.text = string.Format ("{0} \n{1}", optionValues [i, 0], optionValues [i, 1]);
+
 			}
 					
 		} else if (level == 2) {
@@ -345,7 +355,7 @@ public class ChooseOptionsManagerScript : MonoBehaviour {
 		}
 
 		//start timer
-		TimerScript.instance.StartTimer (12);
+		TimerScript.instance.StartTimer (30);
 	}
 
 

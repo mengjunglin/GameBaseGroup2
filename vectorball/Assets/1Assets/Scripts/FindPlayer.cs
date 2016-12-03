@@ -26,7 +26,7 @@ public class FindPlayer : MonoBehaviour
 
     }
 
-	public int[] find_teammate(int level, int[] pos,int pass) {
+	public int[] find_teammate(int level, int[] pos,int pass, int flow) {
 		int flag = -1;
         row = pos[1];
 		HashSet<int> exclude = new HashSet<int>() ;
@@ -34,7 +34,7 @@ public class FindPlayer : MonoBehaviour
 			path = pathfile.text.Split('\n');
 		}
 		if (0 == pass) {
-			selected_line = new System.Random ().Next (((level * 5) - 5), (level * 5));
+			selected_line = flow;
 		}
 			
         string current_path = path[selected_line];

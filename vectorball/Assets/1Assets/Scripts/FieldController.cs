@@ -61,10 +61,12 @@ public class FieldController : MonoBehaviour {
         {
             Vector2 coords = GetXYOfPlayer(ballMono.ballOwner);
             VectorRepresentationScript.instance.convertResultToVector("Opponent tackled the ball to:", new int[] { (int)coords.x, (int)coords.y });
-        }
+			ballMono.printed = true;
+		}
         else
         {
             VectorRepresentationScript.instance.convertResultToVector("Opponent team scored a goal at:", new int[] { 0, -1 });
+			ballMono.printed = true;
         }
     }
 

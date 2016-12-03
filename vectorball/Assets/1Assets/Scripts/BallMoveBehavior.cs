@@ -35,7 +35,7 @@ public class BallMoveBehavior : MonoBehaviour {
 	void Start(){
 		tubeOptions = new int[10,2]; 
 		tb = TubeController.instance;
-		tb.AddPosition(FieldController.instance.GetAbsolutePosition (0,0));
+
 		optionsManager = GameObject.FindGameObjectWithTag ("OptionsManager");
 		script = optionsManager.GetComponent<VectorRepresentationScript>();
 	}
@@ -62,7 +62,7 @@ public class BallMoveBehavior : MonoBehaviour {
 				//	AudioSource cheerAudio =GameObject.Find("Cheer").GetComponent<AudioSource>();
 				//	cheerAudio.Play ();
 				//	GameObject.FindGameObjectWithTag ("GoalText").GetComponent<ParticleSystem> ().Play ();
-
+				tb.AddPosition(FieldController.instance.GetAbsolutePosition (0,0));
 				for (int i = 0; i < 10; ++i) {
 					if (tubeOptions [i, 0] == 0 && tubeOptions [i, 1] == 0)
 						break;
@@ -88,7 +88,7 @@ public class BallMoveBehavior : MonoBehaviour {
 				if (!printed) {
 					script.convertResultToVector (message, result);
 					printed = true;
-				}
+				} 
 
 			//transform.position = _bullseye.position;
 		}
